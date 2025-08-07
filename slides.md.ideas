@@ -1,0 +1,174 @@
+
+---
+transition: fade-out
+backgroundSize: 80%
+---
+
+# About myself
+
+Change a bit the layout of the slide, use more images and gifs and maybe a photo of last year's golab
+
+<!--  Old description:
+
+I’m a Gopher since 2018
+- Practised via the [Tour of Go](https://go.dev/tour/) and [exercism](https://exercism.org/)
+
+I work in Amadeus where I develop and operate Splunk for logging in the cloud
+
+I speak at conferences, about Go and cloud topics
+
+I previously worked in Java, Scala and C++
+
+Besides programming I enjoy swimming, cooking and learning languages
+- GOのワークショップへようこそ！ -->
+
+---
+transition: fade-out
+layout: fact
+class: 'text-white bg-#00ADD8 font-size-10'
+---
+
+Go is a simple language
+
+---
+transition: fade-out
+backgroundSize: 80%
+---
+<!-- 
+layout: image-right
+image: /images/Gophers1.jpeg 
+-->
+
+# Let's Go colors
+
+1 slide to present colors in the standard library.
+
+Can I use colors here? Too early maybe.
+
+Still this is one of the basic components (try not to sound too serious, let's bring the fun with Go!)
+
+---
+transition: fade-out
+---
+
+# Let's Go images
+
+Everything starts from our rectangle friend
+
+Can we encode a more or less nice Gopher? How about turning it to a svg? (svg encoding is not stdlib)
+
+My two ways to go for images
+
+#1 -> Setting pixels (from file or whatever you want)
+#2 -> Composing existing images
+
+References to the matrix
+
+Examples from advent of code?
+<v-click>
+
+````md magic-move {lines: true}
+```go {all|2|2,6}
+for i := range img {
+  for j := range img[i] {
+    mat[i][j] = color.RGBA{}
+  }
+}
+```
+
+```go {2|all}
+// no time now: TBA
+```
+````
+</v-click>
+
+---
+transition: fade-out
+layout: lblue-fact
+---
+
+We keep a transition here
+<!-- import lblue-fact for this to work -->
+
+---
+transition: fade-out
+---
+
+# How about some ascii art?
+
+This section needs an external library, I said almost all stdlib but that's not so bad after all (frowny gopher here? could this talk be a conversation with a gopher?)
+
+Here there can be some live coding (but also in general, to be seen)
+
+It might be funny to show the transition between what the first try looks like and how to properly draw ascii art
+
+---
+transition: fade-out
+layout: lblue-fact
+---
+
+Gem #2: A human cares about the error message
+<v-click>
+<div class="font-size-8">a program cares about what kind of error it is</div>
+</v-click>
+
+We keep a transition here
+<!-- import lblue-fact for this to work -->
+
+---
+transition: fade-out
+---
+
+# Give me gifs
+
+Quick explanation of gifs (frames + rate and the encoder) then show a selection of them to show what it means
+
+---
+transition: fade-out
+layout: image-right
+image: /images/Gophers10.jpeg
+backgroundSize: 80%
+---
+
+# Conclusions
+
+Simple: you didn't know? Now you know (jk, TBA)
+
+<!-- ---
+KEEP A FACT OR NOT?
+
+layout: fact
+transition: fade-out
+class: "font-size-7.8"
+---
+
+And making our code simpler is how we step up our Go game! -->
+
+---
+layout: lblue-end
+transition: fade-out
+---
+
+<div class="text-white font-size-10">
+Thank you very much!
+</div>
+
+<div class="absolute bottom-10">
+  <div  class="text-white">Michele Caci</div>
+  <div class="flex m-0 gap-1">
+    <a href="https://github.com/mcaci" target="_blank" alt="Michele's GitHub" title="Michele's GitHub"
+      class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+      <carbon-logo-github />
+    </a>
+    <a href="https://x.com/goMicheleCaci" target="_blank" alt="Michele's X" title="Michele's X"
+      class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+      <carbon-logo-x />
+    </a>
+    <a href="https://www.linkedin.com/in/michele-caci-47770132/" target="_blank" alt="Michele's Linkedin" title="Michele's Linkedin"
+      class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+      <carbon-logo-linkedin />
+    </a>
+  </div>
+</div>
+
+<!-- HOW ABOUT A FUNNY IDEA FOR PEACE OUT? LIKE A ENDING CREDITS? OR SOMETHING ELSE? TO BE SEEN -->

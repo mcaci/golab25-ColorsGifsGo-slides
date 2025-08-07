@@ -75,170 +75,113 @@ Monday October 6th, 2025 (45 min)
 
 ---
 transition: fade-out
-backgroundSize: 80%
 ---
 
-# Disclaimer
-
-<!-- Import go fact layouts -->
-
-This talk will contains images and gifs, lots of them
-
-Or
-
-What do this, this and this have in common? They have all been created with Go
-<!-- Show sequence of images and gifs meanwhile -->
-
-Also try to create all of the images of the slides with Go and share the code for them
+# Let's Put Some Color to Our Programming with Go
+Unleashing creativity with pixels, palettes, and Go!
 
 ---
-transition: fade-out
-backgroundSize: 80%
----
 
-# About myself
+# ⚠️ Disclaimer
 
-Change a bit the layout of the slide, use more images and gifs and maybe a photo of last year's golab
+This talk contains:
+- Images 🖼️
+- GIFs 🎞️
+- Pixels 🧮
+- And a lot of Go 🐹
 
-<!--  Old description:
-
-I’m a Gopher since 2018
-- Practised via the [Tour of Go](https://go.dev/tour/) and [exercism](https://exercism.org/)
-
-I work in Amadeus where I develop and operate Splunk for logging in the cloud
-
-I speak at conferences, about Go and cloud topics
-
-I previously worked in Java, Scala and C++
-
-Besides programming I enjoy swimming, cooking and learning languages
-- GOのワークショップへようこそ！ -->
+All visuals are created with Go (yes, even the silly ones).
+Code will be shared — creativity is encouraged!
 
 ---
-transition: fade-out
-layout: fact
-class: 'text-white bg-#00ADD8 font-size-10'
----
 
-Go is a simple language
+# 🧠 What do these have in common?
 
----
-transition: fade-out
-backgroundSize: 80%
----
-<!-- 
-layout: image-right
-image: /images/Gophers1.jpeg 
--->
+<!-- Show a sequence of 3 images or gifs created with Go -->
 
-# Let's Go colors
-
-1 slide to present colors in the standard library.
-
-Can I use colors here? Too early maybe.
-
-Still this is one of the basic components (try not to sound too serious, let's bring the fun with Go!)
+They were all made with Go — and mostly with the standard library!
 
 ---
-transition: fade-out
----
 
-# Let's Go images
+# 🎨 Challenge Accepted
 
-Everything starts from our rectangle friend
+I tried to create **all** the images in this presentation using Go.
 
-Can we encode a more or less nice Gopher? How about turning it to a svg? (svg encoding is not stdlib)
+Why? Because:
+- It’s fun
+- It’s weirdly satisfying
+- And it shows what Go can do beyond servers and CLIs
 
-My two ways to go for images
-
-#1 -> Setting pixels (from file or whatever you want)
-#2 -> Composing existing images
-
-References to the matrix
-
-Examples from advent of code?
-<v-click>
-
-````md magic-move {lines: true}
-```go {all|2|2,6}
-for i := range img {
-  for j := range img[i] {
-    mat[i][j] = color.RGBA{}
-  }
-}
-```
-
-```go {2|all}
-// no time now: TBA
-```
-````
-</v-click>
 
 ---
-transition: fade-out
-layout: lblue-fact
----
 
-We keep a transition here
-<!-- import lblue-fact for this to work -->
-
----
-transition: fade-out
----
-
-# How about some ascii art?
-
-This section needs an external library, I said almost all stdlib but that's not so bad after all (frowny gopher here? could this talk be a conversation with a gopher?)
-
-Here there can be some live coding (but also in general, to be seen)
-
-It might be funny to show the transition between what the first try looks like and how to properly draw ascii art
+## 👋 Welcome!
+- Who I am
+- Why I love Go
+- What this talk is about: creativity, color, and fun!
 
 ---
-transition: fade-out
-layout: lblue-fact
----
 
-Gem #2: A human cares about the error message
-<v-click>
-<div class="font-size-8">a program cares about what kind of error it is</div>
-</v-click>
-
-We keep a transition here
-<!-- import lblue-fact for this to work -->
+## 🎨 Why Color in Code?
+- Programming isn't just logic—it's also art
+- Go is fast, simple, and surprisingly good at graphics
+- We'll use (almost) only the standard library!
 
 ---
-transition: fade-out
+
+## 🌈 Creating Palettes and Images
+- How to define and use colors in Go
+- Building palettes
+- Drawing basic shapes and rectangles
 ---
 
-# Give me gifs
-
-Quick explanation of gifs (frames + rate and the encoder) then show a selection of them to show what it means
-
----
-transition: fade-out
-layout: image-right
-image: /images/Gophers10.jpeg
-backgroundSize: 80%
----
-
-# Conclusions
-
-Simple: you didn't know? Now you know (jk, TBA)
-
-<!-- ---
-KEEP A FACT OR NOT?
-
-layout: fact
-transition: fade-out
-class: "font-size-7.8"
----
-
-And making our code simpler is how we step up our Go game! -->
+## 🧮 From Numbers to Maps
+- Visualizing matrices as forests, terrain, or heatmaps
+- Mapping values to colors
+- Example: turning a grid of numbers into a landscape
 
 ---
-layout: lblue-end
-transition: fade-out
+
+## 🖼️ Layering Images and Text
+- Composing visuals with layers
+- Adding text overlays
+- Creating banners and posters
+
+---
+
+## 🎞️ Animating with Go
+- Making playful GIFs
+- Frame-by-frame animation
+- Example: animated banner or pixel art
+
+---
+
+## 🧰 Tools & Techniques
+- Go packages used (mostly standard library)
+- Tips for working with images and pixels
+- How to stay creative while coding
+---
+
+## 🧠 What You Can Build
+- Fun projects: maps, games, visualizations
+- Ideas to explore on your own
+- Encouragement to experiment!
+
+---
+
+## 🙌 Wrapping Up
+- Recap of what we covered
+- Resources and links
+- Final thoughts: code is a canvas!
+
+---
+
+## 💬 Q&A
+- Ask me anything!
+- Connect with me online
+
+---
+layout: end
 ---
 
 <div class="text-white font-size-10">
