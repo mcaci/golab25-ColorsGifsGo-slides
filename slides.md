@@ -3,7 +3,8 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
+# background: https://cover.sli.dev
+background: /images/first-cave.gif
 # some information about your slides (markdown enabled)
 title: Colors, images, gifs and Go!
 info: |
@@ -74,13 +75,6 @@ LEVEL: Introductory and Overview
 Monday October 6th, 2025 (45 min)
 
 ---
-transition: fade-out
----
-
-# Let's Put Some Color to Our Programming with Go
-Unleashing creativity with pixels, palettes, and Go!
-
----
 
 # ⚠️ Disclaimer
 
@@ -93,7 +87,8 @@ This talk contains:
 All visuals are created with Go (yes, even the silly ones).
 Code will be shared — creativity is encouraged!
 
----
+# Let's Put Some Color to Our Programming with Go
+Unleashing creativity with pixels, palettes, and Go!
 
 # 🧠 What do these have in common?
 
@@ -108,6 +103,7 @@ They were all made with Go — and mostly with the standard library!
 I tried to create **all** the images in this presentation using Go.
 
 Why? Because:
+
 - It’s fun
 - It’s weirdly satisfying
 - And it shows what Go can do beyond servers and CLIs
@@ -128,11 +124,61 @@ Why? Because:
 - We'll use (almost) only the standard library!
 
 ---
+layout: two-cols
+---
 
-## 🌈 Creating Palettes and Images
+# 🌈 Creating Palettes and Images
+
 - How to define and use colors in Go
 - Building palettes
 - Drawing basic shapes and rectangles
+
+````md magic-move
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{G: 150, A: 255})
+  }
+}
+f, _ := os.Create("green.png")
+png.Encode(f, img)
+```
+
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{B: 150, A: 255})
+  }
+}
+f, _ := os.Create("blue.png")
+png.Encode(f, img)
+```
+
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    b := float64(x) / float64(r.Max.X) * 255
+    g := float64(y) / float64(r.Max.Y) * 255
+    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
+  }
+}
+f, _ := os.Create("bgGradient.png")
+png.Encode(f, img)
+```
+````
+
+::right::
+
+<img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click="1" src="/images/blue.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click="2" src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
 ---
 
 ## 🧮 From Numbers to Maps
@@ -181,7 +227,7 @@ Why? Because:
 - Connect with me online
 
 ---
-layout: end
+layout: lblue-end
 ---
 
 <div class="text-white font-size-10">
