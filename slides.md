@@ -95,35 +95,30 @@ They are all made in Go
 
 # ⚠️ Disclaimer
 
-This talk contains:
+In this talk you can expect a lot of:
 - Images 🖼️
 - GIFs 🎞️
-- Pixels 🧮
-- And a lot of Go 🐹
+- And Go 🐹
 
-All visuals are created with Go (yes, even the silly ones).
-Code will be shared — creativity is encouraged!
-
-# Let's Put Some Color to Our Programming with Go
-Unleashing creativity with pixels, palettes, and Go!
-
-
-
-
-They were all made with Go — and mostly with the standard library!
+The code will be shared so your creativity can take over!
+- Light up those pixels! 🧮
+- Let's Put Some Color to Our Programming with Go
+  - Unleashing creativity with pixels, palettes, and Go!
+  - They were all made with Go — and mostly with the standard library!
 
 ---
 
-# 🎨 Challenge Accepted
+# 🎨  Challenge Accepted
 
 I tried to create **all** the images in this presentation using Go.
 
-Why? Because:
+Why would you even create images or gifs in Go?
 
+- I love Go
 - It’s fun
 - It’s weirdly satisfying
 - And it shows what Go can do beyond servers and CLIs
-
+  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I did it in Go)
 
 ---
 
