@@ -82,6 +82,7 @@ Monday October 6th, 2025 (45 min)
 <img v-click="1" src="/images/forest.png" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
 <img v-click="2" src="/images/bgGradient.png" class="absolute top-50 left-50" style="width: 30%; height: auto;"/>
 <img v-click="3" src="/images/LunchBreak.gif" class="absolute bottom-50 left-50" style="width: 30%; height: auto;"/>
+<img v-click="4" src="/images/game_of_life.gif" class="absolute bottom-50 right-50" style="width: 30%; height: auto;"/>
 
 <!-- Show a sequence of 3 images or gifs created with Go -->
 
