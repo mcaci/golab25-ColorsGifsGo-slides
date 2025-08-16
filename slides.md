@@ -82,7 +82,7 @@ Monday October 6th, 2025 (45 min)
 <img v-click="1" src="/images/forest.png" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
 <img v-click="2" src="/images/bgGradient.png" class="absolute top-50 left-50" style="width: 30%; height: auto;"/>
 <img v-click="3" src="/images/LunchBreak.gif" class="absolute bottom-50 left-50" style="width: 30%; height: auto;"/>
-<img v-click="4" src="/images/game_of_life.gif" class="absolute bottom-50 right-50" style="width: 30%; height: auto;"/>
+<img v-click="4" src="/images/game_of_life.gif" class="absolute bottom-25 right-50" style="width: 30%; height: auto;"/>
 
 <!-- Show a sequence of 3 images or gifs created with Go -->
 
@@ -105,35 +105,30 @@ The code will be shared so your creativity can take over!
 - Light up those pixels! 🧮
 - Let's Put Some Color to Our Programming with Go
   - Unleashing creativity with pixels, palettes, and Go!
-  - They were all made with Go — and mostly with the standard library!
-
----
-
-# 🎨  Challenge Accepted
 
 I tried to create **all** the images in this presentation using Go.
 
-Why would you even create images or gifs in Go?
+---
+
+# 🎨 Why would you even create images or gifs in Go?
 
 - I love Go
 - It’s fun
 - It’s weirdly satisfying
-- And it shows what Go can do beyond servers and CLIs
-  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I did it in Go)
+- It shows that Go can hold its ground when working with images
+  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I had to do it in Go)
+
+- 🎨 Why Color in Code?
+  - Programming isn't just logic—it's also art
+  - Go is fast, simple, and surprisingly good at graphics
+  - We'll use (almost) only the standard library!
 
 ---
 
-## 👋 Welcome!
+# 👋 Welcome!
 - Who I am
 - Why I love Go
 - What this talk is about: creativity, color, and fun!
-
----
-
-## 🎨 Why Color in Code?
-- Programming isn't just logic—it's also art
-- Go is fast, simple, and surprisingly good at graphics
-- We'll use (almost) only the standard library!
 
 ---
 layout: two-cols
@@ -197,6 +192,8 @@ png.Encode(f, img)
 - Visualizing matrices as forests, terrain, or heatmaps
 - Mapping values to colors
 - Example: turning a grid of numbers into a landscape
+
+<!-- Add joke about the matrix movie and or bitmaps -->
 
 ---
 
