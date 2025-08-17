@@ -314,6 +314,16 @@ func cfuncT(t time.Time) color.Color {
 layout: two-cols
 ---
 
+# Making Art with Go
+
+Piet Go-ndrian
+
+Easiest way: https://www.google.com/search?q=piet+mondrian&client=ms-android-google&sca_esv=e34a8a4f92e4e401&udm=2&biw=411&bih=785&sxsrf=AE3TifMXRufYHwbrEiyrTi5GI1jaf5AZUg%3A1755465000360&ei=KEWiaPXiFa6HkdUPmJ7RoAg&gs_ssp=eJzj4tTP1TdILspLMjVg9OItyEwtUcjNz0spykzMAwBr0Qib&oq=piet+&gs_lp=EhJtb2JpbGUtZ3dzLXdpei1pbWciBXBpZXQgKgIIADIFEC4YgAQyBRAAGIAEMgUQLhiABDIFEC4YgAQyBRAAGIAESMU2UKwSWL4mcAJ4AJABAJgBgQGgAbkDqgEDNC4xuAEByAEA-AEBmAIHoALeA6gCBcICChAjGCcYyQIY6gLCAgcQIxgnGMkCwgIKEC4YgAQYQxiKBcICChAAGIAEGEMYigXCAgsQLhiABBjHARivAZgDBJIHAzYuMaAHhC-yBwM0LjG4B9YDwgcDMi03yAch&sclient=mobile-gws-wiz-img
+
+---
+layout: two-cols
+---
+
 # 🌈 Creating Palettes and Images
 
 - How to define and use colors in Go
