@@ -131,6 +131,186 @@ I tried to create **all** the images in this presentation using Go.
 - What this talk is about: creativity, color, and fun!
 
 ---
+
+# 🌈 Creating Images
+
+The basic stuff
+
+A basic image starts with a rectangle
+
+```go
+r := image.Rect(0, 0, 1024, 768)
+```
+
+The images is created with the boundaries given by the rectangle
+
+```go
+img := image.NewRGBA(r)
+```
+
+We set the pixels of the image to the color we want
+
+```go
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{G: 150, A: 255})
+  }
+}
+```
+
+And then we save it into a file
+
+```go
+f, _ := os.Create("green.png"); png.Encode(f, img)
+```
+
+---
+layout: two-cols
+---
+
+# 🌈 Creating Images
+
+The code put altogether gives us this basic green image
+
+```go
+package main
+
+import (
+	"image"
+	"image/color"
+	"image/png"
+	"os"
+)
+
+func main() {
+	r := image.Rect(0, 0, 1024, 768)
+	img := image.NewRGBA(r)
+	for x := range r.Max.X {
+		for y := range r.Max.Y {
+			img.Set(x, y, color.RGBA{G: 150, A: 255})
+		}
+	}
+	f, _ := os.Create("green.png")
+	png.Encode(f, img)
+}
+
+```
+
+::right::
+
+<img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<!-- 
+<img v-click v-click.hide src="/images/very-dull-page.png" class="absolute bottom-10 right-100" style="width: 30%; height: auto;"/>
+<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 right-10" style="width: 30%; height: auto;"/> -->
+
+---
+
+# 🌈 Creating Images
+
+Let's focus on
+
+_We set the pixels of the image to the color we want_
+
+```go
+img.Set(x, y, color.RGBA{G: 150, A: 255})
+```
+
+This sets a pixel at coordinates `(x, y)` to a fully opaque medium green (not too bright, not too dark)
+
+```go
+img.Set(x, y, color.RGBA{B: 150, A: 255})
+```
+
+This sets a pixel at coordinates `(x, y)` to a fully opaque medium blue (not too bright, not too dark)
+
+```go
+b := float64(x) / float64(r.Max.X) * 255
+g := float64(y) / float64(r.Max.Y) * 255
+img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
+```
+
+This sets a pixel at coordinates `(x, y)` to a combination of blue and green that depend on the coordinates
+
+---
+layout: two-cols
+---
+
+# 🌈 Creating Images
+
+Which on the same program above gives us this image
+
+```go
+package main
+
+import (
+	"image"
+	"image/color"
+	"image/png"
+	"os"
+)
+
+func main() {
+	r := image.Rect(0, 0, 1024, 768)
+	img := image.NewRGBA(r)
+	for x := range r.Max.X {
+		for y := range r.Max.Y {
+    b := float64(x) / float64(r.Max.X) * 255
+    g := float64(y) / float64(r.Max.Y) * 255
+    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
+		}
+	}
+	f, _ := os.Create("bgGradient.png")
+	png.Encode(f, img)
+}
+
+```
+
+::right::
+
+<img src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
+---
+layout: two-cols
+---
+
+# 🌈 Creating Images
+
+A function of anything
+
+````md magic-move
+```go
+func cFuncBGGradient(x, y int, r image.Rectangle) color.Color {
+  b := float64(x) / float64(r.Max.X) * 255
+  g := float64(y) / float64(r.Max.Y) * 255
+  return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
+}
+```
+
+```go
+func cfunc(x, y int) color.Color {
+  r := math.Abs(math.Cos(float64(x))) * 50
+  g := math.Abs(math.Sin(float64(y))) * 200
+  b := math.Abs(math.Cos(float64(x*10-y*10))) * 50
+  return color.RGBA{R: uint8(r), G: uint8(g), B: uint8(b), A: 255}
+}
+```
+
+```go
+func cfuncT(t time.Time) color.Color {
+  b := t.Nanosecond() % 200
+  g := t.Nanosecond() % 256
+  return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
+}
+```
+````
+
+::right::
+
+<img v-click v-click.hide src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click v-click.hide src="/images/stripes.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click v-click.hide src="/images/timedots.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
+---
 layout: two-cols
 ---
 
@@ -187,11 +367,60 @@ png.Encode(f, img)
 <img v-click="2" src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
+layout: two-cols
+---
 
 ## 🧮 From Numbers to Maps
 - Visualizing matrices as forests, terrain, or heatmaps
 - Mapping values to colors
 - Example: turning a grid of numbers into a landscape
+
+````md magic-move
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{G: 150, A: 255})
+  }
+}
+f, _ := os.Create("green.png")
+png.Encode(f, img)
+```
+
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{B: 150, A: 255})
+  }
+}
+f, _ := os.Create("blue.png")
+png.Encode(f, img)
+```
+
+```go
+r := image.Rect(0, 0, 1024, 768)
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    b := float64(x) / float64(r.Max.X) * 255
+    g := float64(y) / float64(r.Max.Y) * 255
+    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
+  }
+}
+f, _ := os.Create("bgGradient.png")
+png.Encode(f, img)
+```
+````
+
+::right::
+
+<img v-click="[1, '+1']" src="/images/forest.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click="[2, '+1']" src="/images/hill.png" class="absolute top-50 right-25" style="width: 35%; height: auto;"/>
+<img v-click="3" src="/images/cave-with-sand.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
+
 
 <!-- Add joke about the matrix movie and or bitmaps -->
 
