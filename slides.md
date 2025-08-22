@@ -117,7 +117,6 @@ I tried to create **all** the images in this presentation using Go.
 - It’s weirdly satisfying
 - It shows that Go can hold its ground when working with images
   - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I had to do it in Go)
-
 - 🎨 Why Color in Code?
   - Programming isn't just logic—it's also art
   - Go is fast, simple, and surprisingly good at graphics
@@ -134,21 +133,26 @@ I tried to create **all** the images in this presentation using Go.
 
 # 🌈 Creating Images
 
-The basic stuff
+The basics step by step
 
-A basic image starts with a rectangle
+<v-click>
+1. We start by defining the bounds of the image as a rectangle.
 
 ```go
-r := image.Rect(0, 0, 1024, 768)
+r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 ```
+</v-click>
 
-The images is created with the boundaries given by the rectangle
+<v-click>
+2. We create the image using the rectangle and a specific color space (RGBA).
 
 ```go
 img := image.NewRGBA(r)
 ```
+</v-click>
 
-We set the pixels of the image to the color we want
+<v-click>
+3. We set the pixels of the image to the color we want
 
 ```go
 for x := range r.Max.X {
@@ -157,20 +161,25 @@ for x := range r.Max.X {
   }
 }
 ```
+</v-click>
 
-And then we save it into a file
+<v-click>
+4. We encode the image into a file with a specific format
 
-```go
-f, _ := os.Create("green.png"); png.Encode(f, img)
-```
+</v-click>
 
----
-layout: two-cols
+<img v-click="1" src="/images/bounds.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
+<img v-click="5" src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
+<!-- 
+<img v-click v-click.hide src="/images/very-dull-page.png" class="absolute bottom-10 right-100" style="width: 30%; height: auto;"/>
+<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 right-10" style="width: 30%; height: auto;"/> -->
+
 ---
 
 # 🌈 Creating Images
 
-The code put altogether gives us this basic green image
+A quick overview of the full code
 
 ```go
 package main
@@ -193,15 +202,9 @@ func main() {
 	f, _ := os.Create("green.png")
 	png.Encode(f, img)
 }
-
 ```
 
-::right::
-
-<img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<!-- 
-<img v-click v-click.hide src="/images/very-dull-page.png" class="absolute bottom-10 right-100" style="width: 30%; height: auto;"/>
-<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 right-10" style="width: 30%; height: auto;"/> -->
+<img v-click src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
@@ -231,43 +234,10 @@ img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
 
 This sets a pixel at coordinates `(x, y)` to a combination of blue and green that depend on the coordinates
 
----
-layout: two-cols
----
 
-# 🌈 Creating Images
-
-Which on the same program above gives us this image
-
-```go
-package main
-
-import (
-	"image"
-	"image/color"
-	"image/png"
-	"os"
-)
-
-func main() {
-	r := image.Rect(0, 0, 1024, 768)
-	img := image.NewRGBA(r)
-	for x := range r.Max.X {
-		for y := range r.Max.Y {
-    b := float64(x) / float64(r.Max.X) * 255
-    g := float64(y) / float64(r.Max.Y) * 255
-    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
-		}
-	}
-	f, _ := os.Create("bgGradient.png")
-	png.Encode(f, img)
-}
-
-```
-
-::right::
-
-<img src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click="1" src="/images/green.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
+<img v-click="2" src="/images/blue.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click="3" src="/images/bgGradient.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
 
 ---
 layout: two-cols
