@@ -131,9 +131,9 @@ I tried to create **all** the images in this presentation using Go.
 
 ---
 
-# 🌈 Creating Images
+# 🖼️ Our First Image
 
-The basics step by step
+The basics: step by step
 
 <v-click>
 1. We start by defining the bounds of the image as a rectangle.
@@ -171,17 +171,13 @@ for x := range r.Max.X {
 <img v-click="1" src="/images/bounds.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
 <img v-click="5" src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
-<!-- 
-<img v-click v-click.hide src="/images/very-dull-page.png" class="absolute bottom-10 right-100" style="width: 30%; height: auto;"/>
-<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 right-10" style="width: 30%; height: auto;"/> -->
-
 ---
 
-# 🌈 Creating Images
+# 🖼️ Our First Image
 
-A quick overview of the full code
+Full code
 
-```go
+```go{all|11|12|13-17|18-19|all}
 package main
 
 import (
@@ -204,27 +200,31 @@ func main() {
 }
 ```
 
-<img v-click src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click=5 src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
-# 🌈 Creating Images
+# 🎨 Beyond our First Image
 
-Let's focus on
-
-_We set the pixels of the image to the color we want_
-
+````md magic-move
 ```go
 img.Set(x, y, color.RGBA{G: 150, A: 255})
 ```
-
-This sets a pixel at coordinates `(x, y)` to a fully opaque medium green (not too bright, not too dark)
 
 ```go
 img.Set(x, y, color.RGBA{B: 150, A: 255})
 ```
 
-This sets a pixel at coordinates `(x, y)` to a fully opaque medium blue (not too bright, not too dark)
+```go
+var b, g uint8
+switch (x/32 + y/32) % 2 {
+case 0:
+  b = 150
+default:
+  g = 150
+}
+img.Set(x, y, color.RGBA{B: b, G: g, A: 255})
+```
 
 ```go
 b := float64(x) / float64(r.Max.X) * 255
@@ -232,24 +232,20 @@ g := float64(y) / float64(r.Max.Y) * 255
 img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
 ```
 
-This sets a pixel at coordinates `(x, y)` to a combination of blue and green that depend on the coordinates
+```go
+func paintWith(/***/) color.Color {
+  /***/
+}
 
+img.Set(x, y, paintWith(/***/))
+```
+````
 
-<img v-click="1" src="/images/green.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
-<img v-click="2" src="/images/blue.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click="3" src="/images/bgGradient.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
-
----
-layout: two-cols
----
-
-# 🌈 Creating Images
-
-A function of anything
+<v-click at=4>
 
 ````md magic-move
 ```go
-func cFuncBGGradient(x, y int, r image.Rectangle) color.Color {
+func paintWith(x, y int, r image.Rectangle) color.Color {
   b := float64(x) / float64(r.Max.X) * 255
   g := float64(y) / float64(r.Max.Y) * 255
   return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
@@ -257,100 +253,71 @@ func cFuncBGGradient(x, y int, r image.Rectangle) color.Color {
 ```
 
 ```go
-func cfunc(x, y int) color.Color {
-  r := math.Abs(math.Cos(float64(x))) * 50
-  g := math.Abs(math.Sin(float64(y))) * 200
-  b := math.Abs(math.Cos(float64(x*10-y*10))) * 50
-  return color.RGBA{R: uint8(r), G: uint8(g), B: uint8(b), A: 255}
+func paintWith(x, y int) color.Color {
+  r := (1 + math.Cos(float64(x)/10)) * 255
+  g := (1 + math.Sin(float64(y)/10)) * 255
+  return color.RGBA{
+    R: uint8(r),
+    G: uint8(g),
+    A: 255,
+  }
 }
 ```
 
 ```go
-func cfuncT(t time.Time) color.Color {
-  b := t.Nanosecond() % 200
-  g := t.Nanosecond() % 256
-  return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
+func paintWith(t time.Time) color.Color {
+  nano := uint32(t.UnixNano())
+  r := uint8((nano >> 16) & 0xFF)
+  g := uint8((nano >> 8) & 0xFF)
+  b := uint8(nano & 0xFF)
+  return color.RGBA{
+    R: uint8(r),
+    G: uint8(g),
+    B: uint8(b),
+    A: 255,
+  }
 }
 ```
 ````
+</v-click>
 
-::right::
+<img src="/images/green.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
+<img v-click="+1" src="/images/blue.png" class="absolute top-35 right-20" style="width: 30%; height: auto;"/>
+<img v-click="+2" src="/images/bgCheckerboard.png" class="absolute top-50 right-35" style="width: 30%; height: auto;"/>
+<img v-click="+3" src="/images/bgGradient.png" class="absolute top-65 right-50" style="width: 28%; height: auto;"/>
+<!-- <img v-click="+4" v-click.hide src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 50%; height: auto;"/> -->
+<img v-click="+5" src="/images/plaid.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
+<img v-click="+6" src="/images/timeflow.png" class="absolute top-50 right-25" style="width: 45%; height: auto;"/>
+<img v-click="+7" src="/images/timeflow.gif" class="absolute top-21 right-5" style="width: 50%; height: auto;"/>
 
-<img v-click v-click.hide src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click v-click.hide src="/images/stripes.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click v-click.hide src="/images/timedots.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<!-- 
+In the first image we started by setting all pixels to a fully opaque medium green (not too bright, not too dark)
 
----
-layout: two-cols
----
+We can easily change that to a fully opaque medium blue (not too bright, not too dark)
 
-# Making Art with Go
+Or go even a bit further and create a checkerboard pattern or a gradient of blue and green where each pixel is a combination of blue and green that depend on the coordinates
 
-Piet Go-ndrian
+We decide the color we want to paint the image the way we want and with the tools we want: our choice is just a function that decides what color goes where.
 
-Easiest way: https://www.google.com/search?q=piet+mondrian&client=ms-android-google&sca_esv=e34a8a4f92e4e401&udm=2&biw=411&bih=785&sxsrf=AE3TifMXRufYHwbrEiyrTi5GI1jaf5AZUg%3A1755465000360&ei=KEWiaPXiFa6HkdUPmJ7RoAg&gs_ssp=eJzj4tTP1TdILspLMjVg9OItyEwtUcjNz0spykzMAwBr0Qib&oq=piet+&gs_lp=EhJtb2JpbGUtZ3dzLXdpei1pbWciBXBpZXQgKgIIADIFEC4YgAQyBRAAGIAEMgUQLhiABDIFEC4YgAQyBRAAGIAESMU2UKwSWL4mcAJ4AJABAJgBgQGgAbkDqgEDNC4xuAEByAEA-AEBmAIHoALeA6gCBcICChAjGCcYyQIY6gLCAgcQIxgnGMkCwgIKEC4YgAQYQxiKBcICChAAGIAEGEMYigXCAgsQLhiABBjHARivAZgDBJIHAzYuMaAHhC-yBwM0LjG4B9YDwgcDMi03yAch&sclient=mobile-gws-wiz-img
+We can use math (yes, math) to create a nice plaid.
 
----
-layout: two-cols
----
-
-# 🌈 Creating Palettes and Images
-
-- How to define and use colors in Go
-- Building palettes
-- Drawing basic shapes and rectangles
-
-````md magic-move
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    img.Set(x, y, color.RGBA{G: 150, A: 255})
-  }
-}
-f, _ := os.Create("green.png")
-png.Encode(f, img)
-```
-
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    img.Set(x, y, color.RGBA{B: 150, A: 255})
-  }
-}
-f, _ := os.Create("blue.png")
-png.Encode(f, img)
-```
-
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    b := float64(x) / float64(r.Max.X) * 255
-    g := float64(y) / float64(r.Max.Y) * 255
-    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
-  }
-}
-f, _ := os.Create("bgGradient.png")
-png.Encode(f, img)
-```
-````
-
-::right::
-
-<img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click="1" src="/images/blue.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click="2" src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+Or we can even visualize the flow of time. By the way if your really want to see how the fime flows, here it is... a malfunctioning TV screen: mystery solved, you're welcome.
+-->
 
 ---
-layout: two-cols
+layout: lblue-fact
 ---
 
-## 🧮 From Numbers to Maps
+_We decide what color to set for each pixels_
+
+<!-- And this is the basics of creating an image -->
+
+---
+
+# 🧮 From Numbers to Maps
+
+Because setting pixels is fun and imaginative, but we can improve with some external help
+
 - Visualizing matrices as forests, terrain, or heatmaps
 - Mapping values to colors
 - Example: turning a grid of numbers into a landscape
@@ -395,14 +362,20 @@ png.Encode(f, img)
 ```
 ````
 
-::right::
-
 <img v-click="[1, '+1']" src="/images/forest.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 <img v-click="[2, '+1']" src="/images/hill.png" class="absolute top-50 right-25" style="width: 35%; height: auto;"/>
 <img v-click="3" src="/images/cave-with-sand.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
 
 
 <!-- Add joke about the matrix movie and or bitmaps -->
+
+---
+
+# Making Art with Go
+
+Piet Go-ndrian
+
+Easiest way: https://www.google.com/search?q=piet+mondrian&client=ms-android-google&sca_esv=e34a8a4f92e4e401&udm=2&biw=411&bih=785&sxsrf=AE3TifMXRufYHwbrEiyrTi5GI1jaf5AZUg%3A1755465000360&ei=KEWiaPXiFa6HkdUPmJ7RoAg&gs_ssp=eJzj4tTP1TdILspLMjVg9OItyEwtUcjNz0spykzMAwBr0Qib&oq=piet+&gs_lp=EhJtb2JpbGUtZ3dzLXdpei1pbWciBXBpZXQgKgIIADIFEC4YgAQyBRAAGIAEMgUQLhiABDIFEC4YgAQyBRAAGIAESMU2UKwSWL4mcAJ4AJABAJgBgQGgAbkDqgEDNC4xuAEByAEA-AEBmAIHoALeA6gCBcICChAjGCcYyQIY6gLCAgcQIxgnGMkCwgIKEC4YgAQYQxiKBcICChAAGIAEGEMYigXCAgsQLhiABBjHARivAZgDBJIHAzYuMaAHhC-yBwM0LjG4B9YDwgcDMi03yAch&sclient=mobile-gws-wiz-img
 
 ---
 
