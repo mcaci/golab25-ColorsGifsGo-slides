@@ -314,53 +314,47 @@ _We decide what color to set for each pixels_
 
 ---
 
-# 🧮 From Numbers to Maps
+# 🧮 From Numbers and Maps
 
-Because setting pixels is fun and imaginative, but we can improve with some external help
+Because setting pixels is fun and imaginative, but we can use some tools to improve our images
+
+- Look at this input
+
+> 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
+
+> 497,69 -> 497,73 -> 489,73 -> 489,78 -> 504,78 -> 504,73 -> 501,73 -> 501,69
+
+> 480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> 486,38 -> 488,38 -> 488,36 -> 488,38
+
+> 480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> 486,38 -> 488,38 -> 488,36 -> 488,38
+
+> \[...\]
+
+<v-clicks>
+
+[Advent of code 2022, day 14](https://adventofcode.com/2022/day/14)
+
+These are `(x, y)` coordinates in a 2D space representing walls.
+
+In particular `525,119 -> 525,122` means there's a vertical wall between those two coordinates and `525,122 -> 523,122` means there's a horizontal wall between those coordinates.
+
+So we can render them!
+
+<img src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+
+</v-clicks>
+
+---
+
+# 🧮 From Numbers and Maps
+
+There's more
+
+We have a cave and what's more, sand is coming down from it! (from coordinate `500,0`)
 
 - Visualizing matrices as forests, terrain, or heatmaps
 - Mapping values to colors
 - Example: turning a grid of numbers into a landscape
-
-````md magic-move
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    img.Set(x, y, color.RGBA{G: 150, A: 255})
-  }
-}
-f, _ := os.Create("green.png")
-png.Encode(f, img)
-```
-
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    img.Set(x, y, color.RGBA{B: 150, A: 255})
-  }
-}
-f, _ := os.Create("blue.png")
-png.Encode(f, img)
-```
-
-```go
-r := image.Rect(0, 0, 1024, 768)
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    b := float64(x) / float64(r.Max.X) * 255
-    g := float64(y) / float64(r.Max.Y) * 255
-    img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
-  }
-}
-f, _ := os.Create("bgGradient.png")
-png.Encode(f, img)
-```
-````
 
 <img v-click="[1, '+1']" src="/images/forest.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 <img v-click="[2, '+1']" src="/images/hill.png" class="absolute top-50 right-25" style="width: 35%; height: auto;"/>
