@@ -78,11 +78,11 @@ Monday October 6th, 2025 (45 min)
 
 # 🧠 What do these have in common?
 
-<img src="/images/cave-with-sand.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click="1" src="/images/forest.png" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
-<img v-click="2" src="/images/bgGradient.png" class="absolute top-50 left-50" style="width: 30%; height: auto;"/>
-<img v-click="3" src="/images/LunchBreak.gif" class="absolute bottom-50 left-50" style="width: 30%; height: auto;"/>
-<img v-click="4" src="/images/game_of_life.gif" class="absolute bottom-25 right-50" style="width: 30%; height: auto;"/>
+<img src="/images/actual-cave-with-sand.png" class="absolute top-25 left-20" style="width: 45%; height: auto;"/>
+<img v-click="+1" src="/images/forest.png" class="absolute bottom-5 left-10" style="width: 23%; height: auto;"/>
+<img v-click="+2" src="/images/bgGradient.png" class="absolute bottom-25 left-85" style="width: 20%; height: auto;"/>
+<img v-click="+3" src="/images/LunchBreak.gif" class="absolute bottom-8 left-67" style="width: 30%; height: auto;"/>
+<img v-click="+4" src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
 
 <!-- Show a sequence of 3 images or gifs created with Go -->
 
