@@ -308,7 +308,7 @@ Or we can even visualize the flow of time. By the way if your really want to see
 layout: lblue-fact
 ---
 
-_We decide what color to set for each pixels_
+We decide what color to set for each pixels
 
 <!-- And this is the basics of creating an image -->
 
@@ -318,7 +318,7 @@ _We decide what color to set for each pixels_
 
 Because setting pixels is fun and imaginative, but we can use some tools to improve our images
 
-- Look at this input
+- Look at this input:
 
 > 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
 
@@ -332,17 +332,19 @@ Because setting pixels is fun and imaginative, but we can use some tools to impr
 
 <v-clicks>
 
-[Advent of code 2022, day 14](https://adventofcode.com/2022/day/14)
-
 These are `(x, y)` coordinates in a 2D space representing walls.
 
-In particular `525,119 -> 525,122` means there's a vertical wall between those two coordinates and `525,122 -> 523,122` means there's a horizontal wall between those coordinates.
-
-So we can render them!
-
-<img src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+From the first line:
 
 </v-clicks>
+
+<v-clicks depth="2">
+
+- `525,119 -> 525,122` is a vertical wall between those two coordinates.
+- `525,122 -> 523,122` is a horizontal wall between those coordinates.
+</v-clicks>
+
+<img v-click src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 
 ---
 
@@ -350,7 +352,18 @@ So we can render them!
 
 There's more
 
+This input comes from the advent of code [2022/14](https://adventofcode.com/2022/day/14).
+
 We have a cave and what's more, sand is coming down from it! (from coordinate `500,0`)
+
+<img v-click src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+<img v-click src="/images/first-cave.gif" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+<img v-click src="/images/cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+<img v-click src="/images/actual-cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+
+---
+
+# 🧮 From Numbers and Maps
 
 - Visualizing matrices as forests, terrain, or heatmaps
 - Mapping values to colors
@@ -361,7 +374,10 @@ We have a cave and what's more, sand is coming down from it! (from coordinate `5
 <img v-click="3" src="/images/cave-with-sand.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
 
 
-<!-- Add joke about the matrix movie and or bitmaps -->
+<!--
+ 
+ Add joke about the matrix movie and or bitmaps 
+ -->
 
 ---
 
