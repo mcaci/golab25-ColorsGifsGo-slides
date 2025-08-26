@@ -314,6 +314,18 @@ Or we can even visualize the flow of time. By the way if your really want to see
 layout: lblue-fact
 ---
 
+Fun fact
+
+---
+layout: fact
+---
+
+This what time looks like / Madness of multiverse was made in Go
+
+---
+layout: lblue-fact
+---
+
 We decide what color to set for each pixels
 
 <!-- And this is the basics of creating an image, now setting pixels is fun and imaginative, but we can use some tools to improve our outcome -->
