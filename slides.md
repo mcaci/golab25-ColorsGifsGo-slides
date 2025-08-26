@@ -93,6 +93,12 @@ layout: lblue-fact
 They are all made in Go
 
 ---
+layout: fact
+---
+
+Disclaimer: most of the images in this presentation are made in Go. If not do, you'll see this...
+
+---
 
 # ⚠️ Disclaimer
 
