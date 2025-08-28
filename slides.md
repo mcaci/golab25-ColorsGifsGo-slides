@@ -526,7 +526,7 @@ layout: fact
 Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yellow" painting in 1930
 
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
-<img v-click v-click.hide src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
+<img v-click v-click.hide src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 <img v-click src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
 
 ---
