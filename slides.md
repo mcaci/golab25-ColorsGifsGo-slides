@@ -172,6 +172,10 @@ for x := range r.Max.X {
 <v-click>
 4. We encode the image into a file with a specific format
 
+```go
+f, _ := os.Create("green.png")
+png.Encode(f, img)
+```
 </v-click>
 
 <img v-click="1" src="/images/bounds.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
@@ -183,30 +187,30 @@ for x := range r.Max.X {
 
 Full code
 
-```go{all|11|12|13-17|18-19|all}
+```go{all|13-17|15}
 package main
 
 import (
-	"image"
-	"image/color"
-	"image/png"
-	"os"
+  "image"
+  "image/color"
+  "image/png"
+  "os"
 )
 
 func main() {
-	r := image.Rect(0, 0, 1024, 768)
-	img := image.NewRGBA(r)
-	for x := range r.Max.X {
-		for y := range r.Max.Y {
-			img.Set(x, y, color.RGBA{G: 150, A: 255})
-		}
-	}
-	f, _ := os.Create("green.png")
-	png.Encode(f, img)
+  r := image.Rect(0, 0, 1024, 768)
+  img := image.NewRGBA(r)
+  for x := range r.Max.X {
+    for y := range r.Max.Y {
+      img.Set(x, y, color.RGBA{G: 150, A: 255})
+    }
+  }
+  f, _ := os.Create("green.png")
+  png.Encode(f, img)
 }
 ```
 
-<img v-click=5 src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
@@ -222,79 +226,47 @@ img.Set(x, y, color.RGBA{B: 150, A: 255})
 ```
 
 ```go
-var b, g uint8
 switch (x/32 + y/32) % 2 {
 case 0:
-  b = 150
+  img.Set(x, y, color.RGBA{B: 150, A: 255})
 default:
-  g = 150
+  img.Set(x, y, color.RGBA{G: 150, A: 255})
 }
-img.Set(x, y, color.RGBA{B: b, G: g, A: 255})
 ```
 
 ```go
-b := float64(x) / float64(r.Max.X) * 255
-g := float64(y) / float64(r.Max.Y) * 255
-img.Set(x, y, color.RGBA{B: uint8(b), G: uint8(g), A: 255})
+img.Set(x, y, color.RGBA{
+  B: uint8(float64(x) / float64(r.Max.X) * 255),
+  G: uint8(float64(y) / float64(r.Max.Y) * 255),
+  A: 255,
+})
 ```
 
 ```go
-func paintWith(/***/) color.Color {
-  /***/
-}
+img.Set(x, y, color.RGBA{
+  R: uint8((1 + math.Cos(float64(x)/10)) * 255),
+  G: uint8((1 + math.Sin(float64(y)/10)) * 255),
+  A: 255,
+})
+```
 
-img.Set(x, y, paintWith(/***/))
+```go
+nano := uint32(time.Now().UnixNano())
+img.Set(x, y, color.RGBA{
+  R: uint8((nano >> 16) & 0xFF),
+  G: uint8((nano >> 8) & 0xFF),
+  B: uint8(nano & 0xFF),
+  A: 255,
+})
 ```
 ````
-
-<v-click at=4>
-
-````md magic-move
-```go
-func paintWith(x, y int, r image.Rectangle) color.Color {
-  b := float64(x) / float64(r.Max.X) * 255
-  g := float64(y) / float64(r.Max.Y) * 255
-  return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
-}
-```
-
-```go
-func paintWith(x, y int) color.Color {
-  r := (1 + math.Cos(float64(x)/10)) * 255
-  g := (1 + math.Sin(float64(y)/10)) * 255
-  return color.RGBA{
-    R: uint8(r),
-    G: uint8(g),
-    A: 255,
-  }
-}
-```
-
-```go
-func paintWith(t time.Time) color.Color {
-  nano := uint32(t.UnixNano())
-  r := uint8((nano >> 16) & 0xFF)
-  g := uint8((nano >> 8) & 0xFF)
-  b := uint8(nano & 0xFF)
-  return color.RGBA{
-    R: uint8(r),
-    G: uint8(g),
-    B: uint8(b),
-    A: 255,
-  }
-}
-```
-````
-</v-click>
 
 <img src="/images/green.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
 <img v-click="+1" src="/images/blue.png" class="absolute top-35 right-20" style="width: 30%; height: auto;"/>
 <img v-click="+2" src="/images/bgCheckerboard.png" class="absolute top-50 right-35" style="width: 30%; height: auto;"/>
 <img v-click="+3" src="/images/bgGradient.png" class="absolute top-65 right-50" style="width: 28%; height: auto;"/>
-<!-- <img v-click="+4" v-click.hide src="/images/bgGradient.png" class="absolute top-50 right-25" style="width: 50%; height: auto;"/> -->
-<img v-click="+5" src="/images/plaid.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
-<img v-click="+6" src="/images/timeflow.png" class="absolute top-50 right-25" style="width: 45%; height: auto;"/>
-<img v-click="+7" src="/images/timeflow.gif" class="absolute top-21 right-5" style="width: 50%; height: auto;"/>
+<img v-click="+4" src="/images/plaid.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
+<img v-click="+5" src="/images/timeflow.png" class="absolute top-50 right-25" style="width: 45%; height: auto;"/>
 
 <!-- 
 In the first image we started by setting all pixels to a fully opaque medium green (not too bright, not too dark)
@@ -325,14 +297,6 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
-
----
-layout: lblue-fact
----
-
-We decide what color to set for each pixels
-
-<!-- And this is the basics of creating an image, now setting pixels is fun and imaginative, but we can use some tools to improve our outcome -->
 
 ---
 
