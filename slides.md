@@ -24,7 +24,7 @@ mdc: true
 #  ogImage: https://cover.sli.dev
 ---
 
-# Colors, images and gifs: bring on the fun with Go!
+# Colors, images and gifs: bring on the fun with Go
 
 <div class="absolute bottom-10 text-left">
     <div>Michele Caci</div>
@@ -76,13 +76,13 @@ Monday October 6th, 2025 (45 min)
 
 ---
 
-# 🧠 What do these have in common?
+# Can you guess what do these images have in common
 
 <img src="/images/actual-cave-with-sand.png" class="absolute top-25 left-20" style="width: 45%; height: auto;"/>
-<img v-click="+1" src="/images/forest.png" class="absolute bottom-5 left-10" style="width: 23%; height: auto;"/>
-<img v-click="+2" src="/images/bgGradient.png" class="absolute bottom-25 left-85" style="width: 20%; height: auto;"/>
-<img v-click="+3" src="/images/LunchBreak.gif" class="absolute bottom-8 left-67" style="width: 30%; height: auto;"/>
-<img v-click="+4" src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
+<img src="/images/forest.png" class="absolute bottom-5 left-10" style="width: 23%; height: auto;"/>
+<img src="/images/bgGradient.png" class="absolute bottom-25 left-85" style="width: 20%; height: auto;"/>
+<img src="/images/LunchBreak.gif" class="absolute bottom-8 left-67" style="width: 30%; height: auto;"/>
+<img src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
 
 <!-- Show a sequence of 3 images or gifs created with Go -->
 
@@ -96,50 +96,58 @@ They are all made in Go
 layout: fact
 ---
 
-Disclaimer: most of the images in this presentation are made in Go. If not do, you'll see this...
-
----
-
 # ⚠️ Disclaimer
 
-In this talk you can expect a lot of:
-- Images 🖼️
-- GIFs 🎞️
-- And Go 🐹
+<v-click>
+Most of the images in this presentation are made in Go
+</v-click>
 
-The code will be shared so your creativity can take over!
-- Light up those pixels! 🧮
-- Let's Put Some Color to Our Programming with Go
-  - Unleashing creativity with pixels, palettes, and Go!
-
-I tried to create **all** the images in this presentation using Go.
+<!-- If an image is not made in Go you'll notice -->
 
 ---
 
-# 🎨 Why would you even create images or gifs in Go?
+# But why would I even start make images or gifs in Go?
+
+<v-clicks>
 
 - I love Go
 - It’s fun
-- It’s weirdly satisfying
-- It shows that Go can hold its ground when working with images
-  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I had to do it in Go)
-- 🎨 Why Color in Code?
-  - Programming isn't just logic—it's also art
-  - Go is fast, simple, and surprisingly good at graphics
-  - We'll use (almost) only the standard library!
+- The results can be weirdly satisfying
+
+</v-clicks>
+
+<img v-click src="/images/whatIsBestForImageProcessing.png" class="absolute top-25 left-30" style="width: 55%; height: auto;"/>
+<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 left-10" style="width: 40%; height: auto;"/>
+
+<!-- 
+- I love Go
+  - It's a straightforward language that can generate performant programs
+- It’s fun 
+- The results can be weirdly satisfying
+  - There are some images I couldn't believe myself to be able to generate
+- When I googled "which programming language is best for pictures" I got this
+  - So of course I had to do it in Go
+-->
 
 ---
+layout: center
+---
 
-# 👋 Welcome!
-- Who I am
-- Why I love Go
-- What this talk is about: creativity, color, and fun!
+# 👋 Hello
+
+- I'm Michele
+- I work in Amadeus
+- I deploy and operate Splunk
+- My hobbies include languages, board games and TBA (something fun)
+- And I'm going to talk you about creativity, art and fun with Go!
+
+<!-- Amadeus: we make travel working -->
 
 ---
 
 # 🖼️ Our First Image
 
-The basics: step by step
+Step by step
 
 <v-click>
 1. We start by defining the bounds of the image as a rectangle.
@@ -147,6 +155,7 @@ The basics: step by step
 ```go
 r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 ```
+
 </v-click>
 
 <v-click>
@@ -155,6 +164,7 @@ r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 ```go
 img := image.NewRGBA(r)
 ```
+
 </v-click>
 
 <v-click>
@@ -167,6 +177,7 @@ for x := range r.Max.X {
   }
 }
 ```
+
 </v-click>
 
 <v-click>
@@ -176,6 +187,7 @@ for x := range r.Max.X {
 f, _ := os.Create("green.png")
 png.Encode(f, img)
 ```
+
 </v-click>
 
 <img v-click="1" src="/images/bounds.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
@@ -300,9 +312,9 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 
 ---
 
-# 🧮 From Numbers and Matrices
+# 🧮 From Inputs and Matrices
 
-Images from input
+To an image
 
 ```
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
@@ -313,7 +325,9 @@ Images from input
 112102131331201432320312233124434232544144233241123334112232531521542551332434224211234133132330300
 ...
 ```
+
 or
+
 ```
 ...
 SbcccccccaaaaacaaaaaaaaccccccaaaaaccccccccciiinnntttxxxEzzzzyyyyvvqqqjjjdddccccc
@@ -332,15 +346,13 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 
 <arrow v-click v-click.hide x1="170" y1="200"  x2="70" y2="150" color="#F00" width="2" arrowSize="1" />
 <arrow v-click v-click.hide x1="180" y1="200"  x2="80" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click v-click.hide x1="190" y1="200"  x2="90" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click v-click.hide x1="200" y1="200"  x2="100" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click v-click.hide x1="210" y1="200"  x2="110" y2="150" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="190" y1="200"  x2="90" y2="150" color="#F00" width="2" arrowSize="1" />
 
 ---
 
-# 🧮 From Numbers and Matrices
+# 🧮 From Inputs and Matrices
 
-Images from input
+To an image
 
 ```go
 for x := range r.Max.X {
@@ -368,44 +380,50 @@ for x := range r.Max.X {
 }
 ```
 
+<arrow v-click x1="380" y1="250" x2="320" y2="210" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="1" x1="380" y1="525" x2="320" y2="465" color="#F00" width="2" arrowSize="1" />
 <img v-click src="/images/forest.png" class="absolute top-35 left-55" style="width: 40%; height: auto;"/>
 <img v-click src="/images/hill.png" class="absolute top-35 left-35" style="width: 70%; height: auto;"/>
 
+<!-- 
+Add joke about the matrix movie and or bitmaps 
+-->
+
 ---
 
-# 🧮 From Numbers and Matrices
+# 🧮 From Inputs and Matrices
 
-Images from more complex input
+More complex input
 
 ```
 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
 497,69 -> 497,73 -> 489,73 -> 489,78 -> 504,78 -> 504,73 -> 501,73 -> 501,69
-480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> 486,38 -> 488,38 -> 488,36 -> 488,38
-480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> 486,38 -> 488,38 -> 488,36 -> 488,38
+480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> ...
+480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> ...
 ...
 ```
 
 <v-click>
 
-These are `(x, y)` coordinates in a 2D space representing lines of rock walls inside a cave.
+These are `(x, y)` coordinates in a 2D space representing lines of rock walls inside a cave
 </v-click>
 
-<v-clicks depth="2">
+<v-clicks>
 
-- `525,119 -> 525,122` is a vertical wall between those two coordinates.
-- `525,122 -> 523,122` is a horizontal wall between those coordinates.
+- `525,119 -> 525,122`
+  - a vertical wall (only Y changes)
+- `525,122 -> 523,122`
+  - a horizontal wall (only X changes)
 </v-clicks>
 
-<v-click>
-
-Build a matrix of representing this cave from the rules above and use it as input.
-</v-click>
+<!-- So we uses these rules to build a matrix with the coordinates representing this cave 
+and use it as input to color our image-->
 
 ---
 
-# 🧮 From Numbers and Matrices
+# 🧮 From Inputs and Matrices
 
-Images from more complex input
+The cave
 
 ```go
 // var cave [][]byte
@@ -427,30 +445,46 @@ for i := range cave {
 
 <img v-click v-click.hide src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 
-<v-click>Wait, sand is coming down inside the cave!</v-click>
+<v-click>Sand is coming down inside the cave!</v-click>
 
 <img v-click src="/images/first-cave.gif" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/actual-cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 
 ---
+layout: center
+---
 
-# 🧮 From Numbers and Matrices
+# 🌍 A real world example
 
-How about a real world example
+Github contribution table
 
-Making the github contribution table is just like creating another matrix and filling the image with the appropriate colors
+<img v-click src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
 
-And github gives us all the information we need:
+---
+
+# 🌍 A real world example
+
+Github contribution table
+
+<v-clicks>
+
+We take the input from the HTML of a github user's homepage
 
 ```html
 <td ... id="contribution-day-component-3-6" data-level="3" ...></td>
 ```
 
 - `id` attribute has the (x, y) coordinates
-- `data-level` has the color to use in the table
+- `data-level` has the index of the color from a __palette__
 
-and I mean a precise color from a palette, which is easily definable in Go
+</v-clicks>
+
+<br/>
+
+<v-click>
+
+And a palette is easily definable in Go
 
 ```go
 // type color.Palette []color.Color
@@ -463,19 +497,19 @@ p := color.Palette{
 }
 ```
 
+</v-click>
 
-
-<img src="/images/actual-gh-contributions.png" class="absolute top-50 right-15" style="width: 40%; height: auto;"/>
-<arrow v-click x1="700" y1="325" x2="855" y2="295" color="#F00" width="2" arrowSize="1" />
-<img v-click src="/images/generated-gh-contributions.png" class="absolute bottom-20 right-15" style="width: 40%; height: auto;"/>
+<img v-click src="/images/actual-gh-contributions.png" class="absolute top-60 right-15" style="width: 40%; height: auto;"/>
+<arrow v-click="5" x1="360" y1="400" x2="850" y2="330" color="#F00" width="2" arrowSize="1" />
 
 ---
 
-# 🧮 From Numbers and Matrices
+# 🌍 A real world example
 
-- Visualizing matrices as forests, terrain, or heatmaps
-- Mapping values to colors
-- Example: turning a grid of numbers into a landscape
+Github contribution table
+
+<img src="/images/actual-gh-contributions.png" class="absolute top-30 left-30" style="width: 70%; height: auto;"/>
+<img v-click src="/images/generated-gh-contributions.png" class="absolute bottom-30 left-40" style="width: 65%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -483,23 +517,24 @@ layout: lblue-fact
 
 Fun fact
 
-<!-- 
-Add joke about the matrix movie and or bitmaps 
--->
-
 ---
 layout: fact
 ---
 
-Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yellow" painting in 1930
+Gioconda paint by number (to be updated)
 
-<img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
-<img v-click v-click.hide src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
-<img v-click src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
+<img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
+<img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
+<img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 ---
 
+# 🖼️ Layering Images and Text
+
+Let's leave the pixel setting to get to composing images
+
 ## 🖼️ Layering Images and Text
+
 - Composing visuals with layers
 - Adding text overlays
 - Creating banners and posters
@@ -507,6 +542,7 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 ---
 
 ## 🎞️ Animating with Go
+
 - Making playful GIFs
 - Frame-by-frame animation
 - Example: animated banner or pixel art
@@ -514,12 +550,15 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 ---
 
 ## 🧰 Tools & Techniques
+
 - Go packages used (mostly standard library)
 - Tips for working with images and pixels
 - How to stay creative while coding
+
 ---
 
 ## 🧠 What You Can Build
+
 - Fun projects: maps, games, visualizations
 - Ideas to explore on your own
 - Encouragement to experiment!
@@ -527,17 +566,27 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 ---
 
 ## 🙌 Wrapping Up
+
 - Recap of what we covered
 - Resources and links
 - Final thoughts: code is a canvas!
 
+- It shows that Go can hold its ground when working with images
+  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I had to do it in Go)
+- 🎨 Why Color in Code?
+  - Programming isn't just logic—it's also art
+  - Go is fast, simple, and surprisingly good at graphics
+  - We'll use (almost) only the standard library!
+
 ---
 
 ## 💬 Q&A
+
 - Ask me anything!
 - Connect with me online
 
 ---
+
 layout: lblue-end
 ---
 

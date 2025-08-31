@@ -184,9 +184,14 @@ Thank you very much!
 <img v-click v-click.hide src="/images/stripes.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 <img v-click v-click.hide src="/images/timedots.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
-
 # 🌈 Creating Palettes and Images
 
 - How to define and use colors in Go
 - Building palettes
 - Drawing basic shapes and rectangles
+
+# 🧮 From Inputs and Matrices
+
+- Visualizing matrices as forests, terrain, or heatmaps
+- Mapping values to colors
+- Example: turning a grid of numbers into a landscape
