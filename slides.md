@@ -541,6 +541,24 @@ Let's leave the pixel setting to get to composing images
 
 ---
 
+---
+layout: lblue-fact
+---
+
+Fun fact 
+
+---
+layout: fact
+---
+
+https://en.m.wikipedia.org/wiki/Colored_Mona_Lisa
+
+<img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
+<img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
+<img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
+
+---
+
 ## 🎞️ Animating with Go
 
 - Making playful GIFs
