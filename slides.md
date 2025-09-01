@@ -144,6 +144,12 @@ layout: center
 <!-- Amadeus: we make travel working -->
 
 ---
+layout: lblue-fact
+---
+
+Let's start creating our first Image
+
+---
 
 # 🖼️ Our First Image
 
@@ -312,9 +318,25 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 
 ---
 
-# 🧮 From Inputs and Matrices
+# 🧮 Using Inputs and Matrices
 
-To an image
+Guided creation of images
+
+When we set a pixel to a specific color in this way
+
+```go
+img.Set(x, y, color.RGBA{G: 150, A: 255})
+```
+
+We are the ones deciding the color, either by hardcoding it or by computing it via a function
+
+Another way to create images is to be guided by some input
+
+---
+
+# 🧮 Using Inputs and Matrices
+
+From inputs
 
 ```
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
@@ -325,8 +347,6 @@ To an image
 112102131331201432320312233124434232544144233241123334112232531521542551332434224211234133132330300
 ...
 ```
-
-or
 
 ```
 ...
@@ -344,15 +364,15 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 ...
 ```
 
-<arrow v-click v-click.hide x1="170" y1="200"  x2="70" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click v-click.hide x1="180" y1="200"  x2="80" y2="150" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="170" y1="200"  x2="70" y2="150" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="180" y1="200"  x2="80" y2="150" color="#F00" width="2" arrowSize="1" />
 <arrow v-click x1="190" y1="200"  x2="90" y2="150" color="#F00" width="2" arrowSize="1" />
 
 ---
 
-# 🧮 From Inputs and Matrices
+# 🧮 Using Inputs and Matrices
 
-To an image
+To matrices
 
 ```go
 for x := range r.Max.X {
@@ -382,8 +402,41 @@ for x := range r.Max.X {
 
 <arrow v-click x1="380" y1="250" x2="320" y2="210" color="#F00" width="2" arrowSize="1" />
 <arrow v-click="1" x1="380" y1="525" x2="320" y2="465" color="#F00" width="2" arrowSize="1" />
-<img v-click src="/images/forest.png" class="absolute top-35 left-55" style="width: 40%; height: auto;"/>
-<img v-click src="/images/hill.png" class="absolute top-35 left-35" style="width: 70%; height: auto;"/>
+
+---
+
+# 🧮 Using Inputs and Matrices
+
+To images
+
+```
+100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
+111110201332323210211143123214321343332124211413115514155115511033421001222101204330001300333011010
+222100123300231230122203432310224441551434231352112532354252244334410042212441233243220102033110020
+212210311310102334321243104133012535144151532555155341325352512544453402400411340202133231000102020
+112002102322001003304233302040124544411225523533534235113353522233535550432232202401221022110311110
+112102131331201432320312233124434232544144233241123334112232531521542551332434224211234133132330300
+...
+```
+
+```
+...
+SbcccccccaaaaacaaaaaaaaccccccaaaaaccccccccciiinnntttxxxEzzzzyyyyvvqqqjjjdddccccc
+abcccccccccccccaaaaaaaaaccccaaaaaaccccccccciiinnnntttxxxxyyyyyvvvvqqjjjdddcccccc
+abcccccccccccccaaaaaaaaaacccaaaaaacccccccccciiinnnttttxxxyyyyyvvvqqqjjjdddcccccc
+abccccccccccccccccaaaaaaacccaaaaaaccccccccccciiinnnntttwyyywyyyvvrrrkkjdddcccccc
+abcccccccccccccccaaaaaaaaccccaaaccccccccccccciiihnnnttwwwywwyyywvrrrkkkeeccccccc
+abcccccccccccccccaaaaaaaaccccccccccccccccccccchhhmmmsswwwwwwwwwwwvrrkkkeeccccccc
+abcccccccaacccccccacaaacccccccccccccccccccaacchhhhmmsswwwwwswwwwwrrrkkkeeccccccc
+abcccccccaaaccacccccaaacccccccccccccccaaccaaccchhhmmssswwwssrrwwwrrrkkkeeccccccc
+abcccccccaaaaaaacccccccccccaaaccccccccaaaaaaccchhhmmssssssssrrrrrrrrkkkeeaaacccc
+abcccccaaaaaaaaccccccccccccaaaaccccccccaaaaaaachhhmmmssssssllrrrrrrkkkeeeaaacccc
+abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
+...
+```
+
+<img v-click="1" src="/images/forest.png" class="absolute top-15 right-20" style="width: 25%; height: auto;"/>
+<img v-click="1" src="/images/hill.png" class="absolute bottom-5 right-25" style="width: 40%; height: auto;"/>
 
 <!-- 
 Add joke about the matrix movie and or bitmaps 
@@ -391,7 +444,7 @@ Add joke about the matrix movie and or bitmaps
 
 ---
 
-# 🧮 From Inputs and Matrices
+# 🧮 Using Inputs and Matrices
 
 More complex input
 
@@ -405,7 +458,7 @@ More complex input
 
 <v-click>
 
-These are `(x, y)` coordinates in a 2D space representing lines of rock walls inside a cave
+`(x, y)` coordinates in a 2D space representing walls inside a cave
 </v-click>
 
 <v-clicks>
@@ -416,12 +469,15 @@ These are `(x, y)` coordinates in a 2D space representing lines of rock walls in
   - a horizontal wall (only X changes)
 </v-clicks>
 
+We transform these sequences into a byte matrix and encode each element of the cave as a specific char
+- '0' -> empty space, '*' -> sand, 'x' -> wall
+
 <!-- So we uses these rules to build a matrix with the coordinates representing this cave 
 and use it as input to color our image-->
 
 ---
 
-# 🧮 From Inputs and Matrices
+# 🧮 Using Inputs and Matrices
 
 The cave
 
@@ -438,15 +494,12 @@ for i := range cave {
     default:
       r, g, b = 200, 100, 0 // orange
     }
-    img.Set(j, i, color.RGBA{R: r, G: g, B: b, A: 255})
+    img.Set(i, j, color.RGBA{R: r, G: g, B: b, A: 255})
   }
 }
 ```
 
-<img v-click v-click.hide src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
-
-<v-click>Sand is coming down inside the cave!</v-click>
-
+<img v-click src="/images/cave.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/first-cave.gif" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/actual-cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
@@ -521,17 +574,78 @@ Fun fact
 layout: fact
 ---
 
-Gioconda paint by number (to be updated)
+A less known version of the Monalisa is a paint by number painting made in Go
 
 <img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 ---
+layout: center
+---
 
-# 🖼️ Layering Images and Text
+# 🗃️ Layering Images and Text
 
-Let's leave the pixel setting to get to composing images
+Moving away from setting colors to pixels
+
+So far we have used a lot:
+
+```go
+func (p *RGBA) Set(x, y int, c color.Color) // For RGBA
+```
+
+We are now moving to:
+
+```go
+func Draw(dst Image, r image.Rectangle, src image.Image, sp image.Point, op Op)
+```
+
+---
+
+# 🗃️ Layering Images and Text
+
+A basic composition of two images
+
+<v-click>
+1. Image 1 will be a green rectangle.
+
+```go
+r := image.Rect(0, 0, 800, 600) 
+img := image.NewRGBA(r)
+for x := range r.Max.X {
+  for y := range r.Max.Y {
+    img.Set(x, y, color.RGBA{G: 150, A: 255})
+  }
+}
+```
+</v-click>
+
+<v-click>
+2. Image 2 will be a white rectangle
+
+```go
+img := image.NewRGBA(r)
+```
+
+</v-click>
+
+<v-click>
+3. We set the pixels of the image to the color we want
+
+```go
+```
+
+</v-click>
+
+<v-click>
+4. We encode the image into a file with a specific format
+
+```go
+f, _ := os.Create("green.png")
+png.Encode(f, img)
+```
+
+---
 
 ## 🖼️ Layering Images and Text
 
@@ -539,13 +653,12 @@ Let's leave the pixel setting to get to composing images
 - Adding text overlays
 - Creating banners and posters
 
----
 
 ---
 layout: lblue-fact
 ---
 
-Fun fact 
+Fun fact
 
 ---
 layout: fact
