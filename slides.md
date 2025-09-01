@@ -469,8 +469,11 @@ More complex input
   - a horizontal wall (only X changes)
 </v-clicks>
 
+<v-click>
+
 We transform these sequences into a byte matrix and encode each element of the cave as a specific char
 - '0' -> empty space, '*' -> sand, 'x' -> wall
+</v-click>
 
 <!-- So we uses these rules to build a matrix with the coordinates representing this cave 
 and use it as input to color our image-->
@@ -607,43 +610,58 @@ func Draw(dst Image, r image.Rectangle, src image.Image, sp image.Point, op Op)
 A basic composition of two images
 
 <v-click>
-1. Image 1 will be a green rectangle.
+Image 1 will be a green rectangle
 
 ```go
-r := image.Rect(0, 0, 800, 600) 
-img := image.NewRGBA(r)
-for x := range r.Max.X {
-  for y := range r.Max.Y {
-    img.Set(x, y, color.RGBA{G: 150, A: 255})
+dstR := image.Rect(0, 0, 1024, 768)
+dst := image.NewRGBA(dstR)
+for x := range dstR.Max.X {
+  for y := range dstR.Max.Y {
+    dst.Set(x, y, color.RGBA{G: 150, A: 255})
+  }
+}
+```
+
+</v-click>
+
+<v-click>
+Image 2 will be a smaller white rectangle
+
+```go
+srcR := image.Rect(0, 0, 800, 600)
+src := image.NewRGBA(srcR)
+for x := range srcR.Max.X {
+  for y := range srcR.Max.Y {
+    src.Set(x, y, color.White)
   }
 }
 ```
 </v-click>
 
+---
+
+# 🗃️ Layering Images and Text
+
+A basic composition of two images
+
 <v-click>
-2. Image 2 will be a white rectangle
+We draw image 2 on image 1
 
 ```go
-img := image.NewRGBA(r)
+draw.Draw(dst, dstR, src, image.Point{224, 168}, draw.Over)
 ```
 
 </v-click>
 
 <v-click>
-3. We set the pixels of the image to the color we want
+And encode the result (dst) image into a file with a specific format
 
 ```go
+f, _ := os.Create("white-in-green.png")
+png.Encode(f, dst)
 ```
 
 </v-click>
-
-<v-click>
-4. We encode the image into a file with a specific format
-
-```go
-f, _ := os.Create("green.png")
-png.Encode(f, img)
-```
 
 ---
 
@@ -717,7 +735,6 @@ https://en.m.wikipedia.org/wiki/Colored_Mona_Lisa
 - Connect with me online
 
 ---
-
 layout: lblue-end
 ---
 
