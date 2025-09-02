@@ -234,6 +234,8 @@ func main() {
 
 # 🎨 Beyond our First Image
 
+Stepping up the color scene
+
 ````md magic-move
 ```go
 img.Set(x, y, color.RGBA{G: 150, A: 255})
@@ -317,26 +319,24 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 <img v-click src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
 ---
-
-# 🧮 Using Inputs and Matrices
-
-Guided creation of images
-
-When we set a pixel to a specific color in this way
-
-```go
-img.Set(x, y, color.RGBA{G: 150, A: 255})
-```
-
-We are the ones deciding the color, either by hardcoding it or by computing it via a function
-
-Another way to create images is to be guided by some input
-
+layout: center
+class: text-center
 ---
 
 # 🧮 Using Inputs and Matrices
 
-From inputs
+A more guided image creation
+
+We have been the ones deciding the color so far
+
+Either by hardcoding it or by computing it via a function
+
+Now we see how to use external input to drive the creation of the image
+
+---
+layout: center
+class: text-center
+---
 
 ```
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
@@ -364,15 +364,15 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 ...
 ```
 
-<arrow v-click x1="170" y1="200"  x2="70" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="180" y1="200"  x2="80" y2="150" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="190" y1="200"  x2="90" y2="150" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="270" y1="152"  x2="145" y2="102" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="280" y1="152"  x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="290" y1="152"  x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
 
 ---
 
 # 🧮 Using Inputs and Matrices
 
-To matrices
+From matrices
 
 ```go
 for x := range r.Max.X {
@@ -404,10 +404,9 @@ for x := range r.Max.X {
 <arrow v-click="1" x1="380" y1="525" x2="320" y2="465" color="#F00" width="2" arrowSize="1" />
 
 ---
-
-# 🧮 Using Inputs and Matrices
-
-To images
+layout: center
+class: text-center
+---
 
 ```
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
@@ -418,6 +417,8 @@ To images
 112102131331201432320312233124434232544144233241123334112232531521542551332434224211234133132330300
 ...
 ```
+
+<br/>
 
 ```
 ...
@@ -509,13 +510,14 @@ for i := range cave {
 
 ---
 layout: center
+class: text-center
 ---
 
 # 🌍 A real world example
 
 Github contribution table
 
-<img v-click src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
+<img src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
 
 ---
 
@@ -525,7 +527,7 @@ Github contribution table
 
 <v-clicks>
 
-We take the input from the HTML of a github user's homepage
+We can take the input from the HTML of a github user's homepage
 
 ```html
 <td ... id="contribution-day-component-3-6" data-level="3" ...></td>
@@ -539,8 +541,6 @@ We take the input from the HTML of a github user's homepage
 <br/>
 
 <v-click>
-
-And a palette is easily definable in Go
 
 ```go
 // type color.Palette []color.Color
@@ -556,7 +556,9 @@ p := color.Palette{
 </v-click>
 
 <img v-click src="/images/actual-gh-contributions.png" class="absolute top-60 right-15" style="width: 40%; height: auto;"/>
-<arrow v-click="5" x1="360" y1="400" x2="850" y2="330" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="5" x1="470" y1="400" x2="850" y2="330" color="#F00" width="2" arrowSize="1" />
+
+<!-- And a palette is easily definable in Go -->
 
 ---
 
@@ -585,11 +587,12 @@ A less known version of the Monalisa is a paint by number painting made in Go
 
 ---
 layout: center
+class: text-center
 ---
 
 # 🗃️ Layering Images and Text
 
-Moving away from setting colors to pixels
+  Moving away from setting colors to pixels
 
 So far we have used a lot:
 
@@ -645,10 +648,10 @@ for x := range srcR.Max.X {
 A basic composition of two images
 
 <v-click>
-We draw image 2 on image 1
+We draw image 2 (dst) on image 1 (src)
 
 ```go
-draw.Draw(dst, dstR, src, image.Point{224, 168}, draw.Over)
+draw.Draw(dst, image.Rect(224, 168, dstR.Max.X, dstR.Max.Y), src, image.Point{224, 168}, draw.Over)
 ```
 
 </v-click>
@@ -662,6 +665,37 @@ png.Encode(f, dst)
 ```
 
 </v-click>
+
+---
+
+# 🖼️ Layering Images and Text
+
+Full code
+
+```go
+func main() {
+  dstR := image.Rect(0, 0, 1024, 768)
+  dst := image.NewRGBA(dstR)
+  for x := range dstR.Max.X {
+    for y := range dstR.Max.Y {
+      dst.Set(x, y, color.RGBA{G: 150, A: 255})
+    }
+  }
+  srcR := image.Rect(0, 0, 800, 600)
+  src := image.NewRGBA(srcR)
+  for x := range srcR.Max.X {
+    for y := range srcR.Max.Y {
+      src.Set(x, y, color.White)
+    }
+  }
+  draw.Draw(dst, image.Rect(224, 168, dstR.Max.X, dstR.Max.Y), src, image.Point{224, 168}, draw.Over)
+  f, _ := os.Create("white-in-green.png")
+  png.Encode(f, dst)
+}
+
+```
+
+<img v-click src="/images/white-in-green.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
