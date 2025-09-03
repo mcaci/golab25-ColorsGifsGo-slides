@@ -449,6 +449,8 @@ Add joke about the matrix movie and or bitmaps
 
 More complex input
 
+These are `(x, y)` coordinates in a 2D space representing walls inside a cave
+
 ```
 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
 497,69 -> 497,73 -> 489,73 -> 489,78 -> 504,78 -> 504,73 -> 501,73 -> 501,69
@@ -459,7 +461,6 @@ More complex input
 
 <v-click>
 
-`(x, y)` coordinates in a 2D space representing walls inside a cave
 </v-click>
 
 <v-clicks>
@@ -470,13 +471,7 @@ More complex input
   - a horizontal wall (only X changes)
 </v-clicks>
 
-<v-click>
-
-We transform these sequences into a byte matrix and encode each element of the cave as a specific char
-- '0' -> empty space, '*' -> sand, 'x' -> wall
-</v-click>
-
-<!-- So we uses these rules to build a matrix with the coordinates representing this cave 
+<!-- So we uses these rules to build a byte matrix with the coordinates representing this cave 
 and use it as input to color our image-->
 
 ---
@@ -525,22 +520,28 @@ Github contribution table
 
 Github contribution table
 
-<v-clicks>
+<v-click>
 
 We can take the input from the HTML of a github user's homepage
+</v-click>
+
+<v-clicks>
 
 ```html
 <td ... id="contribution-day-component-3-6" data-level="3" ...></td>
 ```
 
-- `id` attribute has the (x, y) coordinates
-- `data-level` has the index of the color from a __palette__
+- `id` contains the (x, y) coordinates
+- `data-level` is the index of the color from a __palette__
 
 </v-clicks>
 
-<br/>
+<!-- For those who don't know a palette is a set of colors and in Go, conveniently, a palette is a slice of colors -->
+---
 
-<v-click>
+# 🌍 A real world example
+
+Palettes in Go
 
 ```go
 // type color.Palette []color.Color
@@ -553,18 +554,14 @@ p := color.Palette{
 }
 ```
 
-</v-click>
-
-<img v-click src="/images/actual-gh-contributions.png" class="absolute top-60 right-15" style="width: 40%; height: auto;"/>
-<arrow v-click="5" x1="470" y1="400" x2="850" y2="330" color="#F00" width="2" arrowSize="1" />
-
-<!-- And a palette is easily definable in Go -->
+<img v-click src="/images/actual-gh-contributions.png" class="absolute top-40 right-15" style="width: 40%; height: auto;"/>
+<arrow v-after x1="800" y1="300" x2="850" y2="250" color="#F00" width="2" arrowSize="1" />
 
 ---
 
 # 🌍 A real world example
 
-Github contribution table
+Github input + color.Palette = contribution table
 
 <img src="/images/actual-gh-contributions.png" class="absolute top-30 left-30" style="width: 70%; height: auto;"/>
 <img v-click src="/images/generated-gh-contributions.png" class="absolute bottom-30 left-40" style="width: 65%; height: auto;"/>
@@ -590,11 +587,11 @@ layout: center
 class: text-center
 ---
 
-# 🗃️ Layering Images and Text
+# 🗃️ Layering Images
 
-  Moving away from setting colors to pixels
+From setting colors to pixels to drawing layers
 
-So far we have used a lot:
+<!-- So far we have used a lot:
 
 ```go
 func (p *RGBA) Set(x, y int, c color.Color) // For RGBA
@@ -604,16 +601,17 @@ We are now moving to:
 
 ```go
 func Draw(dst Image, r image.Rectangle, src image.Image, sp image.Point, op Op)
-```
+``` -->
 
 ---
 
-# 🗃️ Layering Images and Text
+# 🗃️ Layering Images
 
 A basic composition of two images
 
 <v-click>
-Image 1 will be a green rectangle
+
+1. We create the first image `dst` as a green rectangle
 
 ```go
 dstR := image.Rect(0, 0, 1024, 768)
@@ -624,11 +622,11 @@ for x := range dstR.Max.X {
   }
 }
 ```
-
 </v-click>
 
 <v-click>
-Image 2 will be a smaller white rectangle
+
+2. We create the second image `src` as a smaller white rectangle
 
 ```go
 srcR := image.Rect(0, 0, 800, 600)
@@ -643,21 +641,29 @@ for x := range srcR.Max.X {
 
 ---
 
-# 🗃️ Layering Images and Text
+# 🗃️ Layering Images
 
 A basic composition of two images
 
 <v-click>
-We draw image 2 (dst) on image 1 (src)
+
+3. We draw `dst` over `src`
 
 ```go
-draw.Draw(dst, image.Rect(224, 168, dstR.Max.X, dstR.Max.Y), src, image.Point{224, 168}, draw.Over)
+draw.Draw(
+  dst,   // the destination image
+  image.Rect(224, 168, dstR.Max.X, dstR.Max.Y),  // the area on dst where Draw can operate
+  src,  // the source image
+  image.Point{224, 168}, // the starting point from which the source can be taken
+  draw.Over, // the draw operation (draw src over dst)
+)
 ```
 
 </v-click>
 
 <v-click>
-And encode the result (dst) image into a file with a specific format
+
+4. And encode the resulting image, `dst`, into a file with a specific format
 
 ```go
 f, _ := os.Create("white-in-green.png")
@@ -668,7 +674,7 @@ png.Encode(f, dst)
 
 ---
 
-# 🖼️ Layering Images and Text
+# 🗃️ Layering Images
 
 Full code
 
@@ -696,6 +702,15 @@ func main() {
 ```
 
 <img v-click src="/images/white-in-green.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+
+---
+
+# 🗃️ Layering Images and Text
+
+Let's get creative
+
+<img v-click src="/images/composition.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+
 
 ---
 
