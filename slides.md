@@ -729,6 +729,7 @@ https://en.m.wikipedia.org/wiki/Colored_Mona_Lisa
 - Making playful GIFs
 - Frame-by-frame animation
 - Example: animated banner or pixel art
+- Example: a progress bar
 
 ---
 
