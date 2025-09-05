@@ -24,13 +24,13 @@ func main() {
 
 	draw.Draw(base, image.Rect(110, 100, base.Bounds().Dx()-110, base.Bounds().Dy()-100), gray, image.Point{110, 100}, draw.Over)
 	draw.Draw(base, image.Rect(130, 130, base.Bounds().Dx()-130, base.Bounds().Dy()-130), gopherized, image.Point{130, 130}, draw.Over)
-	ftc, err := ftContext(base, "0x0000DE", 128.0)
+	ftc, err := ftContext(base, "0x0000DE", 94.0)
 	if err != nil {
 		log.Fatal(err)
 	}
-	ftc.DrawString("Colors, images and gifs:", fixed.P(1010, 400))
-	ftc.DrawString("bring on the fun with Go", fixed.P(1000, 600))
-	ftc.DrawString("by Michele Caci", fixed.P(1300, 1150))
+	ftc.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
+	ftc.DrawString("bring on the fun with Go", fixed.P(1250, 550))
+	ftc.DrawString("by Michele Caci", fixed.P(1650, 1150))
 
 	out, _ := os.Create("composition.png")
 	png.Encode(out, base)

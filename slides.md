@@ -709,8 +709,66 @@ func main() {
 
 Let's get creative
 
-<img v-click src="/images/composition.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<v-clicks>
 
+1. Load a background image
+2. Put a grey box inside
+3. Add a nice gopher
+4. Write some text
+</v-clicks>
+
+<img v-click="+1" src="/images/golab-speakers.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<img v-click="+2" src="/images/composition-grey.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<img v-click="+3" src="/images/composition-gopher.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<img v-click="+4" src="/images/composition.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+
+---
+
+# 🗃️ Layering Images and Text
+
+Load the background
+
+```go
+func Load(filename string) draw.Image {
+  f, err := os.Open(filename)
+  if err != nil {
+    log.Fatal(err)
+  }
+  img, err := png.Decode(f)
+  if err != nil {
+    log.Fatal(err)
+  }
+  switch outImg := img.(type) {
+  case draw.Image:
+    return outImg
+  default:
+    log.Fatalf("img %q is not of type draw.Image but %T", filename, img)
+    return nil
+  }
+}
+```
+
+---
+
+# 🗃️ Layering Images and Text
+
+Put a grey box inside
+
+---
+
+# 🗃️ Layering Images and Text
+
+Add a nice gopher
+
+---
+
+# 🗃️ Layering Images and Text
+
+Write some text
+
+---
+
+# How about some ASCII Art?
 
 ---
 
