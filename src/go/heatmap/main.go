@@ -5,7 +5,6 @@ import (
 	"image"
 	"image/color"
 
-	// "image/draw"
 	"image/png"
 	"log"
 	"os"

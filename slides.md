@@ -746,6 +746,19 @@ https://en.m.wikipedia.org/wiki/Colored_Mona_Lisa
 - Example: animated banner or pixel art
 - Example: a progress bar
 
+
+---
+layout: lblue-fact
+---
+
+Fun fact
+
+---
+layout: fact
+---
+
+<img src="/images/progressbar.gif" class="absolute bottom-10 left-70" style="width: 38%; height: auto;"/>
+
 ---
 
 ## 🧰 Tools & Techniques
@@ -809,5 +822,6 @@ Thank you very much!
     </a>
   </div>
 </div>
+<img src="/images/michelecaciQR.jpeg" class="absolute bottom-5 right-5 text-right" style="width: 20%; height: auto;"/>
 
 <!-- HOW ABOUT A FUNNY IDEA FOR PEACE OUT? LIKE A ENDING CREDITS? OR SOMETHING ELSE? TO BE SEEN -->
