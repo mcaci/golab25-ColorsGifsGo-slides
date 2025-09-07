@@ -792,7 +792,6 @@ layout: fact
 And that's how Pablo Picasso used Go to paint his famous Gopher
 
 <img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
-<img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 <!-- Isn't it beautiful? -->

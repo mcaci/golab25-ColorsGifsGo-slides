@@ -25,6 +25,14 @@ func main() {
 	draw.Draw(base, image.Rect(175, 500, 275, 600), paws(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(325, 500, 425, 600), paws(), image.Point{0, 0}, draw.Over)
 
+	for x := range r.Max.X {
+		for y := range r.Max.Y {
+			if base.At(x, y) == color.White {
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			}
+		}
+	}
+
 	out, _ := os.Create("picasso-gopher.png")
 	png.Encode(out, base)
 }
@@ -47,7 +55,7 @@ func body() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 0, G: 0, B: 255, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -74,7 +82,7 @@ func eyes() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -101,7 +109,7 @@ func ears() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 200, B: 0, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -128,7 +136,7 @@ func mouth() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 0, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -155,7 +163,7 @@ func nose() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 0, G: 0, B: 0, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -182,7 +190,7 @@ func paws() image.Image {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 200, B: 0, A: 255})
 			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 0})
+				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
 			default:
 				base.Set(x, y, color.Black)
 			}
