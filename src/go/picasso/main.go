@@ -17,21 +17,22 @@ func main() {
 	draw.Draw(base, base.Bounds(), bg, bg.Bounds().Min, draw.Over)
 	draw.Draw(base, image.Rect(200, 250, 400, 550), body(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(250, 150, 350, 250), eyes(), image.Point{0, 0}, draw.Over)
-	draw.Draw(base, image.Rect(275, 175, 300, 200), eyes(), image.Point{0, 0}, draw.Over)
-	draw.Draw(base, image.Rect(150, 200, 250, 300), ears(), image.Point{0, 0}, draw.Over)
-	draw.Draw(base, image.Rect(350, 200, 450, 300), ears(), image.Point{0, 0}, draw.Over)
+	draw.Draw(base, image.Rect(225, 125, 250, 150), eyes(), image.Point{0, 0}, draw.Over)
+	draw.DrawMask(base, image.Rect(150, 200, 250, 300), ears(), image.Point{0, 0}, body(), image.Point{0, 0}, draw.Over)
+	draw.DrawMask(base, image.Rect(350, 200, 450, 300), ears(), image.Point{0, 0}, body(), image.Point{-20, +120}, draw.Over)
+	// draw.Draw(base, image.Rect(350, 200, 450, 300), ears(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(275, 275, 325, 325), nose(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(250, 325, 350, 375), mouth(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(175, 500, 275, 600), paws(), image.Point{0, 0}, draw.Over)
 	draw.Draw(base, image.Rect(325, 500, 425, 600), paws(), image.Point{0, 0}, draw.Over)
 
-	for x := range r.Max.X {
-		for y := range r.Max.Y {
-			if base.At(x, y) == color.White {
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
-			}
-		}
-	}
+	// for x := range r.Max.X {
+	// 	for y := range r.Max.Y {
+	// 		if base.At(x, y) == color.White {
+	// 			base.Set(x, y, color.RGBA{})
+	// 		}
+	// 	}
+	// }
 
 	out, _ := os.Create("picasso-gopher.png")
 	png.Encode(out, base)
@@ -54,8 +55,8 @@ func body() image.Image {
 			switch {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 0, G: 0, B: 255, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2/a2+y2/b2) >= 1:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -66,10 +67,9 @@ func body() image.Image {
 
 func eyes() image.Image {
 	const (
-		rx, ry = 200, 100
-		dx, dy = rx - 100, ry - 50
-		a, b   = rx / 2, ry / 2
-		a2, b2 = a * a, b * b
+		rx, ry, rds = 200, 200, 65
+		dx, dy      = rx - 130, ry - rds
+		r2          = rds * rds
 	)
 	r := image.Rect(0, 0, rx, ry)
 	base := image.NewRGBA(r)
@@ -79,10 +79,10 @@ func eyes() image.Image {
 			var y2 = float64((y - dy) * (y - dy))
 
 			switch {
-			case math.Abs(x2/a2+y2/b2) < 1:
+			case math.Abs(x2+y2) < r2:
 				base.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2+y2) >= r2:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -108,8 +108,8 @@ func ears() image.Image {
 			switch {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 200, B: 0, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2/a2+y2/b2) >= 1:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -135,8 +135,8 @@ func mouth() image.Image {
 			switch {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 0, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2/a2+y2/b2) >= 1:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -162,8 +162,8 @@ func nose() image.Image {
 			switch {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 0, G: 0, B: 0, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2/a2+y2/b2) >= 1:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}
@@ -189,8 +189,8 @@ func paws() image.Image {
 			switch {
 			case math.Abs(x2/a2+y2/b2) < 1:
 				base.Set(x, y, color.RGBA{R: 255, G: 200, B: 0, A: 255})
-			case math.Abs(x2/a2+y2/b2) > 1:
-				base.Set(x, y, color.RGBA{R: 255, G: 0, B: 255, A: 0})
+			case math.Abs(x2/a2+y2/b2) >= 1:
+				base.Set(x, y, color.RGBA{})
 			default:
 				base.Set(x, y, color.Black)
 			}

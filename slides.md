@@ -707,7 +707,7 @@ func main() {
 
 # 🗃️ Layering Images and Text
 
-Let's get creative
+Creating a banner
 
 <v-clicks>
 
@@ -716,6 +716,62 @@ Let's get creative
 3. Add a nice gopher
 4. Write some text
 </v-clicks>
+
+<v-click at=1>
+````md magic-move{at:2}
+```go
+f, err := os.Open("golab-speakers.png")
+// ...
+baseImg, err := png.Decode(f)
+```
+
+```go
+gray := image.NewUniform(color.Gray{Y: 150})
+// ...
+// ...
+// ...
+draw.Draw(
+  baseImg,
+  image.Rect(110, 100, baseImg.Bounds().Dx()-110, baseImg.Bounds().Dy()-100), 
+  gray, 
+  image.Point{110, 100},
+  draw.Over,
+)
+```
+
+```go
+f, err := os.Open("McaciGopherizeMe.png")
+// ...
+gopherized, err := png.Decode(f)
+// ...
+draw.Draw(
+  baseImg,
+  image.Rect(130, 130, baseImg.Bounds().Dx()-130, baseImg.Bounds().Dy()-130), 
+  gray, 
+  image.Point{130, 130},
+  draw.Over,
+)
+```
+
+```go
+import "github.com/golang/freetype"
+// ...
+ftCtx, err := ftContext(base, "0x0000DE", 94.0)
+// ...
+ftCtx.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
+ftCtx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
+ftCtx.DrawString("by Michele Caci", fixed.P(1650, 1150))
+// ...
+func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Context, error) {
+	ctx := freetype.NewContext()
+  // ...
+  return ctx, nil
+}
+```
+````
+
+</v-click>
+
 
 <img v-click="+1" src="/images/golab-speakers.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 <img v-click="+2" src="/images/composition-grey.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
@@ -726,58 +782,9 @@ Let's get creative
 
 # 🗃️ Layering Images and Text
 
-Load the background
+How about some ASCII Art?
 
-```go
-func Load(filename string) draw.Image {
-  f, err := os.Open(filename)
-  if err != nil {
-    log.Fatal(err)
-  }
-  img, err := png.Decode(f)
-  if err != nil {
-    log.Fatal(err)
-  }
-  switch outImg := img.(type) {
-  case draw.Image:
-    return outImg
-  default:
-    log.Fatalf("img %q is not of type draw.Image but %T", filename, img)
-    return nil
-  }
-}
-```
-
----
-
-# 🗃️ Layering Images and Text
-
-Put a grey box inside
-
----
-
-# 🗃️ Layering Images and Text
-
-Add a nice gopher
-
----
-
-# 🗃️ Layering Images and Text
-
-Write some text
-
----
-
-# How about some ASCII Art?
-
----
-
-## 🖼️ Layering Images and Text
-
-- Composing visuals with layers
-- Adding text overlays
-- Creating banners and posters
-
+<img v-click="+1" src="/images/asciiart.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 
 ---
 layout: lblue-fact

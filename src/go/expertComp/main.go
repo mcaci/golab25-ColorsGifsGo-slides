@@ -24,15 +24,19 @@ func main() {
 
 	draw.Draw(base, image.Rect(110, 100, base.Bounds().Dx()-110, base.Bounds().Dy()-100), gray, image.Point{110, 100}, draw.Over)
 	draw.Draw(base, image.Rect(130, 130, base.Bounds().Dx()-130, base.Bounds().Dy()-130), gopherized, image.Point{130, 130}, draw.Over)
-	ftc, err := ftContext(base, "0x0000DE", 94.0)
+	ftCtx, err := ftContext(base, "0x0000DE", 94.0)
 	if err != nil {
 		log.Fatal(err)
 	}
-	ftc.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
-	ftc.DrawString("bring on the fun with Go", fixed.P(1250, 550))
-	ftc.DrawString("by Michele Caci", fixed.P(1650, 1150))
+	ftCtx.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
+	ftCtx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
+	ftCtx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 
-	out, _ := os.Create("composition.png")
+	out, err := os.Create("composition.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer out.Close()
 	png.Encode(out, base)
 }
 
@@ -67,7 +71,7 @@ func MustLoad(filename string) draw.Image {
 }
 
 func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Context, error) {
-	c := freetype.NewContext()
+	ctx := freetype.NewContext()
 	fontBytes, err := os.ReadFile("Ubuntu-R.ttf")
 	if err != nil {
 		return nil, err
@@ -76,18 +80,18 @@ func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Co
 	if err != nil {
 		return nil, err
 	}
-	c.SetFont(f)
-	c.SetDPI(72)
-	c.SetFontSize(fontSize)
-	c.SetClip(bg.Bounds())
-	c.SetDst(bg)
+	ctx.SetFont(f)
+	ctx.SetDPI(72)
+	ctx.SetFontSize(fontSize)
+	ctx.SetClip(bg.Bounds())
+	ctx.SetDst(bg)
 	fgColor, err := ParseHexColor(fgColorHex)
 	if err != nil {
 		return nil, err
 	}
-	c.SetSrc(image.NewUniform(fgColor))
-	c.SetHinting(font.HintingNone)
-	return c, nil
+	ctx.SetSrc(image.NewUniform(fgColor))
+	ctx.SetHinting(font.HintingNone)
+	return ctx, nil
 }
 
 func ParseHexColor(hex string) (color.RGBA, error) {
