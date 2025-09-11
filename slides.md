@@ -156,6 +156,7 @@ Let's start creating our first Image
 Step by step
 
 <v-click>
+
 1. We start by defining the bounds of the image as a rectangle.
 
 ```go
@@ -165,6 +166,7 @@ r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 </v-click>
 
 <v-click>
+
 2. We create the image using the rectangle and a specific color space (RGBA).
 
 ```go
@@ -174,6 +176,7 @@ img := image.NewRGBA(r)
 </v-click>
 
 <v-click>
+
 3. We set the pixels of the image to the color we want
 
 ```go
@@ -187,6 +190,7 @@ for x := range r.Max.X {
 </v-click>
 
 <v-click>
+
 4. We encode the image into a file with a specific format
 
 ```go
@@ -712,7 +716,7 @@ Creating a banner
 <v-clicks>
 
 1. Load a background image
-2. Put a grey box inside
+2. Put a semi-transparent gray box inside
 3. Add a nice gopher
 4. Write some text
 </v-clicks>
@@ -726,7 +730,7 @@ baseImg, err := png.Decode(f)
 ```
 
 ```go
-gray := image.NewUniform(color.Gray{Y: 150})
+gray := image.NewUniform(color.RGBA{R: 150, G: 150, B: 150, A: 200})
 // ...
 // ...
 // ...
@@ -763,7 +767,7 @@ ftCtx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
 ftCtx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 // ...
 func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Context, error) {
-	ctx := freetype.NewContext()
+  ctx := freetype.NewContext()
   // ...
   return ctx, nil
 }
@@ -774,7 +778,7 @@ func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Co
 
 
 <img v-click="+1" src="/images/golab-speakers.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
-<img v-click="+2" src="/images/composition-grey.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<img v-click="+2" src="/images/composition-gray.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 <img v-click="+3" src="/images/composition-gopher.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 <img v-click="+4" src="/images/composition.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 
@@ -784,7 +788,45 @@ func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Co
 
 How about some ASCII Art?
 
-<img v-click="+1" src="/images/asciiart.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+We'll make use of an external library [`go-figure`](github.com/common-nighthawk/go-figure). Whose normal usage is this one
+
+```go
+import figure "github.com/common-nighthawk/go-figure"
+
+func main() {
+  const figlet = "standard"
+  const text = "Welcome to GoLab!"
+  fig := figure.NewFigure(text, figlet, true)
+  fig.Print()
+}
+```
+
+gives this
+
+```bash
+mcaci@mcaciLaptop:~/go/src/github.com/mcaci/golab25-ColorsGifsGo-slides/src/go/asciiart$ go run .
+ __        __         _                                       _                ____           _               _       _
+ \ \      / /   ___  | |   ___    ___    _ __ ___     ___    | |_    ___      / ___|   ___   | |       __ _  | |__   | |
+  \ \ /\ / /   / _ \ | |  / __|  / _ \  | '_ ` _ \   / _ \   | __|  / _ \    | |  _   / _ \  | |      / _` | | '_ \  | |
+   \ V  V /   |  __/ | | | (__  | (_) | | | | | | | |  __/   | |_  | (_) |   | |_| | | (_) | | |___  | (_| | | |_) | |_|
+    \_/\_/     \___| |_|  \___|  \___/  |_| |_| |_|  \___|    \__|  \___/     \____|  \___/  |_____|  \__,_| |_.__/  (_)
+```
+---
+
+# 🗃️ Layering Images and Text
+
+ASCII Art in an image
+
+but if we use `fig.Slicify()` we get control of the result as `[]string`
+
+this gives us full control to use "github.com/golang/freetype" package that writes strings into an image and do whatever we want with it
+
+we all of the tools that we saw
+
+and a little eye for positioning each character at the right place in the image
+
+<img v-click="+1" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
+<img v-click="+2" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -798,20 +840,124 @@ layout: fact
 
 And that's how Pablo Picasso used Go to paint his famous Gopher
 
-<img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
+<img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 <!-- Isn't it beautiful? -->
 
 ---
 
-## 🎞️ Animating with Go
+# 🎞️ Entering Animations
 
-- Making playful GIFs
-- Frame-by-frame animation
-- Example: animated banner or pixel art
-- Example: a progress bar
+Basic GIFs concepts explained with Go
 
+Go has a simple way to explain how a basic GIF is made
+
+```go
+type GIF struct {
+  Image []*image.Paletted // The successive images (frames).
+  Delay []int             // The successive delay times, one per frame, in 100ths of a second.
+}
+```
+
+This means that we already have all the tools to make a basic gif
+
+---
+
+# 🎞️ Entering Animations
+
+Basic GIF with 2 frames and same delay
+
+<v-click>
+
+
+1. We create the rectangle for the GIF's bounds
+
+```go
+frmBounds := image.Rect(0, 0, 1024, 768)
+```
+</v-click>
+
+<v-click>
+
+2. We create the first frame `frm1` as a green rectangle
+
+```go
+frm1 := image.NewPaletted(frmBounds, palette.Plan9)
+draw.Draw(frm1, frmBounds, image.NewUniform(color.RGBA{G: 150, A: 255}), image.Pt(0, 0), draw.Over)
+```
+</v-click>
+
+<v-click>
+
+3. We create the second image `frm2` as a yellow rectangle
+
+```go
+frm2 := image.NewPaletted(frmBounds, palette.Plan9)
+draw.Draw(frm2, frmBounds, image.NewUniform(color.RGBA{G: 150, R: 150, A: 255}), image.Pt(0, 0), draw.Over)
+```
+</v-click>
+
+<v-click>
+
+4. We encode the GIF and write it to a file
+
+```go
+f, _ := os.Create("myFirst.gif")
+g := &gif.GIF{
+  Image: []*image.Paletted{frm1, frm2},
+  Delay: []int{200, 200},
+}
+gif.EncodeAll(f, g)
+```
+</v-click>
+
+---
+
+# 🎞️ Entering Animations
+
+Full code
+
+```go
+package main
+
+import (
+  "image"
+  "image/color"
+  "image/color/palette"
+  "image/gif"
+  "os"
+)
+
+func main() {
+  frmBounds := image.Rect(0, 0, 1024, 768)
+  frm1 := image.NewPaletted(frmBounds, palette.Plan9)
+  draw.Draw(frm1, frmBounds, image.NewUniform(color.RGBA{G: 150, A: 255}), image.Pt(0, 0), draw.Over)
+  frm2 := image.NewPaletted(frmBounds, palette.Plan9)
+  draw.Draw(frm2, frmBounds, image.NewUniform(color.RGBA{G: 150, R: 150, A: 255}), image.Pt(0, 0), draw.Over)
+  f, _ := os.Create("myFirst.gif")
+  g := &gif.GIF{
+    Image: []*image.Paletted{frm1, frm2},
+    Delay: []int{200, 200},
+  }
+  gif.EncodeAll(f, g)
+}
+```
+
+<img v-click src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
+---
+
+# 🎞️ Entering Animations
+
+And this is just the beginning
+
+<img v-click src="/images/first-cave.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/timeflow.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/game_of_life.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/LunchBreak.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-70" style="width: 38%; height: auto;"/>
+<img v-click src="/images/gradients.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -823,7 +969,7 @@ Fun fact
 layout: fact
 ---
 
-<img src="/images/progressbar.gif" class="absolute bottom-10 left-70" style="width: 38%; height: auto;"/>
+The sky is the limit
 
 ---
 

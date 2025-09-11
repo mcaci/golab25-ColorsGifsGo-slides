@@ -14,13 +14,13 @@ import (
 
 	"github.com/golang/freetype"
 	"golang.org/x/image/font"
-	"golang.org/x/image/math/fixed"
+	"golang.org/x/image/font/fixed"
 )
 
 func main() {
 	base := MustLoad("golab-speakers.png")
 	gopherized := MustLoad("McaciGopherizeMe.png")
-	gray := image.NewUniform(color.Gray{Y: 150})
+	gray := image.NewUniform(color.RGBA{R: 150, G: 150, B: 150, A: 200})
 
 	draw.Draw(base, image.Rect(110, 100, base.Bounds().Dx()-110, base.Bounds().Dy()-100), gray, image.Point{110, 100}, draw.Over)
 	draw.Draw(base, image.Rect(130, 130, base.Bounds().Dx()-130, base.Bounds().Dy()-130), gopherized, image.Point{130, 130}, draw.Over)
@@ -32,7 +32,7 @@ func main() {
 	ftCtx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
 	ftCtx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 
-	out, err := os.Create("composition.png")
+	out, err := os.Create("composition-gopher.png")
 	if err != nil {
 		log.Fatal(err)
 	}

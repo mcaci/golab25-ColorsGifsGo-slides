@@ -13,13 +13,13 @@ import (
 )
 
 func main() {
-	// green()
-	// blue()
-	// bgGradient()
-	// bgCheckerboard()
-	// rbgGradient()
-	// rgCosSinStripes()
-	// rgbNanoseconds()
+	green()
+	blue()
+	bgGradient()
+	bgCheckerboard()
+	rbgGradient()
+	rgCosSinStripes()
+	rgbNanoseconds()
 	rgbNanosecondsGif()
 }
 

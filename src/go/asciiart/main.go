@@ -9,6 +9,7 @@ import (
 	"image/draw"
 	"image/png"
 	"log"
+	"math"
 	"os"
 	"strings"
 
@@ -21,20 +22,36 @@ func main() {
 	var figlet string
 	flag.StringVar(&figlet, "f", "standard", "Figlet font to use")
 	flag.Parse()
-	text := flag.Args()[0]
+	text := "Welcome to GoLab!"
+	if len(flag.Args()) > 0 {
+		text = flag.Args()[0]
+	}
 	fig := figure.NewFigure(text, figlet, true)
 	fig.Print()
 	asciiArtLines := prepareText(text, figlet)
 	const (
-		lImg, hImg = 4500, 600
-		fontSize   = 24.0
+		lImg, hImg = 5600, 600
+		fontSize   = 64.0
 		fontPath   = "./Ubuntu-R.ttf"
 		xPtFactor  = 0.6
 		yPtFactor  = 1.2
-		bgColorHex = "0x7AA1FF"
-		fgColorHex = "0x002300"
+		bgColorHex = "0xf4ff42" // or "0xfe7dd0" or "0x7AA1FF"
+		fgColorHex = "0xf4ff42"
 	)
-	image := makePng(asciiArtLines, lImg, hImg, bgColorHex, fgColorHex, fontPath, fontSize, xPtFactor, yPtFactor)
+	// For a solid background:
+	// image := makePng(asciiArtLines, lImg, hImg, bgColorHex, fgColorHex, fontPath, fontSize, xPtFactor, yPtFactor, nil)
+	// For a dynamic background (paint providing the function parameter):
+	image := makePng(asciiArtLines, lImg, hImg, bgColorHex, fgColorHex, fontPath, fontSize, xPtFactor, yPtFactor,
+		func(l, h int, img *image.Paletted) {
+			for x := range l {
+				for y := range h {
+					var r int
+					b := (1 + math.Cos(float64(x)/10)) * 40
+					g := (1 + math.Sin(float64(y)/10)) * 40
+					img.Set(x, y, color.RGBA{R: uint8(r), G: uint8(g), B: uint8(b), A: 100})
+				}
+			}
+		})
 	writePng(image, "asciiart.png")
 }
 
@@ -54,8 +71,15 @@ func prepareText(text, figlet string) []string {
 	return asciiArtLines
 }
 
-func makePng(asciiArtLines []string, l, h int, bgColorHex, fgColorHex string, fontPath string, fontSize, xPtFactor, yPtFactor float64) *image.Paletted {
-	img, err := setupBG(bgColorHex, l, h)
+func makePng(asciiArtLines []string, l, h int, bgColorHex, fgColorHex string, fontPath string, fontSize, xPtFactor, yPtFactor float64, paint func(int, int, *image.Paletted)) *image.Paletted {
+	var img *image.Paletted
+	var err error
+	switch paint {
+	case nil:
+		img, err = setupBG(bgColorHex, l, h)
+	default:
+		img, err = setupBGFunc(bgColorHex, l, h, paint)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -71,8 +95,15 @@ func setupBG(bgHex string, l, h int) (*image.Paletted, error) {
 	if err != nil {
 		return nil, err
 	}
+	return setupBGFunc(bgHex, l, h, func(l, h int, bg *image.Paletted) {
+		draw.Draw(bg, bg.Bounds(), image.NewUniform(c), image.Pt(0, 0), draw.Src)
+	})
+
+}
+
+func setupBGFunc(bgHex string, l, h int, paint func(int, int, *image.Paletted)) (*image.Paletted, error) {
 	bg := image.NewPaletted(image.Rect(0, 0, l, h), palette.Plan9)
-	draw.Draw(bg, bg.Bounds(), image.NewUniform(c), image.Pt(0, 0), draw.Src)
+	paint(l, h, bg)
 	return bg, nil
 }
 
