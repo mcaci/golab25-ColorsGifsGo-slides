@@ -19,6 +19,9 @@ import (
 )
 
 func main() {
+	// first try
+	firstTry()
+	// real images
 	var figlet string
 	flag.StringVar(&figlet, "f", "standard", "Figlet font to use")
 	flag.Parse()
@@ -161,7 +164,7 @@ func fgContext(bg draw.Image, fgColorHex, fontPath string, fontSize float64) (*f
 		return nil, err
 	}
 	c.SetSrc(image.NewUniform(fgColor))
-	c.SetHinting(font.HintingNone)
+	// c.SetHinting(firstTry.HintingNone)
 	return c, nil
 }
 
@@ -200,4 +203,42 @@ func mustFile(name string) *os.File {
 		log.Fatal(err)
 	}
 	return f
+}
+
+func firstTry() {
+	const figlet = "standard"
+	const text = "Welcome to GoLab!"
+	fig := figure.NewFigure(text, figlet, true)
+	lines := fig.Slicify()
+
+	// ...
+	const height = 100
+	ctx := freetype.NewContext()
+	c := freetype.NewContext()
+	fontBytes, err := os.ReadFile("./Ubuntu-R.ttf")
+	if err != nil {
+		log.Fatal(err)
+	}
+	f, err := freetype.ParseFont(fontBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.SetFont(f)
+	c.SetDPI(72)
+	c.SetFontSize(36)
+	r := image.Rect(0, 0, 5600, 600)
+	c.SetClip(r)
+	dst := image.NewRGBA(r)
+	draw.Draw(dst, r, image.Black, image.Pt(0, 0), draw.Over)
+	c.SetDst(dst)
+	c.SetSrc(image.NewUniform(color.RGBA{G: 255, A: 255}))
+	c.SetHinting(font.HintingNone)
+	for i := range lines {
+		ctx.DrawString(lines[i], freetype.Pt(0, height*(i+1)))
+	}
+	out, err := os.Create("ascii-firsttry.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	png.Encode(out, dst)
 }

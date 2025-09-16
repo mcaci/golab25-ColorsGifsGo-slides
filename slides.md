@@ -106,7 +106,7 @@ Most of the images in this presentation are made in Go
 
 ---
 
-# But why would I even start make images or gifs in Go?
+# Why would I even want to make images or gifs in Go?
 
 <v-clicks>
 
@@ -147,7 +147,7 @@ layout: center
 layout: lblue-fact
 ---
 
-Let's start creating our first Image
+Let's create our first image
 
 ---
 
@@ -726,6 +726,8 @@ Creating a banner
 ```go
 f, err := os.Open("golab-speakers.png")
 // ...
+// ...
+// ...
 baseImg, err := png.Decode(f)
 ```
 
@@ -760,17 +762,11 @@ draw.Draw(
 ```go
 import "github.com/golang/freetype"
 // ...
-ftCtx, err := ftContext(base, "0x0000DE", 94.0)
-// ...
-ftCtx.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
-ftCtx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
-ftCtx.DrawString("by Michele Caci", fixed.P(1650, 1150))
-// ...
-func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Context, error) {
-  ctx := freetype.NewContext()
-  // ...
-  return ctx, nil
-}
+ctx := freetype.NewContext()
+// ... fill context information ...
+ctx.DrawString("Colors, images and gifs:", fixed.P(1200, 400))
+ctx.DrawString("bring on the fun with Go", fixed.P(1250, 550))
+ctx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 ```
 ````
 
@@ -784,13 +780,15 @@ func ftContext(bg draw.Image, fgColorHex string, fontSize float64) (*freetype.Co
 
 ---
 
-# 🗃️ Layering Images and Text
+# 🗃️ How about some ASCII Art?
 
-How about some ASCII Art?
+Printing ASCII Art
 
-We'll make use of an external library [`go-figure`](github.com/common-nighthawk/go-figure). Whose normal usage is this one
+<v-click>
 
 ```go
+package main
+
 import figure "github.com/common-nighthawk/go-figure"
 
 func main() {
@@ -800,8 +798,11 @@ func main() {
   fig.Print()
 }
 ```
+</v-click>
 
-gives this
+<br/>
+
+<v-click>
 
 ```bash
 mcaci@mcaciLaptop:~/go/src/github.com/mcaci/golab25-ColorsGifsGo-slides/src/go/asciiart$ go run .
@@ -811,22 +812,60 @@ mcaci@mcaciLaptop:~/go/src/github.com/mcaci/golab25-ColorsGifsGo-slides/src/go/a
    \ V  V /   |  __/ | | | (__  | (_) | | | | | | | |  __/   | |_  | (_) |   | |_| | | (_) | | |___  | (_| | | |_) | |_|
     \_/\_/     \___| |_|  \___|  \___/  |_| |_| |_|  \___|    \__|  \___/     \____|  \___/  |_____|  \__,_| |_.__/  (_)
 ```
+
+</v-click>
+
+<!-- We'll make use of an external library [`go-figure`](github.com/common-nighthawk/go-figure). Whose normal usage is this one -->
+
 ---
 
 # 🗃️ Layering Images and Text
 
 ASCII Art in an image
 
-but if we use `fig.Slicify()` we get control of the result as `[]string`
+````md magic-move
+```go
+package main
 
-this gives us full control to use "github.com/golang/freetype" package that writes strings into an image and do whatever we want with it
+import (
+  figure "github.com/common-nighthawk/go-figure"
+)
 
-we all of the tools that we saw
+func main() {
+  const figlet = "standard"
+  const text = "Welcome to GoLab!"
+  fig := figure.NewFigure(text, figlet, true)
+  lines := fig.Slicify()
+}
+```
 
-and a little eye for positioning each character at the right place in the image
+```go
+package main
 
-<img v-click="+1" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
-<img v-click="+2" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
+import (
+  figure "github.com/common-nighthawk/go-figure"
+  "github.com/golang/freetype"
+)
+
+func main() {
+  const figlet = "standard"
+  const text = "Welcome to GoLab!"
+  fig := figure.NewFigure(text, figlet, true)
+  lines := fig.Slicify()
+  
+  // ...
+  const height = 100
+  ctx := freetype.NewContext()
+  // ... fill context information ...
+  for i := range lines {
+    ctx.DrawString(lines[i], fixed.P(0, height * (i +  1)))
+  }
+}
+```
+````
+
+<img v-click="+2" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
+<img v-click="+3" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
 
 ---
 layout: lblue-fact

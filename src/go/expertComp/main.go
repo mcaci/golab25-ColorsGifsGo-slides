@@ -14,7 +14,7 @@ import (
 
 	"github.com/golang/freetype"
 	"golang.org/x/image/font"
-	"golang.org/x/image/font/fixed"
+	// "golang.org/x/image/font/fixed"
 )
 
 func main() {
