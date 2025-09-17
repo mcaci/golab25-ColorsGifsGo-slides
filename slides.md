@@ -835,6 +835,21 @@ func main() {
   const figlet = "standard"
   const text = "Welcome to GoLab!"
   fig := figure.NewFigure(text, figlet, true)
+  fig.Print()
+}
+```
+
+```go
+package main
+
+import (
+  figure "github.com/common-nighthawk/go-figure"
+)
+
+func main() {
+  const figlet = "standard"
+  const text = "Welcome to GoLab!"
+  fig := figure.NewFigure(text, figlet, true)
   lines := fig.Slicify()
 }
 ```
@@ -852,7 +867,6 @@ func main() {
   const text = "Welcome to GoLab!"
   fig := figure.NewFigure(text, figlet, true)
   lines := fig.Slicify()
-  
   // ...
   const height = 100
   ctx := freetype.NewContext()
@@ -864,8 +878,8 @@ func main() {
 ```
 ````
 
-<img v-click="+2" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
-<img v-click="+3" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
+<img v-click="+3" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
+<img v-click="+4" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
 
 ---
 layout: lblue-fact
