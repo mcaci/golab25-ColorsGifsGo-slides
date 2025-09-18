@@ -72,7 +72,7 @@ The outline of the talk should go this way
 - If time permits also show some gameplay examples
 
 LEVEL: Introductory and Overview
-Monday October 6th, 2025 (45 min)
+Monday October 6th, 2025 (45 min @15:15)
 
 ---
 
@@ -902,100 +902,80 @@ And that's how Pablo Picasso used Go to paint his famous Gopher
 
 # 🎞️ Entering Animations
 
-Basic GIFs concepts explained with Go
+Go GIFs Basic
 
-Go has a simple way to explain how a basic GIF is made
+<v-clicks>
 
 ```go
 type GIF struct {
   Image []*image.Paletted // The successive images (frames).
   Delay []int             // The successive delay times, one per frame, in 100ths of a second.
+  )/ ...
 }
 ```
 
-This means that we already have all the tools to make a basic gif
+The main difference between image.RGBA and image.Paletted is the usage of a palette.
+
+</v-clicks>
 
 ---
 
 # 🎞️ Entering Animations
 
-Basic GIF with 2 frames and same delay
+<v-clicks>
 
-<v-click>
-
-
-1. We create the rectangle for the GIF's bounds
+- Instantiate a variable of type `gif.GIF` and fill its fields
 
 ```go
-frmBounds := image.Rect(0, 0, 1024, 768)
+import "image/gif"
+
+// var frm1, frm2 *image.Paletted
+g := gif.GIF{
+  Image: []*image.Paletted{frm1, frm2},
+  Delay: []int{150, 150},
+}  
 ```
-</v-click>
 
-<v-click>
-
-2. We create the first frame `frm1` as a green rectangle
+- Encode the gif into a file
 
 ```go
-frm1 := image.NewPaletted(frmBounds, palette.Plan9)
-draw.Draw(frm1, frmBounds, image.NewUniform(color.RGBA{G: 150, A: 255}), image.Pt(0, 0), draw.Over)
+// var f, err = os.Create("my-first-gif.gif")
+gif.EncodeAll(f, &g)
 ```
-</v-click>
+
+</v-clicks>
+
+---
+
+# 🎞️ A basic example
+
+2-frame GIF
+
+1. The first frame is a green rectangle
+2. The second frame is a yellow rectangle
 
 <v-click>
 
-3. We create the second image `frm2` as a yellow rectangle
-
 ```go
-frm2 := image.NewPaletted(frmBounds, palette.Plan9)
-draw.Draw(frm2, frmBounds, image.NewUniform(color.RGBA{G: 150, R: 150, A: 255}), image.Pt(0, 0), draw.Over)
-```
-</v-click>
+func MakeFrame(c color.RGBA) *image.Paletted {
+r := image.Rect(0, 0, 1024, 768)
+frm := image.NewPaletted(r, palette.Plan9)
+draw.Draw(frm, r, image.NewUniform(c), image.Pt(0, 0), draw.Over)
+return frm
+}
 
-<v-click>
-
-4. We encode the GIF and write it to a file
-
-```go
+func main() {
+frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
+frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
 f, _ := os.Create("myFirst.gif")
 g := &gif.GIF{
   Image: []*image.Paletted{frm1, frm2},
-  Delay: []int{200, 200},
+  Delay: []int{150, 150},
 }
 gif.EncodeAll(f, g)
-```
-</v-click>
-
----
-
-# 🎞️ Entering Animations
-
-Full code
-
-```go
-package main
-
-import (
-  "image"
-  "image/color"
-  "image/color/palette"
-  "image/gif"
-  "os"
-)
-
-func main() {
-  frmBounds := image.Rect(0, 0, 1024, 768)
-  frm1 := image.NewPaletted(frmBounds, palette.Plan9)
-  draw.Draw(frm1, frmBounds, image.NewUniform(color.RGBA{G: 150, A: 255}), image.Pt(0, 0), draw.Over)
-  frm2 := image.NewPaletted(frmBounds, palette.Plan9)
-  draw.Draw(frm2, frmBounds, image.NewUniform(color.RGBA{G: 150, R: 150, A: 255}), image.Pt(0, 0), draw.Over)
-  f, _ := os.Create("myFirst.gif")
-  g := &gif.GIF{
-    Image: []*image.Paletted{frm1, frm2},
-    Delay: []int{200, 200},
-  }
-  gif.EncodeAll(f, g)
 }
 ```
+</v-click>
 
 <img v-click src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
