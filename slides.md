@@ -179,6 +179,8 @@ img := image.NewRGBA(r)
 
 3. We set the pixels of the image to the color we want
 
+insert r.Max arrow to lower right red square
+
 ```go
 for x := range r.Max.X {
   for y := range r.Max.Y {
@@ -327,6 +329,13 @@ layout: center
 class: text-center
 ---
 
+# Can we use inputs to guide the creation of images?
+
+---
+layout: center
+class: text-center
+---
+
 # 🧮 Using Inputs and Matrices
 
 A more guided image creation
@@ -372,11 +381,20 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 <arrow v-click x1="280" y1="152"  x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
 <arrow v-click x1="290" y1="152"  x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
 
+
+---
+layout: center
+---
+
+# Welcome to the Matrix
+
+insert Go meme here
+
 ---
 
 # 🧮 Using Inputs and Matrices
 
-From matrices
+Reading from matrices
 
 ```go
 for x := range r.Max.X {
@@ -451,9 +469,7 @@ Add joke about the matrix movie and or bitmaps
 
 # 🧮 Using Inputs and Matrices
 
-More complex input
-
-These are `(x, y)` coordinates in a 2D space representing walls inside a cave
+Beyond the matrix
 
 ```
 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
@@ -465,17 +481,23 @@ These are `(x, y)` coordinates in a 2D space representing walls inside a cave
 
 <v-click>
 
+These are rules on 2D coordinates `(x,y) -> (x1,y1)`
+
+Use laTex here
+
 </v-click>
 
 <v-clicks>
 
-- `525,119 -> 525,122`
-  - a vertical wall (only Y changes)
-- `525,122 -> 523,122`
-  - a horizontal wall (only X changes)
+- X coordinate changes?
+  - it's a horizontal wall
+- Y coordinate changes?
+  - it's a vertical wall
 </v-clicks>
 
-<!-- So we uses these rules to build a byte matrix with the coordinates representing this cave 
+<!--
+These are rules on 2D coordinates representing walls
+ So we uses these rules to build a byte matrix with the coordinates representing this cave 
 and use it as input to color our image-->
 
 ---
@@ -506,6 +528,8 @@ for i := range cave {
 <img v-click src="/images/first-cave.gif" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/actual-cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
+
+<!-- These are `(x, y)` coordinates in a 2D space representing walls inside a cave -->
 
 ---
 layout: center
