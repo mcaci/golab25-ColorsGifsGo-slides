@@ -15,7 +15,7 @@ func main() {
 	for i := range 420 {
 		log.Printf("%d/420", i+1)
 		g.Image = append(g.Image, frame(i, bounds))
-		g.Delay = append(g.Delay, 10)
+		g.Delay = append(g.Delay, 5)
 	}
 	f, _ := os.Create("gradients.gif")
 	gif.EncodeAll(f, &g)

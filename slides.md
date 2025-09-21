@@ -79,9 +79,7 @@ Monday October 6th, 2025 (45 min @15:15)
 # Can you guess what do these images have in common
 
 <img src="/images/actual-cave-with-sand.png" class="absolute top-25 left-20" style="width: 45%; height: auto;"/>
-<img src="/images/forest.png" class="absolute bottom-5 left-10" style="width: 23%; height: auto;"/>
-<img src="/images/bgGradient.png" class="absolute bottom-25 left-85" style="width: 20%; height: auto;"/>
-<img src="/images/LunchBreak.gif" class="absolute bottom-8 left-67" style="width: 30%; height: auto;"/>
+<img src="/images/bgGradient.png" class="absolute bottom-5 left-40" style="width: 30%; height: auto;"/>
 <img src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
 
 <!-- Show a sequence of 3 images or gifs created with Go -->
@@ -116,7 +114,7 @@ Most of the images in this presentation are made in Go
 
 </v-clicks>
 
-<img v-click src="/images/whatIsBestForImageProcessing.png" class="absolute top-25 left-30" style="width: 55%; height: auto;"/>
+<img v-click src="/images/whatIsBestForImageProcessing.png" class="absolute top-25 left-50" style="width: 55%; height: auto;"/>
 <img v-click src="/images/very-dull-page.png" class="absolute bottom-10 left-10" style="width: 40%; height: auto;"/>
 
 <!-- 
@@ -130,16 +128,21 @@ Most of the images in this presentation are made in Go
 -->
 
 ---
-layout: center
+layout: intro
 ---
-
 # 👋 Hello
 
-- I'm Michele
-- I work in Amadeus
-- I deploy and operate Splunk
-- My hobbies include languages, board games and TBA (something fun)
-- And I'm going to talk you about creativity, art and fun with Go!
+Who am I?
+
+I'm Michele
+
+I work in Amadeus
+
+I deploy and operate Splunk
+
+My hobbies include languages, board games and TBA (something fun)
+
+And I'm going to talk you about creativity, art and fun with Go!
 
 <!-- Amadeus: we make travel working -->
 
@@ -179,8 +182,6 @@ img := image.NewRGBA(r)
 
 3. We set the pixels of the image to the color we want
 
-insert r.Max arrow to lower right red square
-
 ```go
 for x := range r.Max.X {
   for y := range r.Max.Y {
@@ -188,6 +189,8 @@ for x := range r.Max.X {
   }
 }
 ```
+
+<arrow v-after x1="800" y1="325" x2="925" y2="280" color="#F00" width="2" arrowSize="1" />
 
 </v-click>
 
@@ -239,8 +242,6 @@ func main() {
 ---
 
 # 🎨 Beyond our First Image
-
-Stepping up the color scene
 
 ````md magic-move
 ```go
@@ -330,13 +331,6 @@ layout: lblue-fact
 
 Can we use inputs for the creation of images?
 
----
-layout: center
-class: text-center
----
-
-# 🧮 Using Inputs and Matrices
-
 <!-- 
 A more guided image creation
 
@@ -378,10 +372,9 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 ...
 ```
 
-<arrow v-click x1="270" y1="152"  x2="145" y2="102" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="280" y1="152"  x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="290" y1="152"  x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
-
+<arrow v-click x1="270" y1="152" x2="145" y2="102" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="280" y1="152" x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
+<arrow v-click x1="290" y1="152" x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
 
 ---
 layout: center
@@ -408,7 +401,7 @@ for x := range r.Max.X {
 }
 ```
 
-or
+<br/>
 
 ```go
 for x := range r.Max.X {
@@ -424,7 +417,7 @@ for x := range r.Max.X {
 ```
 
 <arrow v-click x1="380" y1="250" x2="320" y2="210" color="#F00" width="2" arrowSize="1" />
-<arrow v-click="1" x1="380" y1="525" x2="320" y2="465" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="1" x1="380" y1="480" x2="320" y2="440" color="#F00" width="2" arrowSize="1" />
 
 ---
 layout: center
@@ -482,9 +475,7 @@ Beyond the matrix
 
 <v-click>
 
-These are rules on 2D coordinates `(x,y) -> (x1,y1)`
-
-Use laTex here
+These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
 
 </v-click>
 
@@ -505,7 +496,7 @@ and use it as input to color our image-->
 
 # 🧮 Using Inputs and Matrices
 
-The cave
+Drawing the landscape
 
 ```go
 // var cave [][]byte
@@ -533,39 +524,40 @@ for i := range cave {
 <!-- These are `(x, y)` coordinates in a 2D space representing walls inside a cave -->
 
 ---
-layout: center
-class: text-center
+layout: lblue-fact
 ---
 
-# 🌍 A real world example
-
-Github contribution table
-
-<img src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
+Let's see a real world example
 
 ---
 
 # 🌍 A real world example
 
-Github contribution table
+GitHub contribution table
 
 <v-click>
 
-We can take the input from the HTML of a github user's homepage
-</v-click>
-
-<v-clicks>
+From the HTML of a github user's homepage
 
 ```html
 <td ... id="contribution-day-component-3-6" data-level="3" ...></td>
 ```
+</v-click>
+
+<arrow v-click="2" x1="430" y1="240" x2="370" y2="200" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="3" x1="540" y1="240" x2="480" y2="200" color="#F00" width="2" arrowSize="1" />
+
+<v-clicks>
 
 - `id` contains the (x, y) coordinates
 - `data-level` is the index of the color from a __palette__
-
 </v-clicks>
 
-<!-- For those who don't know a palette is a set of colors and in Go, conveniently, a palette is a slice of colors -->
+<img src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
+
+<!-- 
+For those who don't know a palette is a set of colors and in Go, conveniently, a palette is a slice of colors 
+-->
 ---
 
 # 🌍 A real world example
@@ -586,14 +578,11 @@ p := color.Palette{
 <img v-click src="/images/actual-gh-contributions.png" class="absolute top-40 right-15" style="width: 40%; height: auto;"/>
 <arrow v-after x1="800" y1="300" x2="850" y2="250" color="#F00" width="2" arrowSize="1" />
 
----
-
-# 🌍 A real world example
+<v-click>
 
 Github input + color.Palette = contribution table
-
-<img src="/images/actual-gh-contributions.png" class="absolute top-30 left-30" style="width: 70%; height: auto;"/>
-<img v-click src="/images/generated-gh-contributions.png" class="absolute bottom-30 left-40" style="width: 65%; height: auto;"/>
+<img  src="/images/generated-gh-contributions.png" class="absolute bottom-30 left-40" style="width: 65%; height: auto;"/>
+</v-click>
 
 ---
 layout: lblue-fact
@@ -612,11 +601,8 @@ A less known version of the Monalisa is a paint by number painting made in Go
 <img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 ---
-layout: center
-class: text-center
+layout: lblue-fact
 ---
-
-# 🗃️ Layering Images
 
 From setting colors to pixels to drawing layers
 
@@ -641,30 +627,21 @@ A basic composition of two images
 <v-click>
 
 1. We create the first image `dst` as a green rectangle
-
-```go
-dstR := image.Rect(0, 0, 1024, 768)
-dst := image.NewRGBA(dstR)
-for x := range dstR.Max.X {
-  for y := range dstR.Max.Y {
-    dst.Set(x, y, color.RGBA{G: 150, A: 255})
-  }
-}
-```
-</v-click>
-
-<v-click>
-
 2. We create the second image `src` as a smaller white rectangle
 
 ```go
-srcR := image.Rect(0, 0, 800, 600)
-src := image.NewRGBA(srcR)
-for x := range srcR.Max.X {
-  for y := range srcR.Max.Y {
-    src.Set(x, y, color.White)
+func MakeLayer(r image.Rectangle, c color.RGBA) *image.RGBA {
+  l := image.NewRGBA(r)
+  for x := range r.Max.X {
+    for y := range r.Max.Y {
+      dst.Set(x, y, c)
+    }
   }
+  return l
 }
+
+dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
+src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
 ```
 </v-click>
 
@@ -680,9 +657,9 @@ A basic composition of two images
 
 ```go
 draw.Draw(
-  dst,   // the destination image
+  dst,   // the destination layer
   image.Rect(224, 168, dstR.Max.X, dstR.Max.Y),  // the area on dst where Draw can operate
-  src,  // the source image
+  src,  // the source layer
   image.Point{224, 168}, // the starting point from which the source can be taken
   draw.Over, // the draw operation (draw src over dst)
 )
@@ -692,7 +669,7 @@ draw.Draw(
 
 <v-click>
 
-4. And encode the resulting image, `dst`, into a file with a specific format
+4. And encode the result into a file
 
 ```go
 f, _ := os.Create("white-in-green.png")
@@ -708,21 +685,19 @@ png.Encode(f, dst)
 Full code
 
 ```go
+func MakeLayer(r image.Rectangle, c color.RGBA) *image.RGBA {
+  l := image.NewRGBA(r)
+  for x := range r.Max.X {
+    for y := range r.Max.Y {
+      dst.Set(x, y, c)
+    }
+  }
+  return l
+}
+
 func main() {
-  dstR := image.Rect(0, 0, 1024, 768)
-  dst := image.NewRGBA(dstR)
-  for x := range dstR.Max.X {
-    for y := range dstR.Max.Y {
-      dst.Set(x, y, color.RGBA{G: 150, A: 255})
-    }
-  }
-  srcR := image.Rect(0, 0, 800, 600)
-  src := image.NewRGBA(srcR)
-  for x := range srcR.Max.X {
-    for y := range srcR.Max.Y {
-      src.Set(x, y, color.White)
-    }
-  }
+  dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
+  src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
   draw.Draw(dst, image.Rect(224, 168, dstR.Max.X, dstR.Max.Y), src, image.Point{224, 168}, draw.Over)
   f, _ := os.Create("white-in-green.png")
   png.Encode(f, dst)
@@ -730,7 +705,7 @@ func main() {
 
 ```
 
-<img v-click src="/images/white-in-green.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/white-in-green.png" class="absolute top-20 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
@@ -903,8 +878,8 @@ func main() {
 ```
 ````
 
-<img v-click="+3" src="/images/asciiart.png" class="absolute bottom-40 left-25" style="width: 60%; height: auto;"/>
-<img v-click="+4" src="/images/asciiart-plaid.png" class="absolute bottom-15 left-25" style="width: 60%; height: auto;"/>
+<img v-click="+3" src="/images/asciiart.png" class="absolute top-55 right-15" style="width: 60%; height: auto;"/>
+<img v-click="+4" src="/images/asciiart-plaid.png" class="absolute top-85 right-15" style="width: 60%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -983,21 +958,21 @@ gif.EncodeAll(f, &g)
 
 ```go
 func MakeFrame(c color.RGBA) *image.Paletted {
-r := image.Rect(0, 0, 1024, 768)
-frm := image.NewPaletted(r, palette.Plan9)
-draw.Draw(frm, r, image.NewUniform(c), image.Pt(0, 0), draw.Over)
-return frm
+  r := image.Rect(0, 0, 1024, 768)
+  frm := image.NewPaletted(r, palette.Plan9)
+  draw.Draw(frm, r, image.NewUniform(c), image.Pt(0, 0), draw.Over)
+  return frm
 }
 
 func main() {
-frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
-frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
-f, _ := os.Create("myFirst.gif")
-g := &gif.GIF{
-  Image: []*image.Paletted{frm1, frm2},
-  Delay: []int{150, 150},
-}
-gif.EncodeAll(f, g)
+  frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
+  frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
+  f, _ := os.Create("myFirst.gif")
+  g := &gif.GIF{
+    Image: []*image.Paletted{frm1, frm2},
+    Delay: []int{150, 150},
+  }
+  gif.EncodeAll(f, g)
 }
 ```
 </v-click>
@@ -1005,17 +980,17 @@ gif.EncodeAll(f, g)
 <img v-click src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 ---
-
-# 🎞️ Entering Animations
+layout: lblue-fact
+---
 
 And this is just the beginning
 
+<img v-click src="/images/gradients.gif" class="absolute top-15 left-30" style="width: 30%; height: auto;"/>
+<img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-80" style="width: 38%; height: auto;"/>
 <img v-click src="/images/first-cave.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/timeflow.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/game_of_life.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/LunchBreak.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-70" style="width: 38%; height: auto;"/>
-<img v-click src="/images/gradients.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/game_of_life.gif" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/LunchBreak.gif" class="absolute top-25 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/timeflow.gif" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -1028,22 +1003,6 @@ layout: fact
 ---
 
 The sky is the limit
-
----
-
-## 🧰 Tools & Techniques
-
-- Go packages used (mostly standard library)
-- Tips for working with images and pixels
-- How to stay creative while coding
-
----
-
-## 🧠 What You Can Build
-
-- Fun projects: maps, games, visualizations
-- Ideas to explore on your own
-- Encouragement to experiment!
 
 ---
 
@@ -1066,6 +1025,18 @@ The sky is the limit
 
 - Ask me anything!
 - Connect with me online
+
+## 🧰 Tools & Techniques
+
+- Go packages used (mostly standard library)
+- Tips for working with images and pixels
+- How to stay creative while coding
+
+## 🧠 What You Can Build
+
+- Fun projects: maps, games, visualizations
+- Ideas to explore on your own
+- Encouragement to experiment!
 
 ---
 layout: lblue-end
