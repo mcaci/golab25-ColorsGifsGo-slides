@@ -157,7 +157,7 @@ Step by step
 
 <v-click>
 
-1. We start by defining the bounds of the image as a rectangle.
+1. We start by defining the bounds of the image as a rectangle
 
 ```go
 r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
@@ -167,7 +167,7 @@ r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 
 <v-click>
 
-2. We create the image using the rectangle and a specific color space (RGBA).
+2. We create the image using the rectangle and a color space
 
 ```go
 img := image.NewRGBA(r)
@@ -325,11 +325,10 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 <img v-click src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
 ---
-layout: center
-class: text-center
+layout: lblue-fact
 ---
 
-# Can we use inputs to guide the creation of images?
+Can we use inputs for the creation of images?
 
 ---
 layout: center
@@ -338,6 +337,7 @@ class: text-center
 
 # 🧮 Using Inputs and Matrices
 
+<!-- 
 A more guided image creation
 
 We have been the ones deciding the color so far
@@ -345,6 +345,7 @@ We have been the ones deciding the color so far
 Either by hardcoding it or by computing it via a function
 
 Now we see how to use external input to drive the creation of the image
+-->
 
 ---
 layout: center
