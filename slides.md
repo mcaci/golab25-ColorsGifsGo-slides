@@ -34,10 +34,6 @@ mdc: true
         class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
         <carbon-logo-github />
       </a>
-      <a href="https://x.com/goMicheleCaci" target="_blank" alt="Michele's X" title="Michele's X"
-        class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-        <carbon-logo-x />
-      </a>
       <a href="https://www.linkedin.com/in/michele-caci-47770132/" target="_blank" alt="Michele's Linkedin" title="Michele's Linkedin"
         class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
         <carbon-logo-linkedin />
@@ -682,12 +678,12 @@ png.Encode(f, dst)
 
 <img v-click="+1" src="/images/comp-green.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
 <img v-click="+2" src="/images/comp-bounds.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
-<img v-click="+4" v-click.hide="+7" src="/images/comp-src-point.png" class="absolute bottom-5 right-100" style="width: 20%; height: auto;"/>
-<arrow v-click="+5" v-click.hide="+7" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
-<arrow v-click="+5" v-click.hide="+7" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
+<img v-click="+4" src="/images/comp-src-point.png" class="absolute bottom-5 right-100" style="width: 20%; height: auto;"/>
+<arrow v-click="+5" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="+5" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
 <img v-click="+6" src="/images/comp-white-on-green.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
-<arrow v-click="+6" v-click.hide="+7" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
-<arrow v-click="+6" v-click.hide="+7" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="+6" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="+6" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
 
 ---
 
@@ -720,13 +716,11 @@ func main() {
 }
 ```
 
-<img v-click src="/images/comp-white-on-green.png" class="absolute top-20 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/comp-white-on-green.png" class="absolute top-40 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
-# 🗃️ Layering Images and Text
-
-Creating a banner
+# 🗃️ Creating a banner
 
 <v-clicks>
 
@@ -797,7 +791,7 @@ ctx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 
 # 🗃️ How about some ASCII Art?
 
-Printing ASCII Art
+Printing to console
 
 <v-click>
 
@@ -821,11 +815,11 @@ func main() {
 
 ```bash
 mcaci@mcaciLaptop:~/go/src/github.com/mcaci/golab25-ColorsGifsGo-slides/src/go/asciiart$ go run .
- __        __         _                                       _                ____           _               _       _
- \ \      / /   ___  | |   ___    ___    _ __ ___     ___    | |_    ___      / ___|   ___   | |       __ _  | |__   | |
-  \ \ /\ / /   / _ \ | |  / __|  / _ \  | '_ ` _ \   / _ \   | __|  / _ \    | |  _   / _ \  | |      / _` | | '_ \  | |
-   \ V  V /   |  __/ | | | (__  | (_) | | | | | | | |  __/   | |_  | (_) |   | |_| | | (_) | | |___  | (_| | | |_) | |_|
-    \_/\_/     \___| |_|  \___|  \___/  |_| |_| |_|  \___|    \__|  \___/     \____|  \___/  |_____|  \__,_| |_.__/  (_)
+ __        __         _                                       _               ____           _               _       _
+ \ \      / /   ___  | |   ___    ___    _ __ ___     ___   | |_    ___     / ___|   ___   | |       __ _  | |__   | |
+  \ \ /\ / /   / _ \ | |  / __|  / _ \  | '_ ` _ \   / _ \  | __|  / _ \   | |  _   / _ \  | |      / _` | | '_ \  | |
+   \ V  V /   |  __/ | | | (__  | (_) | | | | | | | |  __/  | |_  | (_) |  | |_| | | (_) | | |___  | (_| | | |_) | |_|
+    \_/\_/     \___| |_|  \___|  \___/  |_| |_| |_|  \___|   \__|  \___/    \____|  \___/  |_____|  \__,_| |_.__/  (_)
 ```
 
 </v-click>
@@ -834,9 +828,9 @@ mcaci@mcaciLaptop:~/go/src/github.com/mcaci/golab25-ColorsGifsGo-slides/src/go/a
 
 ---
 
-# 🗃️ Layering Images and Text
+# 🗃️ How about some ASCII Art?
 
-ASCII Art in an image
+Drawing ASCII Art on an image
 
 ````md magic-move
 ```go
@@ -844,6 +838,7 @@ package main
 
 import (
   figure "github.com/common-nighthawk/go-figure"
+
 )
 
 func main() {
@@ -859,13 +854,14 @@ package main
 
 import (
   figure "github.com/common-nighthawk/go-figure"
+
 )
 
 func main() {
   const figlet = "standard"
   const text = "Welcome to GoLab!"
   fig := figure.NewFigure(text, figlet, true)
-  lines := fig.Slicify()
+  lines := fig.Slicify() // []string
 }
 ```
 
@@ -906,12 +902,18 @@ Fun fact
 layout: fact
 ---
 
-And that's how Pablo Picasso used Go to paint his famous Gopher
+Also Pablo Picasso used Go to paint his famous cubist masterpiece
 
 <img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 <!-- Isn't it beautiful? -->
+
+---
+layout: lblue-fact
+---
+
+GIFs, finally!
 
 ---
 
@@ -925,38 +927,50 @@ Go GIFs Basic
 type GIF struct {
   Image []*image.Paletted // The successive images (frames).
   Delay []int             // The successive delay times, one per frame, in 100ths of a second.
-  )/ ...
+  // ...
 }
 ```
 
-The main difference between image.RGBA and image.Paletted is the usage of a palette.
+`image.Paletted` is like `image.RBGA` constrained by a `color.Palette`
 
+```go
+p := color.Palette{
+  color.RGBA{R: 239 G: 242 B: 245 A: 255},  // 0xEFF2F5
+  color.RGBA{R: 172 G: 238 B: 187 A: 255},  // 0xACEEBB
+  color.RGBA{R: 74  G: 194 B: 107 A: 255},  // 0x4AC26B
+  color.RGBA{R: 45  G: 164 B: 78  A: 255},  // 0x2DA44E
+  color.RGBA{R: 17  G: 99  B: 41  A: 255},  // 0x116329
+})
+```
+
+You can import `image/color/palette` and use `palette.Plan9` as a value for `color.Palette` to start
 </v-clicks>
 
 ---
 
-# 🎞️ Entering Animations
+# 🎞️ How to create a GIF
 
 <v-clicks>
 
-- Instantiate a variable of type `gif.GIF` and fill its fields
+1. Instantiate a variable of type `gif.GIF` (`import "image/gif"`) and fill its fields
 
 ```go
-import "image/gif"
-
-// var frm1, frm2 *image.Paletted
+var frm1, frm2 *image.Paletted
 g := gif.GIF{
   Image: []*image.Paletted{frm1, frm2},
   Delay: []int{150, 150},
 }  
 ```
 
-- Encode the gif into a file
+2. Encode the gif into a file
 
 ```go
 // var f, err = os.Create("my-first-gif.gif")
 gif.EncodeAll(f, &g)
 ```
+
+<img src="/images/thats-it.gif" class="absolute bottom-10 left-25" style="width: 60%; height: auto;"/>
+
 
 </v-clicks>
 
@@ -971,7 +985,7 @@ gif.EncodeAll(f, &g)
 
 <v-click>
 
-```go
+```go{1-6|2|2-3|2-4|9-10|9-11|9-10,12-15|9-16|all}
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
@@ -985,7 +999,7 @@ func main() {
   f, _ := os.Create("myFirst.gif")
   g := &gif.GIF{
     Image: []*image.Paletted{frm1, frm2},
-    Delay: []int{150, 150},
+    Delay: []int{100, 100},
   }
   gif.EncodeAll(f, g)
 }
@@ -1001,11 +1015,11 @@ layout: lblue-fact
 And this is just the beginning
 
 <img v-click src="/images/gradients.gif" class="absolute top-15 left-30" style="width: 30%; height: auto;"/>
-<img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-80" style="width: 38%; height: auto;"/>
-<img v-click src="/images/first-cave.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/game_of_life.gif" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
-<img v-click src="/images/LunchBreak.gif" class="absolute top-25 right-25" style="width: 30%; height: auto;"/>
 <img v-click src="/images/timeflow.gif" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
+<img v-click src="/images/first-cave.gif" class="absolute top-50 right-15" style="width: 40%; height: auto;"/>
+<img v-click src="/images/game_of_life.gif" class="absolute top-50 left-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-80" style="width: 38%; height: auto;"/>
+<img v-click src="/images/LunchBreak.gif" class="absolute top-25 right-25" style="width: 30%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -1017,10 +1031,12 @@ Fun fact
 layout: fact
 ---
 
-Pablo Picasso used Go to create an early version of the party Gopher
+Pablo Picasso used Go also to create an early version of the party Gopher
 
+<img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.gif" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
+---
 
 ## 🙌 Wrapping Up
 
@@ -1059,6 +1075,16 @@ layout: lblue-end
 ---
 
 <div class="text-white font-size-10">
+The end?
+</div>
+
+<!--Add something like ending credits or funnily similar -->
+
+---
+layout: lblue-end
+---
+
+<div class="text-white font-size-10">
 Thank you very much!
 </div>
 
@@ -1069,10 +1095,6 @@ Thank you very much!
       class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
       <carbon-logo-github />
     </a>
-    <a href="https://x.com/goMicheleCaci" target="_blank" alt="Michele's X" title="Michele's X"
-      class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-      <carbon-logo-x />
-    </a>
     <a href="https://www.linkedin.com/in/michele-caci-47770132/" target="_blank" alt="Michele's Linkedin" title="Michele's Linkedin"
       class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
       <carbon-logo-linkedin />
@@ -1080,5 +1102,3 @@ Thank you very much!
   </div>
 </div>
 <img src="/images/michelecaciQR.jpeg" class="absolute bottom-5 right-5 text-right" style="width: 20%; height: auto;"/>
-
-<!-- HOW ABOUT A FUNNY IDEA FOR PEACE OUT? LIKE A ENDING CREDITS? OR SOMETHING ELSE? TO BE SEEN -->

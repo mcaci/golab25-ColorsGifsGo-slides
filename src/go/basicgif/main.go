@@ -18,7 +18,7 @@ func main() {
 	f, _ := os.Create("myFirst.gif")
 	g := &gif.GIF{
 		Image: []*image.Paletted{frm1, frm2},
-		Delay: []int{200, 200},
+		Delay: []int{100, 100},
 	}
 	gif.EncodeAll(f, g)
 }
