@@ -191,6 +191,8 @@ for x := range r.Max.X {
 ```
 
 <arrow v-after x1="800" y1="325" x2="925" y2="280" color="#F00" width="2" arrowSize="1" />
+<p v-after class="absolute bottom-50 right-46 opacity-100 transform -rotate-10" color="#F00">r.Max</p>
+
 
 </v-click>
 
@@ -347,6 +349,7 @@ class: text-center
 ---
 
 ```
+...
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
 111110201332323210211143123214321343332124211413115514155115511033421001222101204330001300333011010
 222100123300231230122203432310224441551434231352112532354252244334410042212441233243220102033110020
@@ -355,6 +358,8 @@ class: text-center
 112102131331201432320312233124434232544144233241123334112232531521542551332434224211234133132330300
 ...
 ```
+
+<br/>
 
 ```
 ...
@@ -422,6 +427,7 @@ class: text-center
 ---
 
 ```
+...
 100021112110202312022010330204312040000111012143445142221414240220240442332040010320133120230011020
 111110201332323210211143123214321343332124211413115514155115511033421001222101204330001300333011010
 222100123300231230122203432310224441551434231352112532354252244334410042212441233243220102033110020
@@ -528,9 +534,9 @@ Let's see a real world example
 
 ---
 
-# 🌍 A real world example
+# 🌍 GitHub contribution table
 
-GitHub contribution table
+Gathering inputs
 
 <v-click>
 
@@ -557,9 +563,7 @@ For those who don't know a palette is a set of colors and in Go, conveniently, a
 -->
 ---
 
-# 🌍 A real world example
-
-Palettes in Go
+# 🎨 Palettes in Go
 
 ```go
 // type color.Palette []color.Color
@@ -575,11 +579,14 @@ p := color.Palette{
 <img v-click src="/images/actual-gh-contributions.png" class="absolute top-40 right-15" style="width: 40%; height: auto;"/>
 <arrow v-after x1="800" y1="300" x2="850" y2="250" color="#F00" width="2" arrowSize="1" />
 
-<v-click>
+<br/>
 
-Github input + color.Palette = contribution table
+<v-clicks>
+
+- $github\_input + color.Palette = contribution\_table$
+
 <img  src="/images/generated-gh-contributions.png" class="absolute bottom-30 left-40" style="width: 65%; height: auto;"/>
-</v-click>
+</v-clicks>
 
 ---
 layout: lblue-fact
@@ -623,18 +630,19 @@ A basic composition of two images
 
 <v-click>
 
-1. We create the first image `dst` as a green rectangle
-2. We create the second image `src` as a smaller white rectangle
+1. We create two images:
+    - image 1 (`dst`) is a green rectangle
+    - image 2 (`src`) is a smaller white rectangle
 
 ```go
-func MakeLayer(r image.Rectangle, c color.RGBA) *image.RGBA {
-  l := image.NewRGBA(r)
+func MakeLayer(r image.Rectangle, c color.Color) *image.RGBA {
+  img := image.NewRGBA(r)
   for x := range r.Max.X {
     for y := range r.Max.Y {
-      dst.Set(x, y, c)
+      img.Set(x, y, c)
     }
   }
-  return l
+  return img
 }
 
 dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
@@ -648,11 +656,11 @@ src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
 
 A basic composition of two images
 
-<v-click>
+2. We use `draw.Draw` to draw image 1 (`src`) onto image 2 (`dst`)
 
-3. We draw `dst` over `src`
-
-```go
+```go{all|4|5|6|7|8|all}
+// dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
+// src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
 draw.Draw(
   dst,   // the destination layer
   image.Rect(224, 168, dstR.Max.X, dstR.Max.Y),  // the area on dst where Draw can operate
@@ -662,18 +670,24 @@ draw.Draw(
 )
 ```
 
-</v-click>
-
 <v-click>
 
-4. And encode the result into a file
+3. And encode the result into a file
 
 ```go
 f, _ := os.Create("white-in-green.png")
 png.Encode(f, dst)
 ```
-
 </v-click>
+
+<img v-click="+1" src="/images/comp-green.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
+<img v-click="+2" src="/images/comp-bounds.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
+<img v-click="+4" v-click.hide="+7" src="/images/comp-src-point.png" class="absolute bottom-5 right-100" style="width: 20%; height: auto;"/>
+<arrow v-click="+5" v-click.hide="+7" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="+5" v-click.hide="+7" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
+<img v-click="+6" src="/images/comp-white-on-green.png" class="absolute bottom-5 right-20" style="width: 30%; height: auto;"/>
+<arrow v-click="+6" v-click.hide="+7" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
+<arrow v-click="+6" v-click.hide="+7" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
 
 ---
 
@@ -682,27 +696,31 @@ png.Encode(f, dst)
 Full code
 
 ```go
-func MakeLayer(r image.Rectangle, c color.RGBA) *image.RGBA {
-  l := image.NewRGBA(r)
-  for x := range r.Max.X {
-    for y := range r.Max.Y {
-      dst.Set(x, y, c)
-    }
-  }
-  return l
+package main
+import (
+  // ...
+)
+
+func MakeLayer(r image.Rectangle, c color.Color) *image.RGBA {
+	img := image.NewRGBA(r)
+	for x := range r.Max.X {
+		for y := range r.Max.Y {
+			img.Set(x, y, c)
+		}
+	}
+	return img
 }
 
 func main() {
-  dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
-  src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
-  draw.Draw(dst, image.Rect(224, 168, dstR.Max.X, dstR.Max.Y), src, image.Point{224, 168}, draw.Over)
-  f, _ := os.Create("white-in-green.png")
-  png.Encode(f, dst)
+	dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
+	src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
+	draw.Draw(dst, image.Rect(224, 168, dst.Rect.Max.X, dst.Rect.Max.Y), src, image.Point{224, 168}, draw.Over)
+	f, _ := os.Create("comp-white-on-green.png")
+	png.Encode(f, dst)
 }
-
 ```
 
-<img v-click src="/images/white-in-green.png" class="absolute top-20 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/comp-white-on-green.png" class="absolute top-20 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
