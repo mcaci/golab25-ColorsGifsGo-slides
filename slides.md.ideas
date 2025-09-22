@@ -71,7 +71,7 @@ Examples from advent of code?
 ```go {all|2|2,6}
 for i := range img {
   for j := range img[i] {
-    mat[i][j] = color.RGBA{}
+    mat[i][j] = color.Transparent
   }
 }
 ```

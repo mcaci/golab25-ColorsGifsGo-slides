@@ -377,12 +377,9 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 <arrow v-click x1="290" y1="152" x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
 
 ---
-layout: center
+layout: image
+image: /images/welcome-to-the-matrix.jpg
 ---
-
-# Welcome to the Matrix
-
-insert Go meme here
 
 ---
 
@@ -1002,9 +999,10 @@ Fun fact
 layout: fact
 ---
 
-The sky is the limit
+Pablo Picasso used Go to create an early version of the party Gopher
 
----
+<img v-click src="/images/picasso-gopher.gif" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
+
 
 ## 🙌 Wrapping Up
 

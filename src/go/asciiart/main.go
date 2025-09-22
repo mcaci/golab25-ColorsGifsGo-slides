@@ -184,7 +184,7 @@ func parseHexColor(hex string) (color.RGBA, error) {
 		c.B *= 17
 		return c, err
 	default:
-		return color.RGBA{}, fmt.Errorf("invalid length, must be 8 or 5")
+		return color.Transparent, fmt.Errorf("invalid length, must be 8 or 5")
 	}
 }
 
