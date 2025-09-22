@@ -99,6 +99,26 @@ Most of the images in this presentation are made in Go
 <!-- If an image is not made in Go you'll notice -->
 
 ---
+layout: intro
+---
+
+# 👋 Hello
+
+Who am I?
+
+I'm Michele
+
+I work in Amadeus
+
+I work in Amadeus, where I help with the deployment and operation of Splunk
+
+My hobbies include languages, board games and making silly GIFs with Go
+
+And I'm going to talk to you about creativity, art and having fun with Go!
+
+<!-- Amadeus: we make travel working -->
+
+---
 
 # Why would I even want to make images or gifs in Go?
 
@@ -122,25 +142,6 @@ Most of the images in this presentation are made in Go
 - When I googled "which programming language is best for pictures" I got this
   - So of course I had to do it in Go
 -->
-
----
-layout: intro
----
-# 👋 Hello
-
-Who am I?
-
-I'm Michele
-
-I work in Amadeus
-
-I deploy and operate Splunk
-
-My hobbies include languages, board games and TBA (something fun)
-
-And I'm going to talk you about creativity, art and fun with Go!
-
-<!-- Amadeus: we make travel working -->
 
 ---
 layout: lblue-fact
@@ -1037,6 +1038,8 @@ Pablo Picasso used Go also to create an early version of the party Gopher
 <img v-click src="/images/picasso-gopher.gif" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 ---
+hide: true
+---
 
 ## 🙌 Wrapping Up
 
@@ -1051,6 +1054,8 @@ Pablo Picasso used Go also to create an early version of the party Gopher
   - Go is fast, simple, and surprisingly good at graphics
   - We'll use (almost) only the standard library!
 
+---
+hide: true
 ---
 
 ## 💬 Q&A
