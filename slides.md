@@ -43,7 +43,6 @@ mdc: true
 
 ---
 transition: fade-out
-backgroundSize: 80%
 hide: true
 ---
 
@@ -78,8 +77,6 @@ Monday October 6th, 2025 (45 min @15:15)
 <img src="/images/bgGradient.png" class="absolute bottom-5 left-40" style="width: 30%; height: auto;"/>
 <img src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
 
-<!-- Show a sequence of 3 images or gifs created with Go -->
-
 ---
 layout: lblue-fact
 ---
@@ -93,7 +90,9 @@ layout: fact
 # ⚠️ Disclaimer
 
 <v-click>
-Most of the images in this presentation are made in Go
+Most of the images in this presentation are made in Go 
+
+[golab25](https://github.com/mcaci/golab25-ColorsGifsGo-slides/tree/main/src/go) - [adventOfCode](https://github.com/mcaci/adventOfCode) - [gopherconeu23](https://github.com/mcaci/gopherconeu23img)
 </v-click>
 
 <!-- If an image is not made in Go you'll notice -->
@@ -106,21 +105,41 @@ layout: intro
 
 Who am I?
 
-I'm Michele
+- I'm Michele
+- I work in Amadeus, on Go and logging topics
+- My hobbies include languages, board games and making silly GIFs with Go
 
-I work in Amadeus
+<br/>
 
-I work in Amadeus, where I help with the deployment and operation of Splunk
+<img v-click src="/images/micheleRomeo.jpg" class="absolute top-15 right-15" style="width: 30%; height: auto;"/>
+<arrow v-after x1="800" y1="325" x2="825" y2="250" color="#F00" width="1" arrowSize="1" />
+<p v-after class="absolute bottom-50 right-46 opacity-100 transform -rotate-10" color="#F00">me</p>
+<p v-click class="absolute bottom-55 right-46 opacity-100 transform -rotate-10" color="#F00">young</p>
+<p v-after class="absolute top-25 right-100 opacity-100 transform -rotate-20" color="#F00">actual me</p>
+<arrow v-after x1="580" y1="125" x2="640" y2="130" color="#F00" width="1" arrowSize="1" />
 
-My hobbies include languages, board games and making silly GIFs with Go
-
-And I'm going to talk to you about creativity, art and having fun with Go!
+<img v-click src="/images/amadeus-workmark_DarkSky.png" class="absolute bottom-15 right-15" style="width: 30%; height: auto;"/>
+<img v-click src="/images/splunk-logo.png" class="absolute bottom-10 right-10" style="width: 10%; height: auto;"/>
+<p v-click class="absolute bottom-15 left-10 opacity-100 transform -rotate-350" color="#F00">こんにちわ！</p>
+<p v-after class="absolute bottom-3 left-13 opacity-100 transform -rotate-10" color="#F00">Bom dia!  </p>
+<img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-45" style="width: 24%; height: auto;"/>
+<img v-click src="/images/golab.gif" class="absolute bottom-8 left-40" style="width: 65%; height: auto;"/>
 
 <!-- Amadeus: we make travel working -->
 
 ---
+layout: statement
+---
 
-# Why would I even want to make images or gifs in Go?
+<div class="font-size-10">
+And today I'm going to talk to you about creativity, art and having fun with Go!
+</div>
+
+---
+
+# Why?
+
+Why would I even want to make images or gifs in Go?
 
 <v-clicks>
 
@@ -130,9 +149,6 @@ And I'm going to talk to you about creativity, art and having fun with Go!
 
 </v-clicks>
 
-<img v-click src="/images/whatIsBestForImageProcessing.png" class="absolute top-25 left-50" style="width: 55%; height: auto;"/>
-<img v-click src="/images/very-dull-page.png" class="absolute bottom-10 left-10" style="width: 40%; height: auto;"/>
-
 <!-- 
 - I love Go
   - It's a straightforward language that can generate performant programs
@@ -140,20 +156,30 @@ And I'm going to talk to you about creativity, art and having fun with Go!
 - The results can be weirdly satisfying
   - There are some images I couldn't believe myself to be able to generate
 - When I googled "which programming language is best for pictures" I got this
-  - So of course I had to do it in Go
 -->
+
+---
+layout: image
+image: /images/whatIsBestForImageProcessing.png
+backgroundSize: 65%
+---
+
+<p v-click class="absolute top-50 right-46 opacity-100 transform -rotate-10" color="#F00" font-size="8">C\C++?</p>
+<p v-click class="absolute bottom-50 left-25 opacity-100 transform -rotate-10" color="#F00" font-size="10">Python?</p>
+<p v-click class="absolute bottom-20 right-46 opacity-100 transform -rotate-10" color="#F00" font-size="14">Matlab?</p>
+
 
 ---
 layout: lblue-fact
 ---
 
-Let's create our first image
+So of course I have to do it in Go
 
 ---
 
-# 🖼️ Our First Image
+# 🖼️ Let's start with our first image
 
-Step by step
+Steps
 
 <v-click>
 
@@ -209,7 +235,7 @@ png.Encode(f, img)
 
 ---
 
-# 🖼️ Our First Image
+# 🖼️ Our first image
 
 Full code
 
@@ -322,7 +348,7 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
-<img v-click src="/images/pietGondrian.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
+<img v-click src="/images/piet-mondrian-go.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
 ---
 layout: lblue-fact
@@ -463,7 +489,7 @@ Add joke about the matrix movie and or bitmaps
 
 # 🧮 Using Inputs and Matrices
 
-Beyond the matrix
+More elaborate inputs
 
 ```
 525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
@@ -476,7 +502,6 @@ Beyond the matrix
 <v-click>
 
 These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
-
 </v-click>
 
 <v-clicks>
@@ -487,6 +512,10 @@ These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
   - it's a vertical wall
 </v-clicks>
 
+<v-click>
+
+We use these rules to build a matrix of `bytes`
+</v-click>
 <!--
 These are rules on 2D coordinates representing walls
  So we uses these rules to build a byte matrix with the coordinates representing this cave 
@@ -756,7 +785,7 @@ draw.Draw(
 ```
 
 ```go
-f, err := os.Open("McaciGopherizeMe.png")
+f, err := os.Open("mcaciGopherizeMe.png")
 // ...
 gopherized, err := png.Decode(f)
 // ...
@@ -903,7 +932,7 @@ Fun fact
 layout: fact
 ---
 
-Also Pablo Picasso used Go to paint his famous cubist masterpiece
+Did you know that Pablo Picasso used Go to paint one of his famous cubist masterpiece?
 
 <img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
@@ -932,7 +961,7 @@ type GIF struct {
 }
 ```
 
-`image.Paletted` is like `image.RBGA` constrained by a `color.Palette`
+- `image.Paletted` is like `image.RBGA` constrained by a `color.Palette`
 
 ```go
 p := color.Palette{
@@ -944,36 +973,40 @@ p := color.Palette{
 })
 ```
 
-You can import `image/color/palette` and use `palette.Plan9` as a value for `color.Palette` to start
+- `palette.Plan9` 
+  - convenient value of `color.Palette` type to start
+  - import `image/color/palette`
 </v-clicks>
 
 ---
 
 # 🎞️ How to create a GIF
 
-<v-clicks>
+<v-click>
 
 1. Instantiate a variable of type `gif.GIF` (`import "image/gif"`) and fill its fields
 
 ```go
 var frm1, frm2 *image.Paletted
+// assign frm1 and frm2 to actual images
 g := gif.GIF{
   Image: []*image.Paletted{frm1, frm2},
   Delay: []int{150, 150},
 }  
 ```
+</v-click>
+
+<v-click>
 
 2. Encode the gif into a file
 
 ```go
-// var f, err = os.Create("my-first-gif.gif")
+f, _ := os.Create("my-first-gif.gif")
 gif.EncodeAll(f, &g)
 ```
+</v-click>
 
-<img src="/images/thats-it.gif" class="absolute bottom-10 left-25" style="width: 60%; height: auto;"/>
-
-
-</v-clicks>
+<img v-click src="/images/thats-it.gif" class="absolute bottom-10 left-25" style="width: 60%; height: auto;"/>
 
 ---
 
@@ -986,7 +1019,7 @@ gif.EncodeAll(f, &g)
 
 <v-click>
 
-```go{1-6|2|2-3|2-4|9-10|9-11|9-10,12-15|9-16|all}
+```go{1-6|2|2-3|2-4|9-10|9-14|15|11-15|11-16|all}
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
@@ -997,11 +1030,11 @@ func MakeFrame(c color.RGBA) *image.Paletted {
 func main() {
   frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
   frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
-  f, _ := os.Create("myFirst.gif")
   g := &gif.GIF{
     Image: []*image.Paletted{frm1, frm2},
     Delay: []int{100, 100},
   }
+  f, _ := os.Create("myFirst.gif")
   gif.EncodeAll(f, g)
 }
 ```
@@ -1038,44 +1071,6 @@ Pablo Picasso used Go also to create an early version of the party Gopher
 <img v-click src="/images/picasso-gopher.gif" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
 ---
-hide: true
----
-
-## 🙌 Wrapping Up
-
-- Recap of what we covered
-- Resources and links
-- Final thoughts: code is a canvas!
-
-- It shows that Go can hold its ground when working with images
-  - Go is not the first language mentioned for image creation, so of course I had to do that (wink to the way Ron Evans says, Go is not for that, so of course I had to do it in Go)
-- 🎨 Why Color in Code?
-  - Programming isn't just logic—it's also art
-  - Go is fast, simple, and surprisingly good at graphics
-  - We'll use (almost) only the standard library!
-
----
-hide: true
----
-
-## 💬 Q&A
-
-- Ask me anything!
-- Connect with me online
-
-## 🧰 Tools & Techniques
-
-- Go packages used (mostly standard library)
-- Tips for working with images and pixels
-- How to stay creative while coding
-
-## 🧠 What You Can Build
-
-- Fun projects: maps, games, visualizations
-- Ideas to explore on your own
-- Encouragement to experiment!
-
----
 layout: lblue-end
 ---
 
@@ -1083,11 +1078,32 @@ layout: lblue-end
 The end?
 </div>
 
-<!--Add something like ending credits or funnily similar -->
+<!--
+Is this the end?
+
+Well, I hope this presentation was interesting and funny.
+I hope I managed to share with you the tools that you need to start drawing images and creating GIFs.
+And I hope to see your creations with Go in the near future.
+Go is fast, simple, and in my opinion good at graphics.
+ -->
+
+---
+layout: statement
+---
+
+<div class="font-size-10">
+Programming isn't just logic
+</div>
+
+<div v-click class="font-size-10">
+it's also art!
+</div>
 
 ---
 layout: lblue-end
 ---
+
+<img src="/images/thank-you.gif" class="absolute top-10 left-5" style="width: 95%; height: auto;"/>
 
 <div class="text-white font-size-10">
 Thank you very much!
