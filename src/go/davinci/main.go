@@ -1,75 +1,63 @@
 package main
 
 import (
-	"fmt"
+	"bufio"
 	"image"
 	"image/color"
-	"image/jpeg"
 	"image/png"
-	"math"
+	"log"
 	"os"
-	"time"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	r := image.Rect(0, 0, 1024, 768)
-	img := image.NewRGBA(r)
-	for x := range r.Max.X {
-		for y := range r.Max.Y {
-			img.Set(x, y, cfuncT(time.Now()))
+	pbn2img()
+}
+
+func pbn2img() {
+	input, err := os.Open("monalisaPBN.source")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer input.Close()
+
+	// Read the PNB data and convert it to an image
+	var matrix [][]int
+	scanner := bufio.NewScanner(input)
+	for scanner.Scan() {
+		var row []int
+		line := scanner.Text()
+		for num := range strings.FieldsSeq(line) {
+			n, err := strconv.Atoi(num)
+			if err != nil {
+				log.Fatal(err)
+			}
+			row = append(row, n)
+		}
+		matrix = append(matrix, row)
+	}
+
+	height := len(matrix)
+	if height == 0 {
+		log.Fatal("Empty matrix")
+	}
+	width := len(matrix[0])
+	img := image.NewNRGBA(image.Rect(0, 0, width, height))
+
+	for y, row := range matrix {
+		for x, val := range row {
+			r := uint8((val >> 16) & 0xFF)
+			g := uint8((val >> 8) & 0xFF)
+			b := uint8(val & 0xFF)
+			img.Set(x, y, color.NRGBA{R: r, G: g, B: b, A: 255})
 		}
 	}
-	f, _ := os.Create("pixset2.png")
-	png.Encode(f, img)
-}
-
-func cfunc(x, y int) color.Color {
-	r := math.Abs(math.Cos(float64(x))) * 50
-	g := math.Abs(math.Sin(float64(y))) * 200
-	b := math.Abs(math.Cos(float64(x*10-y*10))) * 50
-	return color.RGBA{R: uint8(r), G: uint8(g), B: uint8(b), A: 255}
-}
-
-func cfuncT(t time.Time) color.Color {
-	b := t.Nanosecond() % 200
-	g := t.Nanosecond() % 256
-	return color.RGBA{B: uint8(b), G: uint8(g), A: 255}
-}
-
-func img2mat2img() {
-
-	file, err := os.Open("gopher.jpg")
+	output, err := os.Create("monalisaPBN.png")
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	defer file.Close()
+	defer output.Close()
 
-	img, err := jpeg.Decode(file)
-	if err != nil {
-		panic(err)
-	}
-
-	bounds := img.Bounds()
-	width, height := bounds.Max.X, bounds.Max.Y
-
-	matrix := make([][]int, height)
-	for y := 0; y < height; y++ {
-		row := make([]int, width)
-		for x := 0; x < width; x++ {
-			c := color.NRGBAModel.Convert(img.At(x, y)).(color.NRGBA)
-			// Represent color as a single integer (e.g., 0xRRGGBB)
-			row[x] = int(c.R)<<16 | int(c.G)<<8 | int(c.B)
-		}
-		matrix[y] = row
-	}
-
-	// Print the matrix (or process as needed)
-	out, _ := os.Create("gopher.jpg.source")
-	for _, row := range matrix {
-		fmt.Fprintln(out, row)
-	}
-	out.Close()
-	// inSrc, _ := os.Open(out.Name())
-	// outImgGoph, _ := os.Create("gopher-out.png")
-	// png.Encode(outImgGoph, outImg)
+	png.Encode(output, img)
 }
