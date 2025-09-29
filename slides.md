@@ -41,6 +41,11 @@ mdc: true
     </div>
 </div>
 
+<!-- Hi everyone and thank you for joining.
+Today I want to offer you a break from all the seriousness of the day
+and deep dive into a relaxing moment where you'll get the tools to create some beautiful art in Go
+ -->
+
 ---
 transition: fade-out
 hide: true
@@ -71,17 +76,22 @@ Monday October 6th, 2025 (45 min @15:15)
 
 ---
 
-# Can you guess what do these images have in common
+# Can you guess what do these have in common?
 
 <img src="/images/actual-cave-with-sand.png" class="absolute top-25 left-20" style="width: 45%; height: auto;"/>
 <img src="/images/bgGradient.png" class="absolute bottom-5 left-40" style="width: 30%; height: auto;"/>
 <img src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
+
+<!-- Having an idea of the topic of the day,
+I can guess you can guess what do these images and gifs have in common-->
 
 ---
 layout: lblue-fact
 ---
 
 They are all made in Go
+
+<!-- And the answer is straightforward, they are all made in Go -->
 
 ---
 layout: fact
@@ -90,12 +100,13 @@ layout: fact
 # ⚠️ Disclaimer
 
 <v-click>
-Most of the images in this presentation are made in Go 
+Most of the images in this presentation are made in Go
 
 [golab25](https://github.com/mcaci/golab25-ColorsGifsGo-slides/tree/main/src/go) - [adventOfCode](https://github.com/mcaci/adventOfCode) - [gopherconeu23](https://github.com/mcaci/gopherconeu23img)
 </v-click>
 
-<!-- If an image is not made in Go you'll notice -->
+<!--
+And, as I will share the slides later, I give you the curiosity of finding out which ones are made in Go by looking at the links that you see there. And you may probably get surprised for a couple of them -->
 
 ---
 layout: intro
@@ -106,7 +117,7 @@ layout: intro
 Who am I?
 
 - I'm Michele
-- I work in Amadeus, on Go and logging topics
+- I use Go to support the logging middleware at Amadeus
 - My hobbies include languages, board games and making silly GIFs with Go
 
 <br/>
@@ -125,37 +136,36 @@ Who am I?
 <img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-45" style="width: 24%; height: auto;"/>
 <img v-click src="/images/golab.gif" class="absolute bottom-8 left-40" style="width: 65%; height: auto;"/>
 
-<!-- Amadeus: we make travel working -->
 
 ---
 layout: statement
 ---
 
 <div class="font-size-10">
-And today I'm going to talk to you about creativity, art and having fun with Go!
+Why?
 </div>
 
 ---
 
-# Why?
-
-Why would I even want to make images or gifs in Go?
+# Why would I even want to make images or gifs in Go?
 
 <v-clicks>
 
-- I love Go
-- It’s fun
-- The results can be weirdly satisfying
+1. I love Go
+2. It’s fun
+3. The results can be surprising and quite satisfying
 
 </v-clicks>
 
 <!-- 
+There are few simple and reasonable explanations:
 - I love Go
   - It's a straightforward language that can generate performant programs
 - It’s fun 
 - The results can be weirdly satisfying
   - There are some images I couldn't believe myself to be able to generate
-- When I googled "which programming language is best for pictures" I got this
+
+Which brings us to the most important reason
 -->
 
 ---
@@ -168,6 +178,13 @@ backgroundSize: 65%
 <p v-click class="absolute bottom-50 left-25 opacity-100 transform -rotate-10" color="#F00" font-size="10">Python?</p>
 <p v-click class="absolute bottom-20 right-46 opacity-100 transform -rotate-10" color="#F00" font-size="14">Matlab?</p>
 
+<!-- 
+Which is this one: some months ago I made a search: "Which programming language is best for pictures" and what I got was C, C++, Phyton, Matlab. And I stopped there for a moment.
+
+Then I remembered the wise words of my son, the one who appeared in the pitcure earlier, he is turning 2 soon and may be in the room somewhere.
+
+These are the wise words my son said: "papaa', papaa', no no no no no no no!"
+ -->
 
 ---
 layout: lblue-fact
@@ -179,7 +196,6 @@ So of course I have to do it in Go
 
 # 🖼️ Let's start with our first image
 
-Steps
 
 <v-click>
 
@@ -216,7 +232,6 @@ for x := range r.Max.X {
 <arrow v-after x1="800" y1="325" x2="925" y2="280" color="#F00" width="2" arrowSize="1" />
 <p v-after class="absolute bottom-50 right-46 opacity-100 transform -rotate-10" color="#F00">r.Max</p>
 
-
 </v-click>
 
 <v-click>
@@ -235,9 +250,7 @@ png.Encode(f, img)
 
 ---
 
-# 🖼️ Our first image
-
-Full code
+# 🖼️ Our first image's full code
 
 ```go{all|13-17|15}
 package main
@@ -266,7 +279,7 @@ func main() {
 
 ---
 
-# 🎨 Beyond our First Image
+# 🎨 Beyond our first image
 
 ````md magic-move
 ```go
@@ -344,10 +357,10 @@ Fun fact
 layout: fact
 ---
 
-Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yellow" painting in 1930
+Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yellow" in 1930
 
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
-<img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
+<!-- <img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/> -->
 <img v-click src="/images/piet-mondrian-go.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
 ---
@@ -516,6 +529,12 @@ These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
 
 We use these rules to build a matrix of `bytes`
 </v-click>
+
+<v-clicks>
+
+- byte 0 is an empty space
+- anything else is a wall
+</v-clicks>
 <!--
 These are rules on 2D coordinates representing walls
  So we uses these rules to build a byte matrix with the coordinates representing this cave 
@@ -585,7 +604,7 @@ From the HTML of a github user's homepage
 <img src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
 
 <!-- 
-For those who don't know a palette is a set of colors and in Go, conveniently, a palette is a slice of colors 
+and in Go, conveniently, a palette is a slice of colors 
 -->
 ---
 
@@ -630,11 +649,13 @@ A less known version of the Monalisa is a paint by number painting made in Go
 <img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
+<!-- Quite remarkable right? Now let's move on -->
+
 ---
 layout: lblue-fact
 ---
 
-From setting colors to pixels to drawing layers
+From setting pixel colors to drawing layers
 
 <!-- So far we have used a lot:
 
@@ -717,9 +738,7 @@ png.Encode(f, dst)
 
 ---
 
-# 🗃️ Layering Images
-
-Full code
+# 🗃️ Green and white composition's full code
 
 ```go
 package main
@@ -746,7 +765,7 @@ func main() {
 }
 ```
 
-<img v-click src="/images/comp-white-on-green.png" class="absolute top-40 right-25" style="width: 30%; height: auto;"/>
+<img src="/images/comp-white-on-green.png" class="absolute top-40 right-25" style="width: 30%; height: auto;"/>
 
 ---
 
@@ -792,7 +811,7 @@ gopherized, err := png.Decode(f)
 draw.Draw(
   baseImg,
   image.Rect(130, 130, baseImg.Bounds().Dx()-130, baseImg.Bounds().Dy()-130), 
-  gray, 
+  gopherized, 
   image.Point{130, 130},
   draw.Over,
 )
@@ -947,9 +966,7 @@ GIFs, finally!
 
 ---
 
-# 🎞️ Entering Animations
-
-Go GIFs Basic
+# 🎞️ The basics of Go GIFs
 
 <v-clicks>
 
@@ -962,21 +979,14 @@ type GIF struct {
 ```
 
 - `image.Paletted` is like `image.RBGA` constrained by a `color.Palette`
-
-```go
-p := color.Palette{
-  color.RGBA{R: 239 G: 242 B: 245 A: 255},  // 0xEFF2F5
-  color.RGBA{R: 172 G: 238 B: 187 A: 255},  // 0xACEEBB
-  color.RGBA{R: 74  G: 194 B: 107 A: 255},  // 0x4AC26B
-  color.RGBA{R: 45  G: 164 B: 78  A: 255},  // 0x2DA44E
-  color.RGBA{R: 17  G: 99  B: 41  A: 255},  // 0x116329
-})
-```
-
-- `palette.Plan9` 
-  - convenient value of `color.Palette` type to start
-  - import `image/color/palette`
 </v-clicks>
+
+<img v-click src="/images/bgGradient.png" class="absolute bottom-10 left-25" style="width: 35%; height: auto;"/>
+<img v-click src="/images/bgGradientP9.png" class="absolute bottom-10 right-25" style="width: 35%; height: auto;"/>
+
+<!-- 
+- `palette.Plan9` 
+  - convenient value of `color.Palette` type to start -->
 
 ---
 
@@ -1055,6 +1065,8 @@ And this is just the beginning
 <img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-80" style="width: 38%; height: auto;"/>
 <img v-click src="/images/LunchBreak.gif" class="absolute top-25 right-25" style="width: 30%; height: auto;"/>
 
+<!-- The sky is the limit -->
+
 ---
 layout: lblue-fact
 ---
@@ -1065,10 +1077,12 @@ Fun fact
 layout: fact
 ---
 
-Pablo Picasso used Go also to create an early version of the party Gopher
+Did you know that Picasso used Go also to create an early version of the party Gopher?
 
 <img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.gif" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
+
+<!-- Here it is dancing its way out -->
 
 ---
 layout: lblue-end
@@ -1081,10 +1095,11 @@ The end?
 <!--
 Is this the end?
 
-Well, I hope this presentation was interesting and funny.
-I hope I managed to share with you the tools that you need to start drawing images and creating GIFs.
-And I hope to see your creations with Go in the near future.
-Go is fast, simple, and in my opinion good at graphics.
+Now you have the tools you need to start drawing images and creating GIFs.
+
+And I hope you had fun while getting them and to see your creations with Go in the near future.
+
+And remember
  -->
 
 ---
