@@ -43,7 +43,7 @@ mdc: true
 
 <!-- Hi everyone and thank you for joining.
 Today I want to offer you a break from all the seriousness of the day
-and deep dive into a relaxing moment where you'll get the tools to create some beautiful art in Go
+and deep dive into a relaxing and fun moment where you'll get the tools to create some beautiful art in Go
  -->
 
 ---
@@ -100,13 +100,20 @@ layout: fact
 # ⚠️ Disclaimer
 
 <v-click>
-Most of the images in this presentation are made in Go
+Most of the images you are about to see are made in Go
 
 [golab25](https://github.com/mcaci/golab25-ColorsGifsGo-slides/tree/main/src/go) - [adventOfCode](https://github.com/mcaci/adventOfCode) - [gopherconeu23](https://github.com/mcaci/gopherconeu23img)
 </v-click>
 
 <!--
-And, as I will share the slides later, I give you the curiosity of finding out which ones are made in Go by looking at the links that you see there. And you may probably get surprised for a couple of them -->
+Bow, I need to give you a disclaimer here.
+
+Most of the images you are about to see are made in Go.
+
+And as I will share the slides later, these links are the places where you want to have a look for the Go code that generated them.
+
+And I'm sure that for a couple of them you'll get some nice surprises.
+-->
 
 ---
 layout: intro
@@ -117,7 +124,7 @@ layout: intro
 Who am I?
 
 - I'm Michele
-- I use Go to support the logging middleware at Amadeus
+- I use Go at work to support the logging middleware (Splunk) of Amadeus
 - My hobbies include languages, board games and making silly GIFs with Go
 
 <br/>
@@ -130,12 +137,15 @@ Who am I?
 <arrow v-after x1="580" y1="125" x2="640" y2="130" color="#F00" width="1" arrowSize="1" />
 
 <img v-click src="/images/amadeus-workmark_DarkSky.png" class="absolute bottom-15 right-15" style="width: 30%; height: auto;"/>
-<img v-click src="/images/splunk-logo.png" class="absolute bottom-10 right-10" style="width: 10%; height: auto;"/>
+<img v-after src="/images/splunk-logo.png" class="absolute bottom-10 right-10" style="width: 10%; height: auto;"/>
 <p v-click class="absolute bottom-15 left-10 opacity-100 transform -rotate-350" color="#F00">こんにちわ！</p>
 <p v-after class="absolute bottom-3 left-13 opacity-100 transform -rotate-10" color="#F00">Bom dia!  </p>
 <img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-45" style="width: 24%; height: auto;"/>
 <img v-click src="/images/golab.gif" class="absolute bottom-8 left-40" style="width: 65%; height: auto;"/>
 
+<!-- 
+Well, I haven't presented myself yet
+-->
 
 ---
 layout: statement
@@ -159,13 +169,12 @@ Why?
 
 <!-- 
 There are few simple and reasonable explanations:
-- I love Go
-  - It's a straightforward language that can generate performant programs
-- It’s fun 
-- The results can be weirdly satisfying
-  - There are some images I couldn't believe myself to be able to generate
 
-Which brings us to the most important reason
+<List the reasons>
+
+Why is that? Let me tell you this story.
+
+Some months ago I made this search
 -->
 
 ---
@@ -179,18 +188,26 @@ backgroundSize: 65%
 <p v-click class="absolute bottom-20 right-46 opacity-100 transform -rotate-10" color="#F00" font-size="14">Matlab?</p>
 
 <!-- 
-Which is this one: some months ago I made a search: "Which programming language is best for pictures" and what I got was C, C++, Phyton, Matlab. And I stopped there for a moment.
+"Which programming language is best for pictures". Pretty straightforward.
 
-Then I remembered the wise words of my son, the one who appeared in the pitcure earlier, he is turning 2 soon and may be in the room somewhere.
+And the results I got were C and C++, Phyton and Matlab.
 
-These are the wise words my son said: "papaa', papaa', no no no no no no no!"
- -->
+I stopped at this sight for a moment.
+
+Then I remembered the wise words of my son, the one from the photo earlier; he is turning 2 soon and this is what he said.
+
+"papaa', papaa', no no no no no no no!"
+-->
 
 ---
 layout: lblue-fact
 ---
 
-So of course I have to do it in Go
+So of course I had to use Go!
+
+<!-- 
+By the way my son may be in the room somewhere and if he is awake he might have just repeated that same wise sentence.
+-->
 
 ---
 
@@ -199,7 +216,7 @@ So of course I have to do it in Go
 
 <v-click>
 
-1. We start by defining the bounds of the image as a rectangle
+1. Define the boundary of the image as a rectangle
 
 ```go
 r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
@@ -209,7 +226,7 @@ r := image.Rect(0, 0, 1024, 768) // A 1024x768 image
 
 <v-click>
 
-2. We create the image using the rectangle and a color space
+2. Create the image variable with that boundary and a color space
 
 ```go
 img := image.NewRGBA(r)
@@ -277,6 +294,17 @@ func main() {
 
 <img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
+<!-- 
+To consolidate everything in one place this is the full code creating the rectangle and again we did it in four steps
+
+1. Define the boundary
+2. Create the image
+3. Color every pixel
+4. Encode to a file
+
+Now for what's coming next we need to focus on the 3rd step: color every pixel and in particular this method call to `img.Set`.
+-->
+
 ---
 
 # 🎨 Beyond our first image
@@ -338,13 +366,15 @@ In the first image we started by setting all pixels to a fully opaque medium gre
 
 We can easily change that to a fully opaque medium blue (not too bright, not too dark)
 
-Or go even a bit further and create a checkerboard pattern or a gradient of blue and green where each pixel is a combination of blue and green that depend on the coordinates
+But we can do more than monochrome images
 
-We decide the color we want to paint the image the way we want and with the tools we want: our choice is just a function that decides what color goes where.
+For the low low price of some basic math we can:
+- create a checkerboard pattern
+- or a blue and green gradient
 
-We can use math (yes, math) to create a nice plaid.
+For the even lower price of some trigonometry we can create the pattern for our next plaid.
 
-Or we can even visualize the flow of time. By the way if your really want to see how the fime flows, here it is... a malfunctioning TV screen: mystery solved, you're welcome.
+And for the more artistic ones, how about visualizing a snapshot of time?
 -->
 
 ---
@@ -352,6 +382,8 @@ layout: lblue-fact
 ---
 
 Fun fact
+
+<!-- Now, it's time for a fun fact, and since we are in Florence, city of art, so we are going to introduce this artist -->
 
 ---
 layout: fact
@@ -363,6 +395,9 @@ Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yell
 <!-- <img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/> -->
 <img v-click src="/images/piet-mondrian-go.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
+<!-- 
+Not bad right?
+-->
 ---
 layout: lblue-fact
 ---
@@ -370,6 +405,10 @@ layout: lblue-fact
 Can we use inputs for the creation of images?
 
 <!-- 
+Let's move forward and answer this question.
+
+...
+
 A more guided image creation
 
 We have been the ones deciding the color so far
@@ -416,6 +455,9 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 <arrow v-click x1="270" y1="152" x2="145" y2="102" color="#F00" width="2" arrowSize="1" />
 <arrow v-click x1="280" y1="152" x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
 <arrow v-click x1="290" y1="152" x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
+
+<!-- 
+Can we make sense of these inputs? = -->
 
 ---
 layout: image
