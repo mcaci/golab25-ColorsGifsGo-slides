@@ -43,7 +43,7 @@ mdc: true
 
 <!-- Hi everyone and thank you for joining.
 Today I want to offer you a break from all the seriousness of the day
-and deep dive into a relaxing and fun moment where you'll get the tools to create some beautiful art in Go
+and deep dive into a relaxing and fun moment where you'll get the tools to create some beautiful art with Go
  -->
 
 ---
@@ -83,7 +83,7 @@ Monday October 6th, 2025 (45 min @15:15)
 <img src="/images/game_of_life.gif" class="absolute bottom-10 right-5" style="width: 40%; height: auto;"/>
 
 <!-- Having an idea of the topic of the day,
-I can guess you can guess what do these images and gifs have in common-->
+I can guess that you can guess what do these images and gifs have in common-->
 
 ---
 layout: lblue-fact
@@ -124,7 +124,7 @@ layout: intro
 Who am I?
 
 - I'm Michele
-- I use Go at work to support the logging middleware (Splunk) of Amadeus
+- I use Go at work to support the logging infrastructure (Splunk) we use at Amadeus
 - My hobbies include languages, board games and making silly GIFs with Go
 
 <br/>
@@ -140,7 +140,7 @@ Who am I?
 <img v-after src="/images/splunk-logo.png" class="absolute bottom-10 right-10" style="width: 10%; height: auto;"/>
 <p v-click class="absolute bottom-15 left-10 opacity-100 transform -rotate-350" color="#F00">こんにちわ！</p>
 <p v-after class="absolute bottom-3 left-13 opacity-100 transform -rotate-10" color="#F00">Bom dia!  </p>
-<img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-45" style="width: 24%; height: auto;"/>
+<img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-65" style="width: 24%; height: auto;"/>
 <img v-click src="/images/golab.gif" class="absolute bottom-8 left-40" style="width: 65%; height: auto;"/>
 
 <!-- 
@@ -155,9 +155,13 @@ layout: statement
 Why?
 </div>
 
+<!--
+At this point you can legitimately ask me 
+-->
+
 ---
 
-# Why would I even want to make images or gifs in Go?
+# Why would you even want to make images/gifs in Go?
 
 <v-clicks>
 
@@ -168,13 +172,13 @@ Why?
 </v-clicks>
 
 <!-- 
-There are few simple and reasonable explanations:
+I'm going to offer you few simple and reasonable explanations:
 
-<List the reasons>
+- List the reasons
 
-Why is that? Let me tell you this story.
+In addition, let me tell you this story.
 
-Some months ago I made this search
+Some months ago I made a search
 -->
 
 ---
@@ -190,13 +194,13 @@ backgroundSize: 65%
 <!-- 
 "Which programming language is best for pictures". Pretty straightforward.
 
-And the results I got were C and C++, Phyton and Matlab.
+And when I saw the results I thought... C/C++? Phyton? Matlab?
 
 I stopped at this sight for a moment.
 
-Then I remembered the wise words of my son, the one from the photo earlier; he is turning 2 soon and this is what he said.
+Then I remembered the wise words of my almost 2-years old son, the one from the photo earlier.
 
-"papaa', papaa', no no no no no no no!"
+This is what he often tells me: "papaaa', papaaa', no no no no no no no!"
 -->
 
 ---
@@ -206,13 +210,12 @@ layout: lblue-fact
 So of course I had to use Go!
 
 <!-- 
-By the way my son may be in the room somewhere and if he is awake he might have just repeated that same wise sentence.
+Fun fact: my son may be in the room right now and may just have repeated that very same sentence.
 -->
 
 ---
 
 # 🖼️ Let's start with our first image
-
 
 <v-click>
 
@@ -236,7 +239,7 @@ img := image.NewRGBA(r)
 
 <v-click>
 
-3. Set the pixels of the image to the color we want
+3. Set the color for each pixel of the image
 
 ```go
 for x := range r.Max.X {
@@ -265,11 +268,21 @@ png.Encode(f, img)
 <img v-click="1" src="/images/bounds.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
 <img v-click="5" src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
+<!-- 
+If you want to take anything out of today, this is the moment to pay maximum attention.
+
+Because here you'll get the 4 steps that you need to perform to start creating beautiful art with Go. Ready? Here are the steps:
+
+Step 1.... Step 2.... Step 3.... Step 4....
+
+With these 4 steps we get our first image: a green rectangle
+-->
+
 ---
 
 # 🖼️ Our first image's full code
 
-```go{all|13-17|15}
+```go{all|11|12|13-17|18-19|all|13-17|15}
 package main
 
 import (
@@ -295,14 +308,14 @@ func main() {
 <img src="/images/green.png" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 <!-- 
-To consolidate everything in one place this is the full code creating the rectangle and again we did it in four steps
+Let's consolidate everything in one place: this is the full code that creates this green rectangle and inside the code we see the four steps together
 
 1. Define the boundary
 2. Create the image
 3. Color every pixel
 4. Encode to a file
 
-Now for what's coming next we need to focus on the 3rd step: color every pixel and in particular this method call to `img.Set`.
+Now for what's coming next you need to focus on the 3rd step: color every pixel and in particular this method call to `img.Set`, where we give the coordinate and the color we want to give to a pixel.
 -->
 
 ---
@@ -364,9 +377,9 @@ img.Set(x, y, color.RGBA{
 <img v-click="+5" src="/images/timeflow.png" class="absolute top-50 right-25" style="width: 45%; height: auto;"/>
 
 <!-- 
-In the first image we started by setting all pixels to a fully opaque medium green (not too bright, not too dark)
+In the first image we started by setting all pixels to a medium green color
 
-We can easily change that to a fully opaque medium blue (not too bright, not too dark)
+Just by updating a field of the RGBA struct, we can easily change that to amedium blue
 
 But we can do more than monochrome images
 
@@ -385,21 +398,25 @@ layout: lblue-fact
 
 Fun fact
 
-<!-- Now, it's time for a fun fact, and since we are in Florence, city of art, so we are going to introduce this artist -->
+<!-- Time for a fun fact! And since we are here, we stay in the context of art, which is quite appropriate since we are in Florence, a city well known for its cultural and artistic history -->
 
 ---
 layout: fact
 ---
 
-Piet Mondrian famously used Go to paint his "Composition with Red, Blue and Yellow" in 1930
+<v-click>
+
+Piet Mondrian actually used Go to paint his "Composition with Red, Blue and Yellow" in 1930
+</v-click>
 
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
-<!-- <img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/> -->
+<img src="/images/Piet_Mondriaan,_1930_-_Mondrian_Composition_II_in_Red,_Blue,_and_Yellow.jpg" class="absolute bottom-20 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/piet-mondrian-go.png" class="absolute top-10 left-60" style="width: 50%; height: auto;"/>
 
 <!-- 
 Not bad right?
 -->
+
 ---
 layout: lblue-fact
 ---
@@ -407,9 +424,9 @@ layout: lblue-fact
 Can we use inputs for the creation of images?
 
 <!-- 
-So far we have decided which color each pixel should have.
+Now, we have decided so far which color each pixel should have.
 
-Let's now move forward and answer this question.
+For the next step let's address this question: can we use inputs to guide the creation of images?
 
 ...
 
@@ -460,6 +477,14 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 
 <!-- 
 Can we make sense of these inputs?
+
+At a first glance these are sequences of numbers and characters...
+
+Wait
+
+Let me say it again, these are sequences of bytes and each line can be seen as a []byte
+
+And put altogether they are a [][]byte
 -->
 
 ---
@@ -468,7 +493,7 @@ image: /images/welcome-to-the-matrix.jpg
 ---
 
 <!-- 
-You can interpret them this way
+Which you can absolutely interpret in this way
 -->
 
 ---
@@ -507,11 +532,11 @@ for x := range r.Max.X {
 <arrow v-click="1" x1="380" y1="480" x2="320" y2="440" color="#F00" width="2" arrowSize="1" />
 
 <!-- 
-Or use them to follow the 4 steps to create an image, let's see them again:
+Or use them to follow the original 4 steps to create an image, let's apply them to this context:
 1. boundaries = matrix size
 2. create image = unchanged
-3. set each pixel = every cell of the matrix is mapped to a color in the image
-4. don't forget to save to file
+3. set each pixel = map every cell of the matrix to a color of the image
+4. don't forget to encode to file
 -->
 
 ---
@@ -551,6 +576,10 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 <img v-click="1" src="/images/forest.png" class="absolute top-15 right-20" style="width: 25%; height: auto;"/>
 <img v-click="1" src="/images/hill.png" class="absolute bottom-5 right-25" style="width: 40%; height: auto;"/>
 
+<!-- 
+And this makes these apparently chaotic inputs into a forest or a hilly landscape
+-->
+
 ---
 
 # 🧮 Using Inputs and Matrices
@@ -570,13 +599,52 @@ More elaborate inputs
 These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
 </v-click>
 
-<v-clicks>
+<!--
+What happens if you have different inputs?
 
+Let's look at these ones
+
+These are rules on 2D coordinates and when you hear 2D coordinates
+
+-->
+
+---
+layout: image
+image: /images/welcome-to-the-matrix.jpg
+---
+
+<!-- 
+... again
+-->
+
+---
+layout: two-cols-header
+---
+
+# 🧮 Using Inputs and Matrices
+
+More elaborate inputs
+
+```
+525,119 -> 525,122 -> 523,122 -> 523,125 -> 529,125 -> 529,122 -> 528,122 -> 528,119
+497,69 -> 497,73 -> 489,73 -> 489,78 -> 504,78 -> 504,73 -> 501,73 -> 501,69
+480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> ...
+480,38 -> 480,31 -> 480,38 -> 482,38 -> 482,35 -> 482,38 -> 484,38 -> 484,35 -> 484,38 -> 486,38 -> 486,28 -> ...
+...
+```
+
+::left::
+
+<v-click>
+
+Rules:
 - X coordinate changes?
   - it's a horizontal wall
 - Y coordinate changes?
   - it's a vertical wall
-</v-clicks>
+</v-click>
+
+::right::
 
 <v-click>
 
@@ -586,12 +654,15 @@ We use these rules to build a `[][]byte`
 <v-clicks>
 
 - byte 0 is an empty space
+- '*' is sand
 - anything else is a wall
 </v-clicks>
+
 <!--
 These are rules on 2D coordinates representing walls
  So we uses these rules to build a byte matrix with the coordinates representing this cave 
-and use it as input to color our image-->
+and use it as input to color our image
+-->
 
 ---
 
@@ -622,13 +693,27 @@ for i := range cave {
 <img v-click src="/images/cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 <img v-click src="/images/actual-cave-with-sand.png" class="absolute top-45 left-35" style="width: 70%; height: auto;"/>
 
-<!-- These are `(x, y)` coordinates in a 2D space representing walls inside a cave -->
+<!--
+Which means that we can again map the matrix values to a specific color in the image
+
+And it so happens that this, together with the two previous examples come from that moment of the year when I think I have free time for coding: the advent of code
+
+The gif shows the flow of sand inside this cave envirionment. And since it's the advent of code there are two parts of the exercise. This is the first one and this is the second one.
+
+In this moment, I want to stop and share with you this thought: creating an image out of a problem not only helps in picturing the problme itself but also have an expectation of what the solution could look like.
+
+At this point you can say, I love this presentation, it's so much fun and instructive but, will I ever make use ot them?
+-->
 
 ---
 layout: lblue-fact
 ---
 
 Let's see a real world example
+
+<!-- 
+Let's see a real world example
+-->
 
 ---
 
@@ -657,7 +742,10 @@ From the HTML of a github user's homepage
 <img src="/images/actual-gh-contributions.png" class="absolute bottom-20 left-50" style="width: 60%; height: auto;"/>
 
 <!-- 
-and in Go, conveniently, a palette is a slice of colors 
+What if we can create the Github contribution table?
+First of all we need to gather all inputs...
+
+...and in Go, conveniently, a palette is a slice of colors 
 -->
 ---
 
@@ -692,17 +780,26 @@ layout: lblue-fact
 
 Fun fact
 
+<!-- Time for another fun fact -->
+
 ---
 layout: fact
 ---
 
-A less known version of the Monalisa is a paint by number painting made in Go
+<v-click>
+
+Did you know that a sketch of the Monalisa was made in Go?
+</v-click>
 
 <img src="/images/leonardo-da-vinci.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img src="/images/Mona_Lisa,_by_Leonardo_da_Vinci.jpg" class="absolute bottom-5 right-15" style="width: 10%; height: auto;"/>
 <img v-click src="/images/monalisaPaintByNumber.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
-<!-- Quite remarkable right? Now let's move on -->
+<!-- This time we moving a bit closer, to none other than Leonardo da vinci
+
+Did you know...?
+
+If you ask me, I can't actually see any difference with the original -->
 
 ---
 layout: lblue-fact
@@ -730,7 +827,7 @@ A basic composition of two images
 
 <v-click>
 
-1. We create two images:
+1. Create two images:
     - image 1 (`dst`) is a green rectangle
     - image 2 (`src`) is a smaller white rectangle
 
@@ -750,13 +847,19 @@ src := MakeLayer(image.Rect(0, 0, 800, 600), color.White)
 ```
 </v-click>
 
+<!-- We are going to see this method in 3 steps
+1. Create the images
+2. Draw one on top of the other
+3. Encode to file
+-->
+
 ---
 
 # 🗃️ Layering Images
 
 A basic composition of two images
 
-2. We use `draw.Draw` to draw image 1 (`src`) onto image 2 (`dst`)
+2. Use `draw.Draw` to draw image 1 (`src`) onto image 2 (`dst`)
 
 ```go{all|4|5|6|7|8|all}
 // dst := MakeLayer(image.Rect(0, 0, 1024, 768), color.RGBA{G: 150, A: 255})
@@ -772,7 +875,7 @@ draw.Draw(
 
 <v-click>
 
-3. And encode the result into a file
+3. Encode the result into a file
 
 ```go
 f, _ := os.Create("white-in-green.png")
@@ -789,11 +892,14 @@ png.Encode(f, dst)
 <arrow v-click="+6" x1="450" y1="425" x2="665" y2="360" color="#F00" width="2" arrowSize="1" />
 <arrow v-click="+6" x1="500" y1="475" x2="725" y2="400" color="#F00" width="2" arrowSize="1" />
 
+<!-- 
+It makes the top left point of the src correspond to the top left point of the destination and it draws as much as it can and if it doesn't totally fill the space on the destination, what's left of the destination is left untouched
+ -->
 ---
 
 # 🗃️ Green and white composition's full code
 
-```go
+```go{all|17-18|19|20-21|all}
 package main
 import (
   // ...
@@ -819,6 +925,16 @@ func main() {
 ```
 
 <img src="/images/comp-white-on-green.png" class="absolute top-40 right-25" style="width: 30%; height: auto;"/>
+
+<!-- 
+Again let's consolidate everything in one place: this is the full code that creates this green-white composition and inside the code we see the three steps together
+
+1. Create the images
+2. Draw one onto the other
+4. Encode to a file
+
+This technique opens up to nice applications such as
+-->
 
 ---
 
@@ -888,6 +1004,15 @@ ctx.DrawString("by Michele Caci", fixed.P(1650, 1150))
 <img v-click="+2" src="/images/composition-gray.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 <img v-click="+3" src="/images/composition-gopher.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
 <img v-click="+4" src="/images/composition.png" class="absolute top-45 right-25" style="width: 30%; height: auto;"/>
+
+<!-- 
+You can use anything as layers:
+- images from files
+- images created in Go
+- and even text
+
+And these steps are there only for an example but you can free your imagination at this point
+-->
 
 ---
 
@@ -994,22 +1119,42 @@ func main() {
 <img v-click="+3" src="/images/asciiart.png" class="absolute top-55 right-15" style="width: 60%; height: auto;"/>
 <img v-click="+4" src="/images/asciiart-plaid.png" class="absolute top-85 right-15" style="width: 60%; height: auto;"/>
 
+<!-- 
+If you want to use ascii art in a drawing just replace Print() with Slicify() and use the `freetype` package to write all of the strings in the retuned slice onto the background 
+ -->
+
 ---
 layout: lblue-fact
 ---
 
 Fun fact
 
+<!-- 
+Time for another fun fact!
+-->
 ---
 layout: fact
 ---
 
+<v-click>
+
 Did you know that Pablo Picasso used Go to paint one of his famous cubist masterpiece?
+</v-click>
 
 <img src="/images/picasso-selfportrait.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
 <img v-click src="/images/picasso-gopher.png" class="absolute top-10 left-80" style="width: 38%; height: auto;"/>
 
-<!-- Isn't it beautiful? -->
+<!--
+This is a self-portrait of Pablo Picasso, it was not made in Go but...
+
+Did you know?
+
+Which one do you think it is? Maybe les demoiselles d'Avignon? The Girl before a mirror? Guernica?
+
+Well, it's none of them... it's the Gopher of course!
+
+Just take some time to admire it, isn't it beautiful? 
+ -->
 
 ---
 layout: lblue-fact
@@ -1019,7 +1164,7 @@ GIFs, finally!
 
 ---
 
-# 🎞️ The basics of Go GIFs
+# 🎞️ What is a GIF in Go
 
 <v-clicks>
 
@@ -1038,30 +1183,56 @@ type GIF struct {
 <img v-click src="/images/bgGradientP9.png" class="absolute bottom-10 right-25" style="width: 35%; height: auto;"/>
 
 <!-- 
-- `palette.Plan9` 
-  - convenient value of `color.Palette` type to start -->
+To understand the basics of a GIF in Go we can look at its type definition
+-->
 
 ---
 
 # 🎞️ How to create a GIF
 
-<v-click>
+2-frames GIF
 
-1. Instantiate a variable of type `gif.GIF` (`import "image/gif"`) and fill its fields
+1. Create two frames:
+    - frame 1 (`frm1`) is a green rectangle
+    - frame 2 (`frm2`) is a yellow rectangle
 
 ```go
-var frm1, frm2 *image.Paletted
-// assign frm1 and frm2 to actual images
-g := gif.GIF{
-  Image: []*image.Paletted{frm1, frm2},
-  Delay: []int{150, 150},
-}  
+func MakeFrame(c color.RGBA) *image.Paletted {
+  r := image.Rect(0, 0, 1024, 768)
+  frm := image.NewPaletted(r, palette.Plan9)
+  draw.Draw(frm, r, image.NewUniform(c), image.Pt(0, 0), draw.Over)
+  return frm
+}
+
+frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
+frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
 ```
-</v-click>
+
+<!-- 
+three steps for creating a gif
+
+1. Create the frames
+2. Instantiate the gif variable
+3. Encode to a file
+ -->
+---
+
+# 🎞️ How to create a GIF
+
+2-frames GIF
+
+2. Instantiate a variable of type `gif.GIF` (`import "image/gif"`) and fill its fields
+
+```go
+g := &gif.GIF{
+  Image: []*image.Paletted{frm1, frm2},
+  Delay: []int{100, 100},
+}
+```
 
 <v-click>
 
-2. Encode the gif into a file
+3. Encode the gif into a file
 
 ```go
 f, _ := os.Create("my-first-gif.gif")
@@ -1069,17 +1240,14 @@ gif.EncodeAll(f, &g)
 ```
 </v-click>
 
-<img v-click src="/images/thats-it.gif" class="absolute bottom-10 left-25" style="width: 60%; height: auto;"/>
+<img v-click src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-click src="/images/thats-it.gif" class="absolute bottom-5 left-10" style="width: 55%; height: auto;"/>
 
 ---
 
-# 🎞️ A basic GIF example
+# 🎞️ 2-frames GIF full code
 
-2-frames (green and yellow) GIF
-
-<v-click>
-
-```go{1-6|9-10|9-14|15|11-15|11-16|all}
+```go{all}
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
@@ -1098,12 +1266,15 @@ func main() {
   gif.EncodeAll(f, g)
 }
 ```
-</v-click>
 
-<img v-after src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
 
 <!-- 
-List the steps again
+Let's consolidate everything in one place: this is the full code that creates this green/yellow gif and inside the code we see the three steps together
+
+1. Create the frames
+2. Instanciate the gif variable
+3. Encode to a file
  -->
 
 ---
@@ -1119,13 +1290,13 @@ And this is just the beginning
 <img v-click src="/images/progressbar.gif" class="absolute bottom-10 left-80" style="width: 38%; height: auto;"/>
 <img v-click src="/images/LunchBreak.gif" class="absolute top-25 right-25" style="width: 30%; height: auto;"/>
 
-<!-- The sky is the limit -->
-
 ---
 layout: lblue-fact
 ---
 
 Fun fact
+
+<!-- Time for the last fun fact of the day -->
 
 ---
 layout: fact
@@ -1149,22 +1320,42 @@ The end?
 <!--
 Now, is this the end?
 
-I gave you the tools to start drawing images and creating GIFs.
+I gave you the tools to start drawing images and creating GIFs with Go.
 
 I hope you had fun while receiving them 
 
-And I can't wait to see your works of art made with Go in the future.
+And I'm looking forward to see your beautiful works of art made with Go.
 
-And remember
- -->
+Discarded...
+And if you are still wondering
+OR
+And remember, programming isn't just logic, it's also art
+-->
+
+---
+layout: statement
+hide: true
+---
+
+<div class="font-size-10">
+Programming isn't just logic
+</div>
+
+<div v-click class="font-size-10">
+it's also art!
+</div>
 
 ---
 layout: statement
 ---
 
 <div class="font-size-10">
-Could it have been done in other programming languages?
+Could all of it have been done in other programming languages?
 </div>
+
+<img v-click src="/images/nono.gif" class="absolute top-10 left-37" style="width: 70%; height: auto;"/>
+
+<!-- papaaaa'.... papaaaaa'... no no no no no no no!  -->
 
 ---
 layout: lblue-end
