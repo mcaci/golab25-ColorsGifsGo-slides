@@ -106,7 +106,7 @@ Most of the images you are about to see are made in Go
 </v-click>
 
 <!--
-Bow, I need to give you a disclaimer here.
+Now, I need to give you a disclaimer here.
 
 Most of the images you are about to see are made in Go.
 
@@ -236,7 +236,7 @@ img := image.NewRGBA(r)
 
 <v-click>
 
-3. We set the pixels of the image to the color we want
+3. Set the pixels of the image to the color we want
 
 ```go
 for x := range r.Max.X {
@@ -253,7 +253,7 @@ for x := range r.Max.X {
 
 <v-click>
 
-4. We encode the image into a file with a specific format
+4. Encode the image into a file with a specific format
 
 ```go
 f, _ := os.Create("green.png")
@@ -319,11 +319,13 @@ img.Set(x, y, color.RGBA{B: 150, A: 255})
 ```
 
 ```go
-switch (x/32 + y/32) % 2 {
-case 0:
-  img.Set(x, y, color.RGBA{B: 150, A: 255})
-default:
-  img.Set(x, y, color.RGBA{G: 150, A: 255})
+switch {
+  case x < 10 || y < 10 || x > r.Max.X-10 || y > r.Max.Y-10:
+    img.Set(x, y, color.Black)
+  case (x/128+y/128)%2 == 0:
+    img.Set(x, y, color.White)
+  default: // case (x/128+y/128)%2 == 1:
+    img.Set(x, y, color.Black)
 }
 ```
 
@@ -356,8 +358,8 @@ img.Set(x, y, color.RGBA{
 
 <img src="/images/green.png" class="absolute top-18 right-10" style="width: 28%; height: auto;"/>
 <img v-click="+1" src="/images/blue.png" class="absolute top-35 right-20" style="width: 30%; height: auto;"/>
-<img v-click="+2" src="/images/bgCheckerboard.png" class="absolute top-50 right-35" style="width: 30%; height: auto;"/>
-<img v-click="+3" src="/images/bgGradient.png" class="absolute top-65 right-50" style="width: 28%; height: auto;"/>
+<img v-click="+2" src="/images/bwChessboard.png" class="absolute top-65 right-50" style="width: 28%; height: auto;"/>
+<img v-click="+3" src="/images/bgGradient.png" class="absolute top-55 right-40" style="width: 28%; height: auto;"/>
 <img v-click="+4" src="/images/plaid.png" class="absolute top-50 right-25" style="width: 40%; height: auto;"/>
 <img v-click="+5" src="/images/timeflow.png" class="absolute top-50 right-25" style="width: 45%; height: auto;"/>
 
@@ -369,12 +371,12 @@ We can easily change that to a fully opaque medium blue (not too bright, not too
 But we can do more than monochrome images
 
 For the low low price of some basic math we can:
-- create a checkerboard pattern
+- create a chess board
 - or a blue and green gradient
 
 For the even lower price of some trigonometry we can create the pattern for our next plaid.
 
-And for the more artistic ones, how about visualizing a snapshot of time?
+And for those who feel like contemporary artists, how about visualizing a snapshot of time itself?
 -->
 
 ---
@@ -405,7 +407,9 @@ layout: lblue-fact
 Can we use inputs for the creation of images?
 
 <!-- 
-Let's move forward and answer this question.
+So far we have decided which color each pixel should have.
+
+Let's now move forward and answer this question.
 
 ...
 
@@ -452,17 +456,20 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 ...
 ```
 
-<arrow v-click x1="270" y1="152" x2="145" y2="102" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="280" y1="152" x2="155" y2="102" color="#F00" width="2" arrowSize="1" />
-<arrow v-click x1="290" y1="152" x2="165" y2="102" color="#F00" width="2" arrowSize="1" />
+<p v-click class="absolute top-50 left-100 opacity-100 transform -rotate-20 text-size-10" color="#F00">[][]byte</p>
 
 <!-- 
-Can we make sense of these inputs? = -->
+Can we make sense of these inputs?
+-->
 
 ---
 layout: image
 image: /images/welcome-to-the-matrix.jpg
 ---
+
+<!-- 
+You can interpret them this way
+-->
 
 ---
 
@@ -498,6 +505,14 @@ for x := range r.Max.X {
 
 <arrow v-click x1="380" y1="250" x2="320" y2="210" color="#F00" width="2" arrowSize="1" />
 <arrow v-click="1" x1="380" y1="480" x2="320" y2="440" color="#F00" width="2" arrowSize="1" />
+
+<!-- 
+Or use them to follow the 4 steps to create an image, let's see them again:
+1. boundaries = matrix size
+2. create image = unchanged
+3. set each pixel = every cell of the matrix is mapped to a color in the image
+4. don't forget to save to file
+-->
 
 ---
 layout: center
@@ -536,10 +551,6 @@ abccccaaaaaaaaaccccccccccccaaaacccccccccaaaaacchhhmmmmsssllllllllkkkkkeeeaaacccc
 <img v-click="1" src="/images/forest.png" class="absolute top-15 right-20" style="width: 25%; height: auto;"/>
 <img v-click="1" src="/images/hill.png" class="absolute bottom-5 right-25" style="width: 40%; height: auto;"/>
 
-<!-- 
-Add joke about the matrix movie and or bitmaps 
--->
-
 ---
 
 # 🧮 Using Inputs and Matrices
@@ -569,7 +580,7 @@ These are rules on 2D coordinates: $(x,y) \rightarrow (x1,y1)$
 
 <v-click>
 
-We use these rules to build a matrix of `bytes`
+We use these rules to build a `[][]byte`
 </v-click>
 
 <v-clicks>
@@ -1062,16 +1073,13 @@ gif.EncodeAll(f, &g)
 
 ---
 
-# 🎞️ A basic example
+# 🎞️ A basic GIF example
 
-2-frame GIF
-
-1. The first frame is a green rectangle
-2. The second frame is a yellow rectangle
+2-frames (green and yellow) GIF
 
 <v-click>
 
-```go{1-6|2|2-3|2-4|9-10|9-14|15|11-15|11-16|all}
+```go{1-6|9-10|9-14|15|11-15|11-16|all}
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
@@ -1092,7 +1100,11 @@ func main() {
 ```
 </v-click>
 
-<img v-click src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+<img v-after src="/images/myFirst.gif" class="absolute top-50 right-25" style="width: 30%; height: auto;"/>
+
+<!-- 
+List the steps again
+ -->
 
 ---
 layout: lblue-fact
@@ -1135,11 +1147,13 @@ The end?
 </div>
 
 <!--
-Is this the end?
+Now, is this the end?
 
-Now you have the tools you need to start drawing images and creating GIFs.
+I gave you the tools to start drawing images and creating GIFs.
 
-And I hope you had fun while getting them and to see your creations with Go in the near future.
+I hope you had fun while receiving them 
+
+And I can't wait to see your works of art made with Go in the future.
 
 And remember
  -->
@@ -1149,11 +1163,7 @@ layout: statement
 ---
 
 <div class="font-size-10">
-Programming isn't just logic
-</div>
-
-<div v-click class="font-size-10">
-it's also art!
+Could it have been done in other programming languages?
 </div>
 
 ---

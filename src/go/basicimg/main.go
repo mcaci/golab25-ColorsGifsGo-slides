@@ -16,7 +16,7 @@ func main() {
 	green()
 	blue()
 	bgGradient()
-	bgCheckerboard()
+	bwChessboard()
 	rbgGradient()
 	rgCosSinStripes()
 	rgbNanoseconds()
@@ -61,23 +61,23 @@ func bgGradient() {
 	png.Encode(f, img)
 }
 
-func bgCheckerboard() {
-	r := image.Rect(0, 0, 1024, 768)
+func bwChessboard() {
+	r := image.Rect(0, 0, 1024, 1024)
+	const l = 1024 / 8
 	img := image.NewRGBA(r)
 	for x := range r.Max.X {
 		for y := range r.Max.Y {
-			var b, g uint8
-			switch (x/32 + y/32) % 2 {
-			case 0:
-				b = 150
+			switch {
+			case x < 10 || y < 10 || x > r.Max.X-10 || y > r.Max.Y-10:
+				img.Set(x, y, color.Black)
+			case (x/128+y/128)%2 == 0:
+				img.Set(x, y, color.White)
 			default:
-				g = 150
+				img.Set(x, y, color.Black)
 			}
-			img.Set(x, y, color.RGBA{B: b, G: g, A: 255})
-
 		}
 	}
-	f, _ := os.Create("bgCheckerboard.png")
+	f, _ := os.Create("bwChessboard.png")
 	png.Encode(f, img)
 }
 
