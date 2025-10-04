@@ -637,7 +637,7 @@ More elaborate inputs
 
 <v-click>
 
-Rules:
+Rules
 - X coordinate changes?
   - it's a horizontal wall
 - Y coordinate changes?
@@ -648,15 +648,12 @@ Rules:
 
 <v-click>
 
-We use these rules to build a `[][]byte`
+We use these rules to build a `[][]byte` and a mapping to a color
+- empty space -> byte 0 -> black
+- sand -> byte '*' -> yellow
+- wall -> anything else -> orange
+
 </v-click>
-
-<v-clicks>
-
-- byte 0 is an empty space
-- '*' is sand
-- anything else is a wall
-</v-clicks>
 
 <!--
 These are rules on 2D coordinates representing walls
@@ -1162,6 +1159,10 @@ layout: lblue-fact
 
 GIFs, finally!
 
+<!-- 
+They have been teased here and there before, let's now see how to make them
+-->
+
 ---
 
 # 🎞️ What is a GIF in Go
@@ -1353,7 +1354,7 @@ layout: statement
 Could all of it have been done in other programming languages?
 </div>
 
-<img v-click src="/images/nono.gif" class="absolute top-10 left-37" style="width: 70%; height: auto;"/>
+<img v-click src="/images/nono.gif" class="absolute top-20 left-5" style="width: 95%; height: auto;"/>
 
 <!-- papaaaa'.... papaaaaa'... no no no no no no no!  -->
 
