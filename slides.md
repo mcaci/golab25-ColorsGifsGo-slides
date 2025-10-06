@@ -43,7 +43,7 @@ mdc: true
 
 <!-- Hi everyone and thank you for joining.
 Today I want to offer you a break from all the seriousness of the day
-and deep dive into a relaxing and fun moment where you'll get the tools to create some beautiful art with Go
+and deep dive into a relaxing and fun moment where you'll get the tools to create some beautiful art with Go and some curious facts along the way.
  -->
 
 ---
@@ -111,8 +111,6 @@ Now, I need to give you a disclaimer here.
 Most of the images you are about to see are made in Go.
 
 And as I will share the slides later, these links are the places where you want to have a look for the Go code that generated them.
-
-And I'm sure that for a couple of them you'll get some nice surprises.
 -->
 
 ---
@@ -141,7 +139,7 @@ Who am I?
 <p v-click class="absolute bottom-15 left-10 opacity-100 transform -rotate-350" color="#F00">こんにちわ！</p>
 <p v-after class="absolute bottom-3 left-13 opacity-100 transform -rotate-10" color="#F00">Bom dia!  </p>
 <img v-click src="/images/TTR_USA_map_graph.jpg" class="absolute bottom-2 left-65" style="width: 24%; height: auto;"/>
-<img v-click src="/images/golab.gif" class="absolute bottom-8 left-40" style="width: 65%; height: auto;"/>
+<img v-click src="/images/golab.gif" class="absolute bottom-33 left-5" style="width: 95%; height: auto;"/>
 
 <!-- 
 Well, I haven't presented myself yet
@@ -406,7 +404,7 @@ layout: fact
 
 <v-click>
 
-Piet Mondrian actually used Go to paint his "Composition with Red, Blue and Yellow" in 1930
+Did you know that Piet Mondrian actually used Go to paint his "Composition with Red, Blue and Yellow"?
 </v-click>
 
 <img src="/images/Piet_Mondriaan.jpg" class="absolute top-5 left-15" style="width: 15%; height: auto;"/>
@@ -1193,11 +1191,20 @@ To understand the basics of a GIF in Go we can look at its type definition
 
 2-frames GIF
 
+<v-click>
+
 1. Create two frames:
     - frame 1 (`frm1`) is a green rectangle
     - frame 2 (`frm2`) is a yellow rectangle
 
 ```go
+import (
+  "image"
+  "image/color"
+  "image/color/palette"
+  "image/draw"
+)
+
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
@@ -1208,6 +1215,8 @@ func MakeFrame(c color.RGBA) *image.Paletted {
 frm1 := MakeFrame(color.RGBA{G: 150, A: 255})
 frm2 := MakeFrame(color.RGBA{G: 150, R: 150, A: 255})
 ```
+
+</v-click>
 
 <!-- 
 three steps for creating a gif
@@ -1225,7 +1234,11 @@ three steps for creating a gif
 2. Instantiate a variable of type `gif.GIF` (`import "image/gif"`) and fill its fields
 
 ```go
-g := &gif.GIF{
+import "image"
+import "image/gif"
+import "os"
+
+g := gif.GIF{
   Image: []*image.Paletted{frm1, frm2},
   Delay: []int{100, 100},
 }
@@ -1248,7 +1261,13 @@ gif.EncodeAll(f, &g)
 
 # 🎞️ 2-frames GIF full code
 
-```go{all}
+```go
+package main
+
+import (
+  // ...
+)
+
 func MakeFrame(c color.RGBA) *image.Paletted {
   r := image.Rect(0, 0, 1024, 768)
   frm := image.NewPaletted(r, palette.Plan9)
