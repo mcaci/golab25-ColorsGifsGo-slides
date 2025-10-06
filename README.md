@@ -15,6 +15,10 @@ When
 October 6th, 2025
 15:15
 
+## Link to slides
+
+[Here](https://mcaci.github.io/golab25-ColorsGifsGo-slides) is the link to the presentation itself.
+
 ## Abstract
 
 Let's walk through how we can put some color to our programming with Go.
